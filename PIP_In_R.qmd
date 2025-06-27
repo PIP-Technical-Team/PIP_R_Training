@@ -3,18 +3,16 @@ title: "The World Bank's Poverty and Inequality Data"
 subtitle: "Access through R"
 format:
   revealjs:
-    theme: white
+    css: "custom.css"   # <-- point to the file you just saved
+    theme: "simple"     # keep the base Reveal JS theme minimal
     slide-number: true
     chalkboard: 
       buttons: false
     # preview-links: auto
     logo: img/WB-PIP-E-horizontal-RGB-med.png
-    css: 
-      - css/tachyons.css
-      - css/my_style.css
 ---
 
-# Outline
+## Outline
 
 -   Poverty and inequality data at the World Bank
 
@@ -32,13 +30,38 @@ format:
 
 -   The World Bank mission is to help low- and middle-income countries reduce poverty
 
+
+## Poverty data at the World Bank
+
+-   The World Bank mission is to support poverty reduction
+
+
 -   The Bank often helps countries field household surveys to measure poverty and helps countries create poverty estimates from these surveys
+
+
+## Poverty data at the World Bank
+
+-   The World Bank mission is to support poverty reduction
+
+-   The Bank often helps countries field household surveys to measure poverty
 
 -   Some countries do not receive assistance yet the Bank is granted access to the data through collaborations with the National Statistical Office
 
+
+
+## Poverty data at the World Bank
+
+-   The World Bank mission is to support poverty reduction
+
+-   The Bank often helps countries field household surveys to measure poverty
+
+-   The Bank accesses other data through NSOs
+
 -   For high-income countries, poverty data is sourced from the Luxembourg Income Study or EU-SILC
 
-## The Poverty and Inequality data Platform (PIP)
+
+
+## The Poverty and Inequality Platform (PIP)
 
 -   This data is harmonized to the extent possible and converted to dollars using purchasing power exchange rates
 
@@ -46,7 +69,65 @@ format:
 
 -   PIP is the source of data for several targets of the Sustainable Development Goals on ending poverty (SDG1) and reducing inequality (SDG10)
 
-# Accesing PIP in R
+
+## The Poverty and Inequality Platform (PIP)
+
+-   Collaboration between different parts of the World Bank through GPWG
+
+
+## The Poverty and Inequality Platform (PIP)
+
+-   Collaboration between different parts of the World Bank through GPWG
+
+-   Development Data Group
+
+-   Development Research Group
+
+-   Poverty and Equity Global Practice
+
+## The Poverty and Inequality Platform (PIP)
+
+
+![](img/process1.png){fig-align="center"}
+
+
+## The Poverty and Inequality Platform (PIP)
+
+
+![](img/process2.png){fig-align="center"}
+
+## The Poverty and Inequality Platform (PIP)
+
+
+![](img/process3.png){fig-align="center"}
+
+
+
+
+## The Poverty and Inequality Platform (PIP)
+
+
+![](img/process4.png){fig-align="center"}
+
+## The Poverty and Inequality Platform (PIP)
+
+
+![](img/process5.png){fig-align="center"}
+
+
+## The Poverty and Inequality Platform (PIP)
+
+
+![](img/process6.png){fig-align="center"}
+
+## The Poverty and Inequality Platform (PIP)
+
+
+![](img/process7.png){fig-align="center"}
+
+
+
+## Accessing PIP in R
 
 ```{r}
 #| echo: false
@@ -85,6 +166,12 @@ library(dplyr)
     -   *reporting_level*: Mostly national, but can be urban or rural
 
     -   *welfare_type*: Income or consumption
+
+-   **`get_wb()`:**
+    
+## Two main functions
+
+-   **`get_stats()`:** 
 
 -   **`get_wb()`:** [regional/global]{.underline} estimates of poverty and inequality
 
@@ -413,6 +500,6 @@ gr
 ```
 :::
 
-# Thank you for listening.
+## Thank you for listening.
 
 dmahler\@worldbank.org

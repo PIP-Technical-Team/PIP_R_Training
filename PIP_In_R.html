@@ -93,9 +93,8 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="PIP_In_R_files/libs/revealjs/dist/theme/quarto-bbe7401fe57d4b791b917637bb662036.css">
-  <link rel="stylesheet" href="css/tachyons.css">
-  <link rel="stylesheet" href="css/my_style.css">
+  <link rel="stylesheet" href="PIP_In_R_files/libs/revealjs/dist/theme/quarto-423d414d36ce366a9d05f36d06304417.css">
+  <link rel="stylesheet" href="custom.css">
   <link href="PIP_In_R_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="PIP_In_R_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="PIP_In_R_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -202,9 +201,8 @@
 </div>
 
 </section>
-<section>
-<section id="outline" class="title-slide slide level1 center">
-<h1>Outline</h1>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
 <ul>
 <li><p>Poverty and inequality data at the World Bank</p></li>
 <li><p>Accessing the data in R</p></li>
@@ -216,24 +214,86 @@
 <section id="poverty-data-at-the-world-bank" class="slide level2">
 <h2>Poverty data at the World Bank</h2>
 <ul>
-<li><p>The World Bank mission is to help low- and middle-income countries reduce poverty</p></li>
+<li>The World Bank mission is to help low- and middle-income countries reduce poverty</li>
+</ul>
+</section>
+<section id="poverty-data-at-the-world-bank-1" class="slide level2">
+<h2>Poverty data at the World Bank</h2>
+<ul>
+<li><p>The World Bank mission is to support poverty reduction</p></li>
 <li><p>The Bank often helps countries field household surveys to measure poverty and helps countries create poverty estimates from these surveys</p></li>
+</ul>
+</section>
+<section id="poverty-data-at-the-world-bank-2" class="slide level2">
+<h2>Poverty data at the World Bank</h2>
+<ul>
+<li><p>The World Bank mission is to support poverty reduction</p></li>
+<li><p>The Bank often helps countries field household surveys to measure poverty</p></li>
 <li><p>Some countries do not receive assistance yet the Bank is granted access to the data through collaborations with the National Statistical Office</p></li>
+</ul>
+</section>
+<section id="poverty-data-at-the-world-bank-3" class="slide level2">
+<h2>Poverty data at the World Bank</h2>
+<ul>
+<li><p>The World Bank mission is to support poverty reduction</p></li>
+<li><p>The Bank often helps countries field household surveys to measure poverty</p></li>
+<li><p>The Bank accesses other data through NSOs</p></li>
 <li><p>For high-income countries, poverty data is sourced from the Luxembourg Income Study or EU-SILC</p></li>
 </ul>
 </section>
-<section id="the-poverty-and-inequality-data-platform-pip" class="slide level2">
-<h2>The Poverty and Inequality data Platform (PIP)</h2>
+<section id="the-poverty-and-inequality-platform-pip" class="slide level2">
+<h2>The Poverty and Inequality Platform (PIP)</h2>
 <ul>
 <li><p>This data is harmonized to the extent possible and converted to dollars using purchasing power exchange rates</p></li>
 <li><p>The harmonized data is available in the Poverty and Inequality Platform (PIP) at <a href="https://pip.worldbank.org">pip.worldbank.org</a></p></li>
 <li><p>PIP is the source of data for several targets of the Sustainable Development Goals on ending poverty (SDG1) and reducing inequality (SDG10)</p></li>
 </ul>
-</section></section>
-<section>
-<section id="accesing-pip-in-r" class="title-slide slide level1 center">
-<h1>Accesing PIP in R</h1>
+</section>
+<section id="the-poverty-and-inequality-platform-pip-1" class="slide level2">
+<h2>The Poverty and Inequality Platform (PIP)</h2>
+<ul>
+<li>Collaboration between different parts of the World Bank through GPWG</li>
+</ul>
+</section>
+<section id="the-poverty-and-inequality-platform-pip-2" class="slide level2">
+<h2>The Poverty and Inequality Platform (PIP)</h2>
+<ul>
+<li><p>Collaboration between different parts of the World Bank through GPWG</p></li>
+<li><p>Development Data Group</p></li>
+<li><p>Development Research Group</p></li>
+<li><p>Poverty and Equity Global Practice</p></li>
+</ul>
+</section>
+<section id="the-poverty-and-inequality-platform-pip-3" class="slide level2">
+<h2>The Poverty and Inequality Platform (PIP)</h2>
 
+<img data-src="img/process1.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="the-poverty-and-inequality-platform-pip-4" class="slide level2">
+<h2>The Poverty and Inequality Platform (PIP)</h2>
+
+<img data-src="img/process2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="the-poverty-and-inequality-platform-pip-5" class="slide level2">
+<h2>The Poverty and Inequality Platform (PIP)</h2>
+
+<img data-src="img/process3.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="the-poverty-and-inequality-platform-pip-6" class="slide level2">
+<h2>The Poverty and Inequality Platform (PIP)</h2>
+
+<img data-src="img/process4.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="the-poverty-and-inequality-platform-pip-7" class="slide level2">
+<h2>The Poverty and Inequality Platform (PIP)</h2>
+
+<img data-src="img/process5.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="the-poverty-and-inequality-platform-pip-8" class="slide level2">
+<h2>The Poverty and Inequality Platform (PIP)</h2>
+
+<img data-src="img/process6.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="the-poverty-and-inequality-platform-pip-9" class="slide level2">
+<h2>The Poverty and Inequality Platform (PIP)</h2>
+
+<img data-src="img/process7.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="accessing-pip-in-r" class="slide level2">
+<h2>Accessing PIP in R</h2>
 </section>
 <section id="the-pipr-package" class="slide level2">
 <h2>The pipr package</h2>
@@ -258,6 +318,13 @@
 <li><p><em>reporting_level</em>: Mostly national, but can be urban or rural</p></li>
 <li><p><em>welfare_type</em>: Income or consumption</p></li>
 </ul></li>
+<li><p><strong><code>get_wb()</code>:</strong></p></li>
+</ul>
+</section>
+<section id="two-main-functions-1" class="slide level2">
+<h2>Two main functions</h2>
+<ul>
+<li><p><strong><code>get_stats()</code>:</strong></p></li>
 <li><p><strong><code>get_wb()</code>:</strong> <u>regional/global</u> estimates of poverty and inequality</p>
 <ul>
 <li>each row identifies a unique combination of <em>region_code</em> and <em>year</em>.</li>
@@ -807,7 +874,7 @@ F-statistic: 223.26 on 2 and 2501 DF,  p-value: &lt; 0.000000000000000222</code>
 </div>
 </div>
 </div>
-</section></section>
+</section>
 <section id="thank-you-for-listening." class="title-slide slide level1 center">
 <h1>Thank you for listening.</h1>
 <p>dmahler@worldbank.org</p>
