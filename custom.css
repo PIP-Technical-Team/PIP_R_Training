@@ -1,0 +1,76 @@
+/* --------------------------------------------------
+  1.  TITLE SLIDE (the very first slide)
+-------------------------------------------------- */
+  
+  /* make the whole title slide dark-blue */
+  .title-slide {
+    background-color: #0f2f55;   /* deep navy */
+      color: #ffffff;              /* white text */
+      padding: 2.5em 3em;
+  }
+
+/* keep every heading inside the title slide white */
+  .title-slide h1,
+.title-slide h2,
+.title-slide h3 {
+  color: #ffffff;
+    margin-top: 0;               /* no gap before first heading */
+}
+
+/* add the light-blue accent strip under the main title-area */
+  .title-slide::after {
+    content: "";
+    display: block;
+    height: 8px;                 /* thickness of the strip – tweak as you like */
+      background-color: #23a6f6;   /* accent colour */
+      margin-top: 1.2em;
+  }
+
+/* --------------------------------------------------
+  2.  EVERY REGULAR SLIDE HEADING
+-------------------------------------------------- */
+  
+  /* first (top) heading on every slide */
+  .reveal section h2:first-child,
+.reveal section h1:first-child { /* pick whichever heading level you use */
+    background-color: #0f2f55;
+    color: #ffffff;
+    padding: 0.45em 0.75em;
+  margin: 0 -1.2em 0.6em -1.2em;  /* negative margins = full-bleed bar */
+    border-bottom: 6px solid #23a6f6; /* the light-blue strip */
+  border-top-left-radius: 0;        /* make sure corners are square */
+    border-top-right-radius: 0;
+}
+
+/* optional: prevent headings inside slide from wrapping awkwardly */
+  .reveal section h2:first-child,
+.reveal section h1:first-child {
+  word-break: keep-all;
+}
+
+
+/*-------------------------------------------------
+  A.  EVERY SLIDE WHOSE FIRST CHILD IS <H1>
+-------------------------------------------------*/
+
+/* 1. Paint the whole slide dark blue and text white         */
+.reveal section.slide.level1 {
+  background-color: #0f2f55;
+  color: #ffffff;
+}
+
+/* 2. Full-width heading bar + accent line                   */
+.reveal section.slide.level1 > h1:first-child {
+  /* make the bar touch the left & right edges of the slide */
+  margin: 0 calc(-50vw + 50%) 0  calc(-50vw + 50%);
+  padding: 0.45em 0.75em;
+  background-color: #0f2f55;
+  color: #ffffff;
+  border-bottom: 6px solid #23a6f6;
+}
+
+/* optional but nice: keep bullets readable against dark bg  */
+.reveal section.slide.level1 ul {
+  font-size: 1.2em;          /* adjust to taste           */
+  margin-left: 1.5em;
+}
