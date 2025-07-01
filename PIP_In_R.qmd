@@ -1,102 +1,137 @@
 ---
-title: "The World Bank's Poverty and Inequality Data"
-subtitle: "Access through R"
+title: "Poverty and Inequality Platform (PIP): an introduction using R"
+date: "July 9th, 2025"
+author: 
+  - Diana C. Garcia Rojas
+  - Zander Prinsloo
+  - Anubhava Singla
+  - Rossana Tatulli
+  - Nishant Yonzan
 format:
   revealjs:
     css: "custom.css"   # <-- point to the file you just saved
     theme: "simple"     # keep the base Reveal JS theme minimal
+    #incremental: true   # incrementally show the bullets
     slide-number: true
+    title-slide-style: pandoc
     chalkboard: 
       buttons: false
     # preview-links: auto
     logo: img/WB-PIP-E-horizontal-RGB-med.png
 ---
 
+# 0. Outline of the presentation
+
 ## Outline
 
--   Poverty and inequality data at the World Bank
+1.   Introduction to the Poverty and Inequality Platform (PIP)
 
--   Accessing the data in R
+2.   PIP user interface 
 
--   Exercise #1
+3.   Accessing the PIP API with R
 
--   More material
+4.   Exercises 
 
--   Exercise #2
+5.   Additional resource
 
-------------------------------------------------------------------------
 
-## Poverty data at the World Bank
 
--   The World Bank mission is to help low- and middle-income countries reduce poverty
-
+# 1. Introduction to the Poverty and Inequality Platform (PIP)
 
 ## Poverty data at the World Bank
 
--   The World Bank mission is to support poverty reduction
+::: {.incremental}
+
+-   The World Bank mission is to end extreme poverty and boost shared poverty on a livable planet.
+
+-   To that end, the World Bank often helps countries field household surveys to track welfare.
+
+-   Some countries do not receive assistance yet the Bank is granted access to the data through collaborations with the National Statistical Office.
+
+-   For high-income countries, poverty data is sourced from the Luxembourg Income Study or EU-SILC.
+
+:::
+
+   
+## The Poverty and Inequality Platform (PIP) {.smaller}
+
+::: {.incremental}
+
+- PIP is the source of poverty and inequality data for the World Bank.
+
+- PIP is the source of data for several targets of the Sustainable Development Goals on ending poverty (SDG1) and reducing inequality (SDG10).
+
+- Collaboration between different parts of the World Bank through the Global Poverty Working Group
+   -   Development Data Group
+   -   Development Research Group
+   -   Poverty and Equity Global Practice
+
+:::
 
 
--   The Bank often helps countries field household surveys to measure poverty and helps countries create poverty estimates from these surveys
+## PIP motivation {.smaller}
+
+::: {.incremental}
+
+- **Scope**: PIP is the World Bank’s data portal for poverty, prosperity, and inequality estimates. 
+
+- **Accessibility**: PIP data is available through Application Programming Interface (API) 
+   - User Interface (UI) – for quick data access and visualizations
+   - Stata and R wrappers – for advanced users, researchers, students
+   - Microdata access (for some surveys) through Microdata Online.
+
+- **Open data, open code, reproducible research**:
+   - PIP code is publicly available, and the PIP Methodology Handbook provides details on the poverty, prosperity, and inequality estimates reported in PIP.
+   - PIP typically is updated twice a year - Spring/Fall. One can, however, access various vintages of the data.
+
+:::
+
+  
+## PIP: Quality, accessibility, and transparency 
+
+::: {.columns}
+::: {.column width="40%"}
+- All code necessary to create the poverty estimates are publicly available (<https://github.com/PIP-Technical-Team>)
+:::
+::: {.column width="60%"}
+![](img/pip_backend_code.png){fig-align="right"}
+:::
+:::
 
 
-## Poverty data at the World Bank
+## PIP: Quality, accessibility, and transparency 
 
--   The World Bank mission is to support poverty reduction
-
--   The Bank often helps countries field household surveys to measure poverty
-
--   Some countries do not receive assistance yet the Bank is granted access to the data through collaborations with the National Statistical Office
-
-
-
-## Poverty data at the World Bank
-
--   The World Bank mission is to support poverty reduction
-
--   The Bank often helps countries field household surveys to measure poverty
-
--   The Bank accesses other data through NSOs
-
--   For high-income countries, poverty data is sourced from the Luxembourg Income Study or EU-SILC
+::: {.columns}
+::: {.column width="40%"}
+- A description of the entire methodology is available in a technical handbook (<https://worldbank.github.io/PIP-Methodology/>)
+:::
+::: {.column width="60%"}
+![](img/pip_methodology.png){fig-align="right"}
+:::
+:::
 
 
+## Data release notes and other publications 
 
-## The Poverty and Inequality Platform (PIP)
+::: {.columns}
+::: {.column width="30%"}
+- Publications are available detailing the updates in each release, methodological assumptions, and other technical improvements (<https://worldbank.github.io/publication/>)
+:::
+::: {.column width="10%"}
 
--   This data is harmonized to the extent possible and converted to dollars using purchasing power exchange rates
-
--   The harmonized data is available in the Poverty and Inequality Platform (PIP) at [pip.worldbank.org](https://pip.worldbank.org)
-
--   PIP is the source of data for several targets of the Sustainable Development Goals on ending poverty (SDG1) and reducing inequality (SDG10)
-
-
-## The Poverty and Inequality Platform (PIP)
-
--   Collaboration between different parts of the World Bank through GPWG
-
-
-## The Poverty and Inequality Platform (PIP)
-
--   Collaboration between different parts of the World Bank through GPWG
-
--   Development Data Group
-
--   Development Research Group
-
--   Poverty and Equity Global Practice
-
-## The Poverty and Inequality Platform (PIP)
+:::
+::: {.column width="60%"}
+![](img/pip_publications.png){fig-align="right"}
+:::
+:::
 
 
-![](img/process1.png){fig-align="center"}
-
-
-## The Poverty and Inequality Platform (PIP)
+## Welfare measure reported in PIP
 
 
 ![](img/process2.png){fig-align="center"}
 
-## The Poverty and Inequality Platform (PIP)
+## Welfare measure reported in PIP
 
 
 ![](img/process3.png){fig-align="center"}
@@ -104,30 +139,33 @@ format:
 
 
 
-## The Poverty and Inequality Platform (PIP)
+## Welfare measure reported in PIP
 
 
 ![](img/process4.png){fig-align="center"}
 
-## The Poverty and Inequality Platform (PIP)
+## Welfare measure reported in PIP
 
 
 ![](img/process5.png){fig-align="center"}
 
 
-## The Poverty and Inequality Platform (PIP)
+## Welfare measure reported in PIP
 
 
 ![](img/process6.png){fig-align="center"}
 
-## The Poverty and Inequality Platform (PIP)
+## Welfare measure reported in PIP
 
 
 ![](img/process7.png){fig-align="center"}
 
 
+# 2. Accessing PIP through the user interface
 
-## Accessing PIP in R
+
+# 3. Accessing PIP in R
+
 
 ```{r}
 #| echo: false
@@ -138,44 +176,47 @@ library(ggthemes)
 library(pipr)
 ```
 
+
 ## The pipr package
 
-**Installation:**
+::: {.incremental}
 
-``` r
-# To install the pipr package, you first need to install the devtools package
-install.packages("devtools")
-# The devtools package allows you to install pipr through GitHub
-devtools::install_github("worldbank/pipr")
-# Now load pipr
-library(pipr)
-# I'll use dplyr a lot in these slides, so best to load it as well
-library(dplyr)
-```
+- **Installation:**
 
-**More information about the package:**
+  ``` r
+  # To install the pipr package, you first need to install the devtools package
+  install.packages("devtools")
+  # The devtools package allows you to install pipr through GitHub
+  devtools::install_github("worldbank/pipr")
+  # Now load pipr
+  library(pipr)
+  # I'll use dplyr a lot in these slides, so best to load it as well
+  library(dplyr)
+  ```
 
-<https://worldbank.github.io/pipr/>
+- **More information about the package:**
 
-## Two main functions
+  <https://worldbank.github.io/pipr/>
 
--   **`get_stats()`:** [country]{.underline} estimates of poverty and inequality
+:::
 
-    -   each row identifies a unique combination of *country_code*, *year*, *reporting_level*, and *welfare_type*
 
-    -   *reporting_level*: Mostly national, but can be urban or rural
+## Two main functions {.smaller}
 
-    -   *welfare_type*: Income or consumption
+::: {.incremental}
 
--   **`get_wb()`:**
-    
-## Two main functions
+- **`get_stats()`:** [country]{.underline} estimates of poverty and inequality
 
--   **`get_stats()`:** 
+    - each row identifies a unique combination of *country_code*, *year*, *reporting_level*, and *welfare_type*
+    - *reporting_level*: Mostly national, but can be urban or rural
+    - *welfare_type*: Income or consumption
 
--   **`get_wb()`:** [regional/global]{.underline} estimates of poverty and inequality
+- **`get_wb()`:** [regional/global]{.underline} estimates of poverty and inequality
 
-    -   each row identifies a unique combination of *region_code* and *year*.
+    - each row identifies a unique combination of *region_code* and *year*.
+
+:::
+
 
 ## Country-level estimates
 
@@ -183,6 +224,7 @@ library(dplyr)
 #| echo: true
 get_stats() 
 ```
+
 
 ## Variables
 
@@ -207,7 +249,10 @@ colnames(get_stats())
 get_aux("dictionary")
 ```
 
+
 ## Ghanaian estimates
+
+::: {.incremental}
 
 ```{r}
 #| echo: true
@@ -218,6 +263,9 @@ get_stats(country = "GHA") |>
 -   The default poverty line is \$3.00 (per capita, per day, in 2021 PPP-adjusted dollars)
 
 -   The mean is expressed in the same currency
+
+:::
+
 
 ## Different poverty line
 
@@ -241,15 +289,19 @@ purrr::map_dfr(.x      = povlines,
 
 ## Estimates across selected countries
 
+::: {.incremental}
+
 ```{r}
 #| echo: true
 get_stats(country = c("LUX","GHA","VNM"), year=2022) |> 
   select(country_code, year, poverty_line, headcount, mean, gini)
 ```
 
--   There is no estimate for Ghana (GHA) in 2022
+- Note that there is no estimate for Ghana (GHA) in 2022 and hence not reported in the output.
 
-## Extrapolation for Ghana
+:::
+
+## Extrapolation for Ghana from 2016 to most recent year
 
 ![](img/GHA_example.png){fig-align="center"}
 
@@ -262,9 +314,11 @@ get_stats(country = "GHA", fill_gaps = TRUE)  |>
   select(country_code, year, poverty_line, headcount)
 ```
 
+
 ## Poverty by welfare type
 
 ::: panel-tabset
+
 ### Code
 
 ```{r}
@@ -338,7 +392,9 @@ df <- get_stats() |>
 print(df, n=29)
 ```
 
-## Exercise
+# 4. Exercises
+
+## Exercise 1 
 
 Explore whether Kuznets' inverse-U hypothesis holds with data in PIP
 
@@ -414,19 +470,8 @@ gr
 
 ![](img/pipr_functions.png){fig-align="center"}
 
-## Other resources
 
--   [Methodological handbook](https://datanalytics.worldbank.org/PIP-Methodology/): Describes all methodological details behind the estimates
-
--   [Poverty & Inequality Briefs](https://www.worldbank.org/en/topic/poverty/publication/poverty-and-equity-briefs): 2-page summary of poverty and inequality in almost every developing country
-
--   [Survey percentiles](https://datacatalog.worldbank.org/search/dataset/0063646): 100 percentiles of each country-year survey distribution
-
--   [Lined-up percentiles distribution](https://datacatalog.worldbank.org/search/dataset/0064304/1000-Binned-Global-Distribution): 1000 points on the global distribution
-
--   [Accessing some of the microdata online)](https://pip.worldbank.org/sol/sol-landing)
-
-## Exercise 2:
+## Exercise 2 
 
 COVID-19 impact on poverty and inequality
 
@@ -500,6 +545,30 @@ gr
 ```
 :::
 
-## Thank you for listening.
 
-dmahler\@worldbank.org
+## Additional resource {.smaller}
+
+- [Methodological handbook](https://datanalytics.worldbank.org/PIP-Methodology/): Describes all methodological details behind the estimates
+
+- [Poverty & Inequality Briefs](https://www.worldbank.org/en/topic/poverty/publication/poverty-and-equity-briefs): 2-page summary of poverty and inequality in almost every developing country
+
+- [Survey percentiles](https://datacatalog.worldbank.org/search/dataset/0063646): 100 percentiles of each country-year survey distribution
+
+- [Lined-up percentiles distribution](https://datacatalog.worldbank.org/search/dataset/0064304/1000-Binned-Global-Distribution): 1000 points on the global distribution
+
+- [Accessing some of the microdata online](https://pip.worldbank.org/sol/sol-landing)
+
+- [More data and indicators through the user interface](https://pip.worldbank.org/furtherindicators-data)
+
+- [API access](https://pip.worldbank.org/api)
+
+
+## Thank you for listening.{.smaller}
+
+For further details please contact:
+
+- Diana C. Garcia Rojas <drojas@worldbank.org>
+- Zander Prinsloo: <zprinsloo@worldbank.org>
+- Rossana Tatulli: <rtatulli@worldbank.org>
+- Anubhava Singla: <asingla1@worldbabnk.org>
+- Nishant Yonzan: <nyonzan@worldbank.org>
