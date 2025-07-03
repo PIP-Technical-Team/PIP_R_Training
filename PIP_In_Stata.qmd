@@ -1,11 +1,9 @@
 ---
-title: "Poverty and Inequality Platform (PIP): an introduction using R"
-date: "July 9th, 2025"
+title: "Poverty and Inequality Platform (PIP): an introduction using STATA"
+date: 07/09/2025
 author: 
   - Diana C. Garcia Rojas
-  - Zander Prinsloo
   - Anubhava Singla
-  - Rossana Tatulli
   - Nishant Yonzan
 format:
   revealjs:
@@ -36,7 +34,7 @@ format:
 
 # 1. Introduction to the Poverty and Inequality Platform (PIP)
 
-## Poverty data at the World Bank
+## Poverty data at the World Bank {.smaller}
 
 ::: incremental
 -   The World Bank mission is to end extreme poverty and boost shared poverty on a livable planet.
@@ -79,7 +77,7 @@ format:
     -   PIP typically is updated twice a year - Spring/Fall. One can, however, access various vintages of the data.
 :::
 
-## PIP: Quality, accessibility, and transparency
+## PIP: Quality, accessibility, and transparency {.smaller}
 
 ::: columns
 ::: {.column width="40%"}
@@ -91,7 +89,7 @@ format:
 :::
 :::
 
-## PIP: Quality, accessibility, and transparency
+## PIP: Quality, accessibility, and transparency {.smaller}
 
 ::: columns
 ::: {.column width="40%"}
@@ -103,7 +101,7 @@ format:
 :::
 :::
 
-## Data release notes and other publications
+## Data release notes and other publications {.smaller}
 
 ::: columns
 ::: {.column width="30%"}
@@ -146,7 +144,9 @@ format:
 
 # 3. Accessing PIP in STATA
 
-## Installing the Stata pip.ado
+## Installing the Stata pip.ado {.smaller}
+
+::: incremental
 
 We recommend installing the package through GitHub by first running the following, which allows you to install Stata packages from GitHub:
 
@@ -155,6 +155,20 @@ We recommend installing the package through GitHub by first running the followin
 -   You can now install the Stata package by running
 
 -   `github install worldbank/pip`
+
+:::
+
+## Installing the Stata pip.ado {.smaller}
+
+
+We recommend installing the package through GitHub by first running the following, which allows you to install Stata packages from GitHub:
+
+-   `net install github, from("https://haghish.github.io/github/")`
+
+-   You can now install the Stata package by running
+
+-   `github install worldbank/pip`
+
 
 **More information about the package:**
 
@@ -176,18 +190,23 @@ We recommend installing the package through GitHub by first running the followin
     -   each row identifies a unique combination of *region_code* and *year*.
 :::
 
-## Country-level estimates
+## Country-level estimates {.smaller}
 
-```{r}
-#| echo: true
-get_stats() 
+```{r, include=FALSE}
+library(Statamarkdown)
 ```
 
-## Variables
-
-```{r}
+```{stata, collectcode=TRUE}
 #| echo: true
-colnames(get_stats())
+set linesize 200
+pip cl, clear
+```
+
+## Variables {.smaller}
+
+```{stata}
+#| echo: true
+describe
 ```
 
 <!-- ## Country-level poverty estimates from surveys -->
@@ -202,147 +221,122 @@ colnames(get_stats())
 
 <!-- ``` -->
 
-## Variable information
+## Ghanaian estimates {.smaller}
 
-```{r}
+<!-- # ```{stata, collectcode=TRUE} -->
+<!-- # #| echo: false -->
+<!-- # set linesize 200 -->
+<!-- # ``` -->
+
+```{stata}
 #| echo: true
-get_aux("dictionary")
+pip, country(GHA) n2disp(7) clear
 ```
 
-## Ghanaian estimates
-
-::: incremental
-```{r}
-#| echo: true
-get_stats(country = "GHA") |> 
-  select(country_code, year, poverty_line, headcount,mean,gini)
-```
+## Ghanaian estimates {.smaller}
 
 -   The default poverty line is \$3.00 (per capita, per day, in 2021 PPP-adjusted dollars)
 
 -   The mean is expressed in the same currency
-:::
 
-## Different poverty line
 
-```{r}
+## Different poverty line {.smaller}
+
+```{stata, collectcode=TRUE}
+#| echo: false
+set linesize 200
+```
+
+```{stata}
 #| echo: true 
-get_stats(country = "LUX", povline = 10)  |>    
-  select(country_code, year, poverty_line, headcount)
+pip, country(LUX) povline(10) clear
 ```
 
-## Multiple poverty lines
+## Multiple poverty lines {.smaller}
 
-```{r}
+```{stata, collectcode=TRUE}
+#| echo: false
+set linesize 200
+```
+
+```{stata}
 #| echo: true   
-povlines <- c(10, 20, 50,100) 
-purrr::map_dfr(.x      = povlines,                 
-               .f      = get_stats,                 
-               country = "LUX",                
-               year    = 2022) |>    
-  select(country_code, year, poverty_line, headcount) 
+pip, country(LUX) year(2022) n2disp(4) povline(10 20 50 100) clear
 ```
 
-## Estimates across selected countries
+## Estimates across selected countries {.smaller}
 
-::: incremental
-```{r}
+```{stata, collectcode=TRUE}
+#| echo: false
+set linesize 200
+```
+
+```{stata}
 #| echo: true
-get_stats(country = c("LUX","GHA","VNM"), year=2022) |> 
-  select(country_code, year, poverty_line, headcount, mean, gini)
+pip, country(LUX GHA VNM) n2disp(3) year(2022) clear
 ```
 
 -   Note that there is no estimate for Ghana (GHA) in 2022 and hence not reported in the output.
-:::
+
 
 ## Extrapolation for Ghana from 2016 to most recent year
 
 ![](img/GHA_example.png){fig-align="center"}
 
-## Interpolated and extrapolated values {auto-animate="true"}
+## Interpolated and extrapolated values {.smaller}
 
-```{r}
+```{stata, collectcode=TRUE}
+#| echo: false
+set linesize 200
+```
+
+```{stata}
 #| echo: true
-get_stats(country = "GHA", fill_gaps = TRUE)  |> 
-  filter(year>=2016) |>
-  select(country_code, year, poverty_line, headcount)
+pip, country(GHA) year(2016/2025) n2disp(5) fillgaps nowcasts clear
 ```
 
-## Poverty by welfare type
 
-::: panel-tabset
-### Code
+## Poverty by welfare type {.smaller}
 
-```{r}
+```{stata, results="hide"}
 #| echo: true
-df <- get_stats(country="PHL")       
-gr <- ggplot(df,aes(y=100*headcount,x=year,color=welfare_type)) +          
-      geom_line() +                     
-      labs(                          
-      title = "Extreme poverty in the Philippines, 1981-2022",                       
-      y = "Poverty rate (%)",                          
-      x = ""                   
-      )
+pip, country(PHL) clear
+graph twoway line headcount year, by(welfare_type) xtitle("") ytitle("Extreme poverty in the Philippines, 1981-2022")
+graph export "welfare_plot.svg", replace
 ```
+![](welfare_plot.svg)
 
-### Plot
+## Poverty by reporting level {.smaller}
 
-```{r}
-#| fig-width: 10  
-#| fig-height: 5  
-gr
-```
-:::
-
-## Poverty by reporting level
-
-::: panel-tabset
-### Code
-
-```{r}
+```{stata, results="hide", collectcode=TRUE}
 #| echo: true
-
-df <- get_stats(country="CHN") |>
-      filter(year>=1990)
-  
-gr <- ggplot(df,aes(y=100*headcount,x=year,color=reporting_level)) +
-      geom_line() + 
-      labs(
-      title = "Extreme poverty in China, 1990-2022",
-      y = "Poverty rate (%)",
-      x = "")
+pip, country(CHN) year(1990/2022) clear
+graph twoway line headcount year, by(reporting_level) xtitle("") ytitle("Extreme poverty in China, 1990-2022")
+graph export "rep_level_plot.svg", replace
 ```
+![](rep_level_plot.svg)
 
-### Plot
+## Within-country comparability {.smaller}
 
-```{r}
-#| fig-width: 10
-#| fig-height: 5
-gr
-```
-:::
-
-## Within-country comparability
-
-```{r}
+```{stata}
 #| echo: true
-df <- get_stats(country="CHN") |> 
-      filter(reporting_level=="national" & year>=1990) |>
-      select(year,headcount,comparable_spell,welfare_type)
-print(df, n = 21)
+keep if reporting_level=="national"
+list year headcount comparable_spell welfare_type
 ```
 
-## Data from LIS
+## Data from LIS {.smaller}
 
-```{r}
+```{stata, results="hide", collectcode=TRUE}
+#| echo: true
+pip, clear
+keep if strpos(survey_acronym,"LIS")
+```
+
+```{stata}
 #| echo: true 
-df <- get_stats() |>
-      filter(grepl("LIS", survey_acronym)) |>
-      group_by(country_name) |>
-      summarize(obs = n()) |>
-      ungroup()
-print(df, n=29)
+tab country_name
 ```
+
 
 # 4. Exercises
 
@@ -356,71 +350,84 @@ Explore whether Kuznets' inverse-U hypothesis holds with data in PIP
 
 ------------------------------------------------------------------------
 
+## Results {.smaller}
+
 ::: panel-tabset
+
 ### Code
 
-```{r}
+```{stata, results="hide", collectcode=TRUE}
 #| echo: true 
-# Kuznets curve? 
-df <- get_stats()   
-gr <- ggplot(df, aes(x = log(mean),y=gini)) +   
-      geom_point() +   
-      geom_smooth() +   
-      labs(title = "Kuznets curve?",
-            y = "Gini coefficient",
-            x = "Log welfare")   
-summary(lm(gini~log(mean)+I(log(mean)^2),data=df)) 
+
+pip, clear
+
+gen logmean = log(mean)
+gen logmean2 = log(mean)^2
+
+graph twoway scatter gini logmean || ///
+lpolyci gini logmean, ///
+title("Kuznets curve?") ///
+xtitle("Log welfare") ///
+ytitle("Gini coefficient") ///
+legend(off)
+
+graph export "ex_1_plot.svg", replace
+```
+
+### Regression
+
+```{stata}
+#| echo: true 
+
+reg gini logmean logmean2
 ```
 
 ### Plot
 
-```{r}
-#| fig-width: 10 
-#| fig-height: 6 
-gr
-```
+![](ex_1_plot.svg)
+
 :::
 
-## Global and regional estimates
+## Global and regional estimates {.smaller}
 
-```{r}
+```{stata, collectcode=TRUE}
 #| echo: true
-get_wb()
+pip wb, clear
+```
+
+```{stata}
+#| echo: true
+levelsof region_code
 ```
 
 ------------------------------------------------------------------------
 
-## Global poverty, 1990-2022
+## Global poverty, 1990-2022 {.smaller}
 
 ::: panel-tabset
 ### Code
 
-```{r}
+```{stata, results="hide"}
 #| echo: true
-df <- get_wb() |>
-      filter(year >= 1990, region_code %in% c("WLD","EAP","SSA"))
+keep if year>=1990 & inlist(region_code,"WLD","EAP","SSA")
+graph twoway line headcount year, by(region_name) ytitle("Poverty rate (%)") ///
+ylab(,angle(horizontal))
 
-gr <- ggplot(df, aes(x = year,y = 100*headcount,color=region_code)) +
-  geom_line() +
-  labs(
-    title = "Global poverty, 1990-2025",
-    y = "Poverty rate (%)",
-    x = ""
-  ) 
+graph export "pov_90_22.svg", replace
 ```
 
 ### Plot
 
-```{r}
-#| fig-width: 10
-#| fig-height: 5
-gr
-```
+![](pov_90_22.svg)
+
 :::
 
-## Many more functions
+## Many more functions {.smaller}
 
-![](img/pipr_functions.png){fig-align="center"}
+```{stata}
+#| echo: true
+pip tables
+```
 
 ## Exercise 2
 
@@ -432,68 +439,65 @@ COVID-19 impact on poverty and inequality
 
 ------------------------------------------------------------------------
 
+## Results {.smaller}
+
 ::: panel-tabset
 ### Code
 
-```{r}
+```{stata, results="hide"}
 #| echo: true
-# Change in number of poor, 2019-2020
-df <- get_wb() |> filter(year==2019 | year==2020) |>
-      group_by(region_code) |>
-      mutate(changeinpoor = pop_in_poverty-lag(pop_in_poverty)) |>
-      filter(!is.na(changeinpoor))
+* Without the nowcast option, data will only be presented for regions with sufficient data coverage
 
-gr <- ggplot(df, aes(y = region_name,x=changeinpoor/10^6)) +
-  geom_bar(stat="identity") +
-  labs(title = "Change in number of poor, 2019-2020",x = "Milllions",y = "Region") 
+pip wb, nowcasts clear
+keep if year==2019 | year==2020
+bysort region_code (year): gen changeinpoor = (pop_in_poverty-pop_in_poverty[_n-1])/10^6
+keep if year==2020
 
+graph hbar changeinpoor, over(region_code, sort(changeinpoor)) ytitle("Millions") title("Change in number of poor, 2019-2020") yline(0)
+
+graph export "ex_2a_plot.svg", replace
 ```
 
 ### Plot
 
-```{r}
-#| fig-width: 10
-#| fig-height: 6
-gr
-```
+![](ex_2a_plot.svg)
 :::
 
 ------------------------------------------------------------------------
+## Results {.smaller}
 
 ::: panel-tabset
 ### Code
 
-```{r}
+```{stata, results="hide", collectcode=TRUE}
 #| echo: true
-# Change in Gini, 2019-2020?=
-df <- get_stats() |> 
-      filter(year==2019 | year==2020) |>
-      filter(reporting_level=="national") |>
-      group_by(country_code,welfare_type,comparable_spell) |>
-      # Only keeps countries with comparable estimates in 2019 and 2020
-      filter(n()==2) |>
-      mutate(ginichange = gini-lag(gini)) |>
-      filter(year==2020) |>
-      ungroup() |>
-      # If countries have both income and consumption estimates, use only the latter
-      group_by(country_code) |>
-      filter(n()==1 | welfare_type=="consumption") |>
-      ungroup()
+pip, year(2019/2020) coverage(national)
 
-gr <- ggplot(df[df$country_code!="XKX",], aes(x = reorder(country_name, +ginichange),y=ginichange*100,fill=region_name)) +
-  geom_bar(stat="identity") +
-  labs(title = "Change in Gini index, 2019-2020",y = "Gini points",x = "Country") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+*Only keep countries with comparable estimates in 2019 and 2020:
 
+bysort country_code welfare_type comparable_spell: keep if _N==2
+bysort country_code welfare_type comparable_spell (year): gen ginichange = gini-gini[_n-1]
+keep if year==2020
+
+*If countries have both income and consumption estimates, use only the latter:
+
+bysort country_code: keep if _N==1 |  welfare_type==1
+
+*Something strange is going on with Kosovo:
+
+drop if country_code=="XKX"
+
+*Draw graph
+
+graph bar ginichange,  over(country_name, sort(ginichange)  gap(0) lab(angle(90) labsize(small)))   ///
+title("Change in Gini index, 2019-2020") ytitle("Gini points") 
+
+graph export "ex_2b_plot.svg", replace
 ```
 
 ### Plot
 
-```{r}
-#| fig-width: 10
-#| fig-height: 6
-gr
-```
+![](ex_2b_plot.svg)
 :::
 
 ## Additional resource {.smaller}
@@ -516,7 +520,7 @@ gr
 
 For further details please contact:
 
--   Diana C. Garcia Rojas [drojas\@worldbank.org](mailto:drojas@worldbank.org){.email}
+-   Diana C. Garcia Rojas: [dgarciarojas\@worldbank.org](mailto:drojas@worldbank.org){.email}
 -   Zander Prinsloo: [zprinsloo\@worldbank.org](mailto:zprinsloo@worldbank.org){.email}
 -   Rossana Tatulli: [rtatulli\@worldbank.org](mailto:rtatulli@worldbank.org){.email}
 -   Anubhava Singla: [asingla1\@worldbabnk.org](mailto:asingla1@worldbabnk.org){.email}
