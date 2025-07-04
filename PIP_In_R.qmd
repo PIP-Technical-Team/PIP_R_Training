@@ -1,6 +1,6 @@
 ---
 title: "Poverty and Inequality Platform (PIP): an introduction using R"
-date: "July 9th, 2025"
+date: "07/09/2025"
 author: 
   - Diana C. Garcia Rojas
   - Zander Prinsloo
@@ -9,11 +9,11 @@ author:
   - Nishant Yonzan
 format:
   revealjs:
-    css: "custom.css"   # <-- point to the file you just saved
-    theme: "simple"     # keep the base Reveal JS theme minimal
+    css: "custom.css"
+    theme: "simple"
     #incremental: true   # incrementally show the bullets
     slide-number: true
-    title-slide-style: pandoc
+    #title-slide-style: pandoc
     chalkboard: 
       buttons: false
     # preview-links: auto

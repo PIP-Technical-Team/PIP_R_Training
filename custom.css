@@ -10,33 +10,26 @@
 /* ==================================================
    1 · H1 TITLE SLIDES WHICH START WITH '#' (the <section class="title-slide">)
    -------------------------------------------------- */
-.title-slide {
-  background-color: var(--wb-navy);
-  color:            var(--wb-white);
-  padding: 2.5em 3em;
-}
-
-/* — headings inside the title slide — */
-.title-slide h1,
+/* 1) center all the text on a title‐slide */
+.title-slide h1.title,
 .title-slide h2,
 .title-slide h3 {
-  margin-top: 0;
-  color: var(--wb-white);
+  text-align: center;
 }
 
-/* >>> CLAMP the main <h1 class="title"> so it never grows too tall <<< */
+/* 2) shrink the main title a little */
 .title-slide h1.title {
-  font-size: clamp(3rem, 10vw, 6rem); /* min … ideal … max            */
-  line-height: 1.1;
+  /* was clamp(3rem,10vw,6rem); */
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 1.2;
+  margin-bottom: 1rem;
 }
 
-/* — author block — */
-.title-slide p.author {
-  margin-top: 1.75rem;
-  font-size: 1.6rem;
-  line-height: 1.3;
-  color: var(--wb-navy);  
+/* 3) hide the built-in <hr> that Pandoc puts mid-slide */
+.title-slide > hr {
+  display: none;
 }
+
 
 
 /* ==================================================
