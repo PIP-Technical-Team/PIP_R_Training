@@ -1,5 +1,5 @@
 ---
-title: "Poverty and Inequality Platform (PIP): an introduction using STATA"
+title: "Poverty and Inequality Platform (PIP): an introduction using Stata"
 date: 07/09/2025
 author: 
   - Diana C. Garcia Rojas
@@ -11,14 +11,20 @@ format:
     theme: "simple"     # keep the base Reveal JS theme minimal
     #incremental: true   # incrementally show the bullets
     slide-number: true
-    title-slide-style: pandoc
+    # title-slide-style: pandoc
     chalkboard: 
       buttons: false
     # preview-links: auto
     logo: img/WB-PIP-E-horizontal-RGB-med.png
 ---
 
-# 0. Outline of the presentation
+# Outline of the presentation
+
+::: footer
+The findings, interpretations, and conclusions expressed in this presentation are entirely those of the author. They do not necessarily represent the views of the World Bank and its affiliated organizations, or those of the Executive Directors of the World Banks or the governments they represent. 
+
+The authors gratefully acknowledge financial support from the UK government through the Data and Evidence for Tackling Extreme Poverty (DEEP) Research Programme.
+:::
 
 ## Outline
 
@@ -26,13 +32,13 @@ format:
 
 2.  PIP user interface
 
-3.  Accessing the PIP API with STATA
+3.  Accessing the PIP API with Stata
 
 4.  Exercises
 
 5.  Additional resources
 
-# 1. Introduction to the Poverty and Inequality Platform (PIP)
+# Introduction
 
 ## Poverty data at the World Bank {.smaller}
 
@@ -142,7 +148,7 @@ format:
 
 # 2. Accessing PIP through the user interface
 
-# 3. Accessing PIP in STATA
+# 3. Accessing PIP in Stata
 
 ## Installing the Stata pip.ado {.smaller}
 
@@ -223,14 +229,16 @@ describe
 
 ## Ghanaian estimates {.smaller}
 
-<!-- # ```{stata, collectcode=TRUE} -->
-<!-- # #| echo: false -->
-<!-- # set linesize 200 -->
-<!-- # ``` -->
-
 ```{stata}
 #| echo: true
 pip, country(GHA) n2disp(7) clear
+```
+
+## Ghanaian estimates with 2017 PPP {.smaller}
+
+```{stata}
+#| echo: true
+pip, country(GHA) n2disp(7) ppp_year(2017) clear
 ```
 
 ## Ghanaian estimates {.smaller}
@@ -321,7 +329,7 @@ graph export "rep_level_plot.svg", replace
 ```{stata}
 #| echo: true
 keep if reporting_level=="national"
-list year headcount comparable_spell welfare_type
+list country_name reporting_level year headcount comparable_spell welfare_type
 ```
 
 ## Data from LIS {.smaller}
@@ -520,8 +528,8 @@ graph export "ex_2b_plot.svg", replace
 
 For further details please contact:
 
--   Diana C. Garcia Rojas: [dgarciarojas\@worldbank.org](mailto:drojas@worldbank.org){.email}
+-   Diana C. Garcia Rojas: [dgarciarojas\@worldbank.org](mailto:dgarciarojas@worldbank.org){.email}
 -   Zander Prinsloo: [zprinsloo\@worldbank.org](mailto:zprinsloo@worldbank.org){.email}
 -   Rossana Tatulli: [rtatulli\@worldbank.org](mailto:rtatulli@worldbank.org){.email}
--   Anubhava Singla: [asingla1\@worldbabnk.org](mailto:asingla1@worldbabnk.org){.email}
+-   Anubhava Singla: [asingla1\@worldbabnk.org](mailto:asingla1@worldbank.org){.email}
 -   Nishant Yonzan: [nyonzan\@worldbank.org](mailto:nyonzan@worldbank.org){.email}

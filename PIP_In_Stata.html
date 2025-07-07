@@ -13,7 +13,7 @@
   <meta name="author" content="Anubhava Singla">
   <meta name="author" content="Nishant Yonzan">
   <meta name="dcterms.date" content="2025-07-09">
-  <title>Poverty and Inequality Platform (PIP): an introduction using STATA</title>
+  <title>Poverty and Inequality Platform (PIP): an introduction using Stata</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -97,7 +97,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="PIP_In_Stata_files/libs/revealjs/dist/theme/quarto-f448a74fcab677edcd5c965f9743e4ef.css">
+  <link rel="stylesheet" href="PIP_In_Stata_files/libs/revealjs/dist/theme/quarto-8f3eebe07241f08526c91a7e9cbef8fd.css">
   <link rel="stylesheet" href="custom.css">
   <link href="PIP_In_Stata_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="PIP_In_Stata_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -197,31 +197,50 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="center">
-  <h1 class="title">Poverty and Inequality Platform (PIP): an introduction using STATA</h1>
-  <p class="author">Diana C. Garcia Rojas</p>
-  <p class="author">Anubhava Singla</p>
-  <p class="author">Nishant Yonzan</p>
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Poverty and Inequality Platform (PIP): an introduction using Stata</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Diana C. Garcia Rojas 
+</div>
+</div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Anubhava Singla 
+</div>
+</div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Nishant Yonzan 
+</div>
+</div>
+</div>
+
   <p class="date">2025-07-09</p>
 </section>
 <section>
 <section id="outline-of-the-presentation" class="title-slide slide level1 center">
-<h1>0. Outline of the presentation</h1>
-
+<h1>Outline of the presentation</h1>
+<div class="footer">
+<p>The findings, interpretations, and conclusions expressed in this presentation are entirely those of the author. They do not necessarily represent the views of the World Bank and its affiliated organizations, or those of the Executive Directors of the World Banks or the governments they represent.</p>
+<p>The authors gratefully acknowledge financial support from the UK government through the Data and Evidence for Tackling Extreme Poverty (DEEP) Research Programme.</p>
+</div>
 </section>
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ol type="1">
 <li><p>Introduction to the Poverty and Inequality Platform (PIP)</p></li>
 <li><p>PIP user interface</p></li>
-<li><p>Accessing the PIP API with STATA</p></li>
+<li><p>Accessing the PIP API with Stata</p></li>
 <li><p>Exercises</p></li>
 <li><p>Additional resources</p></li>
 </ol>
 </section></section>
 <section>
-<section id="introduction-to-the-poverty-and-inequality-platform-pip" class="title-slide slide level1 center">
-<h1>1. Introduction to the Poverty and Inequality Platform (PIP)</h1>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
 
 </section>
 <section id="poverty-data-at-the-world-bank" class="slide level2 smaller">
@@ -347,7 +366,7 @@
 
 <section>
 <section id="accessing-pip-in-stata" class="title-slide slide level1 center">
-<h1>3. Accessing PIP in STATA</h1>
+<h1>3. Accessing PIP in Stata</h1>
 
 </section>
 <section id="installing-the-stata-pip.ado" class="slide level2 smaller">
@@ -395,8 +414,7 @@
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href=""></a><span class="kw">set</span> <span class="dv">linesize</span> 200</span>
 <span id="cb1-2"><a href=""></a>pip cl, <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Cache directory has been set up. If you want to change it, type pip_setup cachedir
-Check for updates will be done in 31 days
+<pre><code>Check for updates will be done in 27 days
 
 first observation
 
@@ -425,9 +443,9 @@ first observation
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href=""></a><span class="kw">describe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Contains data from C:\Users\wb535623\AppData\Local\Temp\ST_6884_000001.tmp
- Observations:         2,504                  WB poverty at country level ( 3 Jul 2025)
-    Variables:            43                  3 Jul 2025 21:52
+<pre><code>Contains data from C:\Users\wb535623\AppData\Local\Temp\ST_4424_000001.tmp
+ Observations:         2,504                  WB poverty at country level ( 7 Jul 2025)
+    Variables:            43                  7 Jul 2025 15:54
                                               (_dta has notes)
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Variable      Storage   Display    Value
@@ -492,10 +510,6 @@ Sorted by: country_code  year
 </section>
 <section id="ghanaian-estimates" class="slide level2 smaller">
 <h2>Ghanaian estimates</h2>
-<!-- # ```{stata, collectcode=TRUE} -->
-<!-- # #| echo: false -->
-<!-- # set linesize 200 -->
-<!-- # ``` -->
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href=""></a>pip, country(GHA) n2disp(7) <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -517,6 +531,29 @@ Click here to display how to cite</code></pre>
 </div>
 </div>
 </section>
+<section id="ghanaian-estimates-with-2017-ppp" class="slide level2 smaller">
+<h2>Ghanaian estimates with 2017 PPP</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href=""></a>pip, country(GHA) n2disp(7) ppp_year(2017) <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>first 7 observations
+
+  +------------------------------------------------------------------------------------+
+  | country_code   year   poverty_line   headcount     mean      median   welfare_type |
+  |------------------------------------------------------------------------------------|
+  |          GHA   1987           2.15      0.5839   2.3365   1.8976071    consumption |
+  |          GHA   1988           2.15      0.5766   2.3995   1.9164557    consumption |
+  |          GHA   1991           2.15      0.6417   2.2311   1.6993231    consumption |
+  |          GHA   1998           2.15      0.4865   2.9707   2.2098793    consumption |
+  |          GHA   2005           2.15      0.4247   3.4015   2.4765912    consumption |
+  |------------------------------------------------------------------------------------|
+  |          GHA   2012           2.15      0.2569   4.8424   3.5266795    consumption |
+  |          GHA   2016           2.15      0.2521   5.0895   3.7379272    consumption |
+  +------------------------------------------------------------------------------------+
+Click here to display how to cite</code></pre>
+</div>
+</div>
+</section>
 <section id="ghanaian-estimates-1" class="slide level2 smaller">
 <h2>Ghanaian estimates</h2>
 <ul>
@@ -527,7 +564,7 @@ Click here to display how to cite</code></pre>
 <section id="different-poverty-line" class="slide level2 smaller">
 <h2>Different poverty line</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href=""></a>pip, country(LUX) povline(10) <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href=""></a>pip, country(LUX) povline(10) <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>first observation
 
@@ -543,7 +580,7 @@ Click here to display how to cite</code></pre>
 <section id="multiple-poverty-lines" class="slide level2 smaller">
 <h2>Multiple poverty lines</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href=""></a>pip, country(LUX) <span class="fu">year</span>(2022) n2disp(4) povline(10 20 50 100) <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href=""></a>pip, country(LUX) <span class="fu">year</span>(2022) n2disp(4) povline(10 20 50 100) <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>first 4 observations
 
@@ -561,15 +598,8 @@ Click here to display how to cite</code></pre>
 </section>
 <section id="estimates-across-selected-countries" class="slide level2 smaller">
 <h2>Estimates across selected countries</h2>
-<div class="cell" data-collectcode="true">
-<div class="cell-output cell-output-stdout">
-<pre><code>There is a problem with PIP API server. Try again later
-invalid syntax
-r(197);</code></pre>
-</div>
-</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href=""></a>pip, country(LUX GHA VNM) n2disp(3) <span class="fu">year</span>(2022) <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href=""></a>pip, country(LUX GHA VNM) n2disp(3) <span class="fu">year</span>(2022) <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>first 2 observations
 
@@ -593,7 +623,7 @@ Click here to display how to cite</code></pre>
 <section id="interpolated-and-extrapolated-values" class="slide level2 smaller">
 <h2>Interpolated and extrapolated values</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href=""></a>pip, country(GHA) <span class="fu">year</span>(2016/2025) n2disp(5) fillgaps nowcasts <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href=""></a>pip, country(GHA) <span class="fu">year</span>(2016/2025) n2disp(5) fillgaps nowcasts <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>first 5 observations
 
@@ -613,66 +643,66 @@ Click here to display how to cite</code></pre>
 <section id="poverty-by-welfare-type" class="slide level2 smaller">
 <h2>Poverty by welfare type</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href=""></a>pip, country(PHL) <span class="kw">clear</span></span>
-<span id="cb16-2"><a href=""></a><span class="kw">graph</span> <span class="kw">twoway</span> <span class="kw">line</span> headcount <span class="fu">year</span>, <span class="kw">by</span>(welfare_type) <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">"Extreme poverty in the Philippines, 1981-2022"</span>)</span>
-<span id="cb16-3"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"welfare_plot.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href=""></a>pip, country(PHL) <span class="kw">clear</span></span>
+<span id="cb17-2"><a href=""></a><span class="kw">graph</span> <span class="kw">twoway</span> <span class="kw">line</span> headcount <span class="fu">year</span>, <span class="kw">by</span>(welfare_type) <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">"Extreme poverty in the Philippines, 1981-2022"</span>)</span>
+<span id="cb17-3"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"welfare_plot.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <img data-src="welfare_plot.svg" class="r-stretch"></section>
 <section id="poverty-by-reporting-level" class="slide level2 smaller">
 <h2>Poverty by reporting level</h2>
 <div class="cell" data-collectcode="true">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href=""></a>pip, country(CHN) <span class="fu">year</span>(1990/2022) <span class="kw">clear</span></span>
-<span id="cb17-2"><a href=""></a><span class="kw">graph</span> <span class="kw">twoway</span> <span class="kw">line</span> headcount <span class="fu">year</span>, <span class="kw">by</span>(reporting_level) <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">"Extreme poverty in China, 1990-2022"</span>)</span>
-<span id="cb17-3"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"rep_level_plot.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href=""></a>pip, country(CHN) <span class="fu">year</span>(1990/2022) <span class="kw">clear</span></span>
+<span id="cb18-2"><a href=""></a><span class="kw">graph</span> <span class="kw">twoway</span> <span class="kw">line</span> headcount <span class="fu">year</span>, <span class="kw">by</span>(reporting_level) <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">"Extreme poverty in China, 1990-2022"</span>)</span>
+<span id="cb18-3"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"rep_level_plot.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <img data-src="rep_level_plot.svg" class="r-stretch"></section>
 <section id="within-country-comparability" class="slide level2 smaller">
 <h2>Within-country comparability</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> reporting_level==<span class="st">"national"</span></span>
-<span id="cb18-2"><a href=""></a><span class="ot">list</span> <span class="fu">year</span> headcount comparable_spell welfare_type</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> reporting_level==<span class="st">"national"</span></span>
+<span id="cb19-2"><a href=""></a><span class="ot">list</span> country_name reporting_level <span class="fu">year</span> headcount comparable_spell welfare_type</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(38 observations deleted)
 
-     +---------------------------------------------+
-     | year   headco~t   comparabl~l   welfare_~pe |
-     |---------------------------------------------|
-  1. | 1990     0.8303   1990 - 2012   consumption |
-  2. | 1993     0.7676   1990 - 2012   consumption |
-  3. | 1996     0.6200   1990 - 2012   consumption |
-  4. | 1999     0.5843   1990 - 2012   consumption |
-  5. | 2002     0.4815   1990 - 2012   consumption |
-     |---------------------------------------------|
-  6. | 2005     0.3310   1990 - 2012   consumption |
-  7. | 2008     0.2624   1990 - 2012   consumption |
-  8. | 2010     0.2059   1990 - 2012   consumption |
-  9. | 2011     0.1570   1990 - 2012   consumption |
- 10. | 2012     0.1324   1990 - 2012   consumption |
-     |---------------------------------------------|
- 11. | 2013     0.0623   2013 - 2021   consumption |
- 12. | 2014     0.0474   2013 - 2021   consumption |
- 13. | 2015     0.0298   2013 - 2021   consumption |
- 14. | 2016     0.0220   2013 - 2021   consumption |
- 15. | 2017     0.0167   2013 - 2021   consumption |
-     |---------------------------------------------|
- 16. | 2018     0.0080   2013 - 2021   consumption |
- 17. | 2019     0.0000   2013 - 2021   consumption |
- 18. | 2020     0.0000   2013 - 2021   consumption |
- 19. | 2021     0.0000   2013 - 2021   consumption |
-     +---------------------------------------------+</code></pre>
+     +-------------------------------------------------------------------+
+     | count~me   report~l   year   headco~t   comparabl~l   welfare_~pe |
+     |-------------------------------------------------------------------|
+  1. |    China   national   1990     0.8303   1990 - 2012   consumption |
+  2. |    China   national   1993     0.7676   1990 - 2012   consumption |
+  3. |    China   national   1996     0.6200   1990 - 2012   consumption |
+  4. |    China   national   1999     0.5843   1990 - 2012   consumption |
+  5. |    China   national   2002     0.4815   1990 - 2012   consumption |
+     |-------------------------------------------------------------------|
+  6. |    China   national   2005     0.3310   1990 - 2012   consumption |
+  7. |    China   national   2008     0.2624   1990 - 2012   consumption |
+  8. |    China   national   2010     0.2059   1990 - 2012   consumption |
+  9. |    China   national   2011     0.1570   1990 - 2012   consumption |
+ 10. |    China   national   2012     0.1324   1990 - 2012   consumption |
+     |-------------------------------------------------------------------|
+ 11. |    China   national   2013     0.0623   2013 - 2021   consumption |
+ 12. |    China   national   2014     0.0474   2013 - 2021   consumption |
+ 13. |    China   national   2015     0.0298   2013 - 2021   consumption |
+ 14. |    China   national   2016     0.0220   2013 - 2021   consumption |
+ 15. |    China   national   2017     0.0167   2013 - 2021   consumption |
+     |-------------------------------------------------------------------|
+ 16. |    China   national   2018     0.0080   2013 - 2021   consumption |
+ 17. |    China   national   2019     0.0000   2013 - 2021   consumption |
+ 18. |    China   national   2020     0.0000   2013 - 2021   consumption |
+ 19. |    China   national   2021     0.0000   2013 - 2021   consumption |
+     +-------------------------------------------------------------------+</code></pre>
 </div>
 </div>
 </section>
 <section id="data-from-lis" class="slide level2 smaller">
 <h2>Data from LIS</h2>
 <div class="cell" data-collectcode="true">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href=""></a>pip, <span class="kw">clear</span></span>
-<span id="cb20-2"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">strpos</span>(survey_acronym,<span class="st">"LIS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href=""></a>pip, <span class="kw">clear</span></span>
+<span id="cb21-2"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">strpos</span>(survey_acronym,<span class="st">"LIS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href=""></a><span class="kw">tab</span> country_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href=""></a><span class="kw">tab</span> country_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    country/economy name |      Freq.     Percent        Cum.
 -------------------------+-----------------------------------
@@ -730,24 +760,24 @@ Click here to display how to cite</code></pre>
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="cell" data-collectcode="true">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href=""></a>pip, <span class="kw">clear</span></span>
-<span id="cb23-2"><a href=""></a></span>
-<span id="cb23-3"><a href=""></a><span class="kw">gen</span> logmean = <span class="fu">log</span>(<span class="kw">mean</span>)</span>
-<span id="cb23-4"><a href=""></a><span class="kw">gen</span> logmean2 = <span class="fu">log</span>(<span class="kw">mean</span>)^2</span>
-<span id="cb23-5"><a href=""></a></span>
-<span id="cb23-6"><a href=""></a><span class="kw">graph</span> <span class="kw">twoway</span> <span class="kw">scatter</span> gini logmean || <span class="co">///</span></span>
-<span id="cb23-7"><a href=""></a>lpolyci gini logmean, <span class="co">///</span></span>
-<span id="cb23-8"><a href=""></a><span class="bn">title</span>(<span class="st">"Kuznets curve?"</span>) <span class="co">///</span></span>
-<span id="cb23-9"><a href=""></a><span class="bn">xtitle</span>(<span class="st">"Log welfare"</span>) <span class="co">///</span></span>
-<span id="cb23-10"><a href=""></a><span class="bn">ytitle</span>(<span class="st">"Gini coefficient"</span>) <span class="co">///</span></span>
-<span id="cb23-11"><a href=""></a><span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb23-12"><a href=""></a></span>
-<span id="cb23-13"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"ex_1_plot.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href=""></a>pip, <span class="kw">clear</span></span>
+<span id="cb24-2"><a href=""></a></span>
+<span id="cb24-3"><a href=""></a><span class="kw">gen</span> logmean = <span class="fu">log</span>(<span class="kw">mean</span>)</span>
+<span id="cb24-4"><a href=""></a><span class="kw">gen</span> logmean2 = <span class="fu">log</span>(<span class="kw">mean</span>)^2</span>
+<span id="cb24-5"><a href=""></a></span>
+<span id="cb24-6"><a href=""></a><span class="kw">graph</span> <span class="kw">twoway</span> <span class="kw">scatter</span> gini logmean || <span class="co">///</span></span>
+<span id="cb24-7"><a href=""></a>lpolyci gini logmean, <span class="co">///</span></span>
+<span id="cb24-8"><a href=""></a><span class="bn">title</span>(<span class="st">"Kuznets curve?"</span>) <span class="co">///</span></span>
+<span id="cb24-9"><a href=""></a><span class="bn">xtitle</span>(<span class="st">"Log welfare"</span>) <span class="co">///</span></span>
+<span id="cb24-10"><a href=""></a><span class="bn">ytitle</span>(<span class="st">"Gini coefficient"</span>) <span class="co">///</span></span>
+<span id="cb24-11"><a href=""></a><span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb24-12"><a href=""></a></span>
+<span id="cb24-13"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"ex_1_plot.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-2">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href=""></a><span class="kw">reg</span> gini logmean logmean2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href=""></a><span class="kw">reg</span> gini logmean logmean2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Source |       SS           df       MS      Number of obs   =     2,504
 -------------+----------------------------------   F(2, 2501)      =    223.26
@@ -775,7 +805,7 @@ Click here to display how to cite</code></pre>
 <section id="global-and-regional-estimates" class="slide level2 smaller">
 <h2>Global and regional estimates</h2>
 <div class="cell" data-collectcode="true">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><a href=""></a>pip wb, <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a href=""></a>pip wb, <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>first observation
 
@@ -788,7 +818,7 @@ Click here to display how to cite</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href=""></a><span class="kw">levelsof</span> region_code</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a href=""></a><span class="kw">levelsof</span> region_code</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>`"AFE"' `"AFW"' `"EAP"' `"ECA"' `"LAC"' `"MNA"' `"OHI"' `"SAS"' `"SSA"' `"WLD"'</code></pre>
 </div>
@@ -801,11 +831,11 @@ Click here to display how to cite</code></pre>
 <div class="tab-content">
 <div id="tabset-2-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span>&gt;=1990 &amp; <span class="fu">inlist</span>(region_code,<span class="st">"WLD"</span>,<span class="st">"EAP"</span>,<span class="st">"SSA"</span>)</span>
-<span id="cb30-2"><a href=""></a><span class="kw">graph</span> <span class="kw">twoway</span> <span class="kw">line</span> headcount <span class="fu">year</span>, <span class="kw">by</span>(region_name) <span class="bn">ytitle</span>(<span class="st">"Poverty rate (%)"</span>) <span class="co">///</span></span>
-<span id="cb30-3"><a href=""></a>ylab(,angle(horizontal))</span>
-<span id="cb30-4"><a href=""></a></span>
-<span id="cb30-5"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"pov_90_22.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span>&gt;=1990 &amp; <span class="fu">inlist</span>(region_code,<span class="st">"WLD"</span>,<span class="st">"EAP"</span>,<span class="st">"SSA"</span>)</span>
+<span id="cb31-2"><a href=""></a><span class="kw">graph</span> <span class="kw">twoway</span> <span class="kw">line</span> headcount <span class="fu">year</span>, <span class="kw">by</span>(region_name) <span class="bn">ytitle</span>(<span class="st">"Poverty rate (%)"</span>) <span class="co">///</span></span>
+<span id="cb31-3"><a href=""></a>ylab(,angle(horizontal))</span>
+<span id="cb31-4"><a href=""></a></span>
+<span id="cb31-5"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"pov_90_22.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-2-2">
@@ -817,7 +847,7 @@ Click here to display how to cite</code></pre>
 <section id="many-more-functions" class="slide level2 smaller">
 <h2>Many more functions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><a href=""></a>pip tables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href=""></a>pip tables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Auxiliary tables available for :
      01 | aux_versions
@@ -865,16 +895,16 @@ Click here to display how to cite</code></pre>
 <div class="tab-content">
 <div id="tabset-3-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb33-1"><a href=""></a>* Without the nowcast option, <span class="kw">data</span> will only <span class="kw">be</span> presented <span class="kw">for</span> regions with sufficient <span class="kw">data</span> coverage</span>
-<span id="cb33-2"><a href=""></a></span>
-<span id="cb33-3"><a href=""></a>pip wb, nowcasts <span class="kw">clear</span></span>
-<span id="cb33-4"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span>==2019 | <span class="fu">year</span>==2020</span>
-<span id="cb33-5"><a href=""></a><span class="kw">bysort</span> region_code (<span class="fu">year</span>): <span class="kw">gen</span> changeinpoor = (pop_in_poverty-pop_in_poverty[<span class="dt">_n</span>-1])/10^6</span>
-<span id="cb33-6"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span>==2020</span>
-<span id="cb33-7"><a href=""></a></span>
-<span id="cb33-8"><a href=""></a><span class="kw">graph</span> <span class="bn">hbar</span> changeinpoor, <span class="bn">over</span>(region_code, <span class="kw">sort</span>(changeinpoor)) <span class="bn">ytitle</span>(<span class="st">"Millions"</span>) <span class="bn">title</span>(<span class="st">"Change in number of poor, 2019-2020"</span>) <span class="kw">yline</span>(0)</span>
-<span id="cb33-9"><a href=""></a></span>
-<span id="cb33-10"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"ex_2a_plot.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb34-1"><a href=""></a>* Without the nowcast option, <span class="kw">data</span> will only <span class="kw">be</span> presented <span class="kw">for</span> regions with sufficient <span class="kw">data</span> coverage</span>
+<span id="cb34-2"><a href=""></a></span>
+<span id="cb34-3"><a href=""></a>pip wb, nowcasts <span class="kw">clear</span></span>
+<span id="cb34-4"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span>==2019 | <span class="fu">year</span>==2020</span>
+<span id="cb34-5"><a href=""></a><span class="kw">bysort</span> region_code (<span class="fu">year</span>): <span class="kw">gen</span> changeinpoor = (pop_in_poverty-pop_in_poverty[<span class="dt">_n</span>-1])/10^6</span>
+<span id="cb34-6"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span>==2020</span>
+<span id="cb34-7"><a href=""></a></span>
+<span id="cb34-8"><a href=""></a><span class="kw">graph</span> <span class="bn">hbar</span> changeinpoor, <span class="bn">over</span>(region_code, <span class="kw">sort</span>(changeinpoor)) <span class="bn">ytitle</span>(<span class="st">"Millions"</span>) <span class="bn">title</span>(<span class="st">"Change in number of poor, 2019-2020"</span>) <span class="kw">yline</span>(0)</span>
+<span id="cb34-9"><a href=""></a></span>
+<span id="cb34-10"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"ex_2a_plot.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-3-2">
@@ -890,28 +920,28 @@ Click here to display how to cite</code></pre>
 <div class="tab-content">
 <div id="tabset-4-1">
 <div class="cell" data-collectcode="true">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb34-1"><a href=""></a>pip, <span class="fu">year</span>(2019/2020) coverage(national)</span>
-<span id="cb34-2"><a href=""></a></span>
-<span id="cb34-3"><a href=""></a>*Only <span class="kw">keep</span> countries with comparable <span class="kw">estimates</span> <span class="kw">in</span> 2019 and 2020:</span>
-<span id="cb34-4"><a href=""></a></span>
-<span id="cb34-5"><a href=""></a><span class="kw">bysort</span> country_code welfare_type comparable_spell: <span class="kw">keep</span> <span class="kw">if</span> _N==2</span>
-<span id="cb34-6"><a href=""></a><span class="kw">bysort</span> country_code welfare_type comparable_spell (<span class="fu">year</span>): <span class="kw">gen</span> ginichange = gini-gini[<span class="dt">_n</span>-1]</span>
-<span id="cb34-7"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span>==2020</span>
-<span id="cb34-8"><a href=""></a></span>
-<span id="cb34-9"><a href=""></a>*If countries have both income and consumption <span class="kw">estimates</span>, <span class="kw">use</span> only the latter:</span>
-<span id="cb34-10"><a href=""></a></span>
-<span id="cb34-11"><a href=""></a><span class="kw">bysort</span> country_code: <span class="kw">keep</span> <span class="kw">if</span> _N==1 |  welfare_type==1</span>
-<span id="cb34-12"><a href=""></a></span>
-<span id="cb34-13"><a href=""></a>*Something strange is going <span class="kw">on</span> with Kosovo:</span>
-<span id="cb34-14"><a href=""></a></span>
-<span id="cb34-15"><a href=""></a><span class="kw">drop</span> <span class="kw">if</span> country_code==<span class="st">"XKX"</span></span>
-<span id="cb34-16"><a href=""></a></span>
-<span id="cb34-17"><a href=""></a>*Draw <span class="kw">graph</span></span>
-<span id="cb34-18"><a href=""></a></span>
-<span id="cb34-19"><a href=""></a><span class="kw">graph</span> <span class="bn">bar</span> ginichange,  <span class="bn">over</span>(country_name, <span class="kw">sort</span>(ginichange)  gap(0) lab(angle(90) <span class="bn">labsize</span>(small)))   <span class="co">///</span></span>
-<span id="cb34-20"><a href=""></a><span class="bn">title</span>(<span class="st">"Change in Gini index, 2019-2020"</span>) <span class="bn">ytitle</span>(<span class="st">"Gini points"</span>) </span>
-<span id="cb34-21"><a href=""></a></span>
-<span id="cb34-22"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"ex_2b_plot.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb35-1"><a href=""></a>pip, <span class="fu">year</span>(2019/2020) coverage(national)</span>
+<span id="cb35-2"><a href=""></a></span>
+<span id="cb35-3"><a href=""></a>*Only <span class="kw">keep</span> countries with comparable <span class="kw">estimates</span> <span class="kw">in</span> 2019 and 2020:</span>
+<span id="cb35-4"><a href=""></a></span>
+<span id="cb35-5"><a href=""></a><span class="kw">bysort</span> country_code welfare_type comparable_spell: <span class="kw">keep</span> <span class="kw">if</span> _N==2</span>
+<span id="cb35-6"><a href=""></a><span class="kw">bysort</span> country_code welfare_type comparable_spell (<span class="fu">year</span>): <span class="kw">gen</span> ginichange = gini-gini[<span class="dt">_n</span>-1]</span>
+<span id="cb35-7"><a href=""></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span>==2020</span>
+<span id="cb35-8"><a href=""></a></span>
+<span id="cb35-9"><a href=""></a>*If countries have both income and consumption <span class="kw">estimates</span>, <span class="kw">use</span> only the latter:</span>
+<span id="cb35-10"><a href=""></a></span>
+<span id="cb35-11"><a href=""></a><span class="kw">bysort</span> country_code: <span class="kw">keep</span> <span class="kw">if</span> _N==1 |  welfare_type==1</span>
+<span id="cb35-12"><a href=""></a></span>
+<span id="cb35-13"><a href=""></a>*Something strange is going <span class="kw">on</span> with Kosovo:</span>
+<span id="cb35-14"><a href=""></a></span>
+<span id="cb35-15"><a href=""></a><span class="kw">drop</span> <span class="kw">if</span> country_code==<span class="st">"XKX"</span></span>
+<span id="cb35-16"><a href=""></a></span>
+<span id="cb35-17"><a href=""></a>*Draw <span class="kw">graph</span></span>
+<span id="cb35-18"><a href=""></a></span>
+<span id="cb35-19"><a href=""></a><span class="kw">graph</span> <span class="bn">bar</span> ginichange,  <span class="bn">over</span>(country_name, <span class="kw">sort</span>(ginichange)  gap(0) lab(angle(90) <span class="bn">labsize</span>(small)))   <span class="co">///</span></span>
+<span id="cb35-20"><a href=""></a><span class="bn">title</span>(<span class="st">"Change in Gini index, 2019-2020"</span>) <span class="bn">ytitle</span>(<span class="st">"Gini points"</span>) </span>
+<span id="cb35-21"><a href=""></a></span>
+<span id="cb35-22"><a href=""></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"ex_2b_plot.svg"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-4-2">
@@ -936,10 +966,10 @@ Click here to display how to cite</code></pre>
 <h2>Thank you for listening.</h2>
 <p>For further details please contact:</p>
 <ul>
-<li>Diana C. Garcia Rojas: <a href="mailto:drojas@worldbank.org" class="email">dgarciarojas@worldbank.org</a></li>
+<li>Diana C. Garcia Rojas: <a href="mailto:dgarciarojas@worldbank.org" class="email">dgarciarojas@worldbank.org</a></li>
 <li>Zander Prinsloo: <a href="mailto:zprinsloo@worldbank.org" class="email">zprinsloo@worldbank.org</a></li>
 <li>Rossana Tatulli: <a href="mailto:rtatulli@worldbank.org" class="email">rtatulli@worldbank.org</a></li>
-<li>Anubhava Singla: <a href="mailto:asingla1@worldbabnk.org" class="email">asingla1@worldbabnk.org</a></li>
+<li>Anubhava Singla: <a href="mailto:asingla1@worldbank.org" class="email">asingla1@worldbabnk.org</a></li>
 <li>Nishant Yonzan: <a href="mailto:nyonzan@worldbank.org" class="email">nyonzan@worldbank.org</a></li>
 </ul>
 
