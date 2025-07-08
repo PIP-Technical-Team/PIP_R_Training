@@ -124,6 +124,16 @@ Publications are available detailing the updates in each release, methodological
 
 ::::
 
+## Data on inequality {.smaller}
+
+::: incremental
+- For each survey, PIP output reports inequality and shared prosperity measures like the Gini, MLD, polarization index, the decile share of income or consumption, and the Prosperity Gap.
+
+- In addition, PIP has a dedicated dashboard that visualize inequality trends and changes. This is available through the [Further Data & Indicators](https://pip.worldbank.org/furtherindicators-data) page in PIP UI.
+
+- We also report the average and threshold income of each percentile for each survey. THis is also available through the Further Data & Indicators page in the PIP website. 
+:::
+
 ## Welfare measure reported in PIP
 
 ![](img/process2.png){fig-align="center"}
@@ -215,35 +225,24 @@ Publications are available detailing the updates in each release, methodological
 
 # 3. Accessing PIP in Stata
 
+
 ## Installing the Stata pip.ado {.smaller}
 
 ::: incremental
+- We recommend installing the package through GitHub by first running the following, which allows you to install Stata packages from GitHub:
 
-We recommend installing the package through GitHub by first running the following, which allows you to install Stata packages from GitHub:
+   - `net install github, from("https://haghish.github.io/github/")`
 
--   `net install github, from("https://haghish.github.io/github/")`
+   - You can now install the Stata package by running
 
--   You can now install the Stata package by running
+   - `github install worldbank/pip`
 
--   `github install worldbank/pip`
+
+- **More information about the package:**
+
+   - <https://github.com/worldbank/pip/>
 
 :::
-
-## Installing the Stata pip.ado {.smaller}
-
-
-We recommend installing the package through GitHub by first running the following, which allows you to install Stata packages from GitHub:
-
--   `net install github, from("https://haghish.github.io/github/")`
-
--   You can now install the Stata package by running
-
--   `github install worldbank/pip`
-
-
-**More information about the package:**
-
-<https://github.com/worldbank/pip/>
 
 ## Two main functions {.smaller}
 
@@ -407,6 +406,21 @@ graph export "rep_level_plot.svg", replace
 #| echo: true
 keep if reporting_level=="national"
 list country_name reporting_level year headcount comparable_spell welfare_type
+```
+
+
+## Data on Shared Prosperity and inequality {.smaller}
+
+- The World Bank recently adopted the *Prosperity Gap* to capture shared prosperity. 
+
+- The *Prosperity Gap* is a average societal shortfall from a prosperity standard, currently set at $28/day in 2021 PPP. The threshold is close to the income levels of individuals living in middle income countries that is transitioning into high income status.
+
+- The data on Prosperty Gap and inequality measures are available in the PIP Stata output.
+
+```{stata, results="hide", collectcode=TRUE}
+#| echo: true
+pip, clear country(GHA)
+list country_code year gini pg in 1/3
 ```
 
 ## Data from LIS {.smaller}
