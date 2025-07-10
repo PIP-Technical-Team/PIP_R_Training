@@ -2,10 +2,8 @@
 title: "Poverty and Inequality Platform (PIP): an introduction using R"
 date: "07/09/2025"
 author: 
-  - Diana C. Garcia Rojas
-  - Zander Prinsloo
-  - Anubhava Singla
   - Rossana Tatulli
+  - Zander Prinsloo
   - Nishant Yonzan
 format:
   revealjs:
@@ -14,7 +12,7 @@ format:
     #incremental: true   # incrementally show the bullets
     slide-number: true
     #title-slide-style: pandoc
-    chalkboard: 
+    chalkboard:
       buttons: false
     # preview-links: auto
     logo: img/WB-PIP-E-horizontal-RGB-med.png
@@ -42,13 +40,13 @@ The authors gratefully acknowledge financial support from the UK government thro
 
 
 
-# 1. Introduction to the Poverty and Inequality Platform (PIP)
+# 1. Introduction 
 
-## Poverty data at the World Bank
+## Poverty data at the World Bank {.smaller}
 
 ::: {.incremental}
 
--   The World Bank mission is to end extreme poverty and boost shared poverty on a livable planet.
+-   The World Bank mission is to end extreme poverty and boost shared prosperity on a livable planet.
 
 -   To that end, the World Bank often helps countries field household surveys to track welfare.
 
@@ -67,10 +65,10 @@ The authors gratefully acknowledge financial support from the UK government thro
 
 - PIP is the source of data for several targets of the Sustainable Development Goals on ending poverty (SDG1) and reducing inequality (SDG10).
 
-- Collaboration between different parts of the World Bank through the Global Poverty Working Group
+- PIP is the joint collaboration different parts of the World Bank through the Global Poverty Working Group
    -   Development Data Group
    -   Development Research Group
-   -   Poverty and Equity Global Practice
+   -   Poverty and Equity Global Department
 
 :::
 
@@ -93,81 +91,157 @@ The authors gratefully acknowledge financial support from the UK government thro
 :::
 
   
-## PIP: Quality, accessibility, and transparency 
+## PIP: Transparency {.smaller}
 
-::: {.columns}
+:::: {.columns}
+
 ::: {.column width="40%"}
-- All code necessary to create the poverty estimates are publicly available (<https://github.com/PIP-Technical-Team>)
+All code necessary to create the poverty estimates are publicly available (<https://github.com/PIP-Technical-Team>)
 :::
+
 ::: {.column width="60%"}
 ![](img/pip_backend_code.png){fig-align="right"}
 :::
-:::
+
+::::
 
 
-## PIP: Quality, accessibility, and transparency 
+## PIP: Transparency {.smaller}
 
-::: {.columns}
+:::: {.columns}
+
 ::: {.column width="40%"}
-- A description of the entire methodology is available in a technical handbook (<https://worldbank.github.io/PIP-Methodology/>)
+A description of the entire methodology is available in a technical handbook (<https://worldbank.github.io/PIP-Methodology/>)
 :::
+
 ::: {.column width="60%"}
 ![](img/pip_methodology.png){fig-align="right"}
 :::
+
+::::
+
+
+## Data release notes and other publications {.smaller}
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+Publications are available detailing the updates in each release, methodological assumptions, and other technical improvements (<https://worldbank.github.io/publication/>)
+
 :::
 
-
-## Data release notes and other publications 
-
-::: {.columns}
-::: {.column width="30%"}
-- Publications are available detailing the updates in each release, methodological assumptions, and other technical improvements (<https://worldbank.github.io/publication/>)
-:::
-::: {.column width="10%"}
+::: {.column width="20%"}
 
 :::
-::: {.column width="60%"}
+
+::: {.column width="40%"}
 ![](img/pip_publications.png){fig-align="right"}
 :::
+
+::::
+
+## Data on inequality {.smaller}
+
+::: incremental
+- For each survey, PIP output reports inequality and shared prosperity measures like the Gini, MLD, polarization index, the decile share of income or consumption, and the Prosperity Gap.
+
+- In addition, PIP has a dedicated dashboard that visualize inequality trends and changes. This is available through the [Further Data & Indicators](https://pip.worldbank.org/furtherindicators-data) page in PIP UI.
+
+- We also report the average and threshold income of each percentile for each survey. THis is also available through the Further Data & Indicators page in the PIP website. 
 :::
 
 
 ## Welfare measure reported in PIP
-
 
 ![](img/process2.png){fig-align="center"}
 
-## Welfare measure reported in PIP
 
+## Welfare measure reported in PIP {.smaller}
+
+::: {.panel-tabset}
+
+## Step 1
+
+#### Acquiring Household Data 
+
+- Sources:
+  - LIC: Surveys collected by National Statistical Offices
+  - HIC: 
+    - Europe: EU-SILC
+    - Other (and earlier years): Luxembourg Income Study (LIS)
+- Data input type: welfare (consumption/income) data at the household or group level
+
+## Step 2
+
+#### Constructing Welfare Aggregates  {.tiny}
+
+- Income vs Consumption (welfare_type) -> consumption preferred.
+- Zeros dropped.
+- Micro or Grouped Data (distribution_type)
+- Additional comparability considerations:
+  - Questionnaire design changes
+  - Equivalence scales (->not used)
+  - Spatio/temporal adjustments
+  - Imputed rent (-> excluded)
+  - Tracked in PIP: comparable_spell and survey_comparability.
+
+## Step 3
+
+#### Adjusting Welfare Aggregates 
+
+- Consumer Price Indices (CPIs) & Purchasing Power Parities (PPPs)
+- Derivation of the International Poverty Line (poverty_line)
+  - \$3.00/day in 2021 PPP -> based on the median of harmonized national poverty lines from poorest countries
+- Derivation of higher poverty lines
+  - \$4.20 and \$8.30 in 2021 PPP -> based on median values of national poverty lines of lower- and upper-middle income countries, respectively.
+- Derivation of societal poverty line (spl)
+
+## Step 4
+
+#### Calculating survey estimates  
+
+- Poverty and Inequality metrics are calculated using adjusted welfare aggregates.
+- All methodology is available in the PIP Methodological Handbook on the website.
+- Source code is available on github through the package `wbpip`.
+
+## Step 5
+
+#### Calculating regional aggregates  
+
+- Extrapolations and/or Interpolations (fill_gaps)
+- Nowcasts (nowcast)
+- Regional classification
+- Population adjustments
+- Coverage rules applied
+
+
+::: 
+
+
+## Welfare measure reported in PIP
 
 ![](img/process3.png){fig-align="center"}
 
-
-
-
 ## Welfare measure reported in PIP
-
 
 ![](img/process4.png){fig-align="center"}
 
 ## Welfare measure reported in PIP
 
-
 ![](img/process5.png){fig-align="center"}
 
-
 ## Welfare measure reported in PIP
-
 
 ![](img/process6.png){fig-align="center"}
 
 ## Welfare measure reported in PIP
 
-
 ![](img/process7.png){fig-align="center"}
 
-
 # 2. Accessing PIP through the user interface
+
+
 
 
 # 3. Accessing PIP in R
@@ -217,9 +291,9 @@ library(pipr)
     - *reporting_level*: Mostly national, but can be urban or rural
     - *welfare_type*: Income or consumption
 
-- **`get_wb()`:** [regional/global]{.underline} estimates of poverty and inequality
+<!-- - **`get_wb()`:** [regional/global]{.underline} estimates of poverty and inequality -->
 
-    - each row identifies a unique combination of *region_code* and *year*.
+<!--     - each row identifies a unique combination of *region_code* and *year*. -->
 
 :::
 
@@ -247,6 +321,21 @@ colnames(get_stats())
 <!--   select(country_name, year, welfare_type, reporting_level, headcount, gini) -->
 <!-- ``` -->
 
+## Two main functions {.smaller}
+
+
+
+- **`get_stats()`:** [country]{.underline} estimates of poverty and inequality
+
+    - each row identifies a unique combination of *country_code*, *year*, *reporting_level*, and *welfare_type*
+    - *reporting_level*: Mostly national, but can be urban or rural
+    - *welfare_type*: Income or consumption
+
+- **`get_wb()`:** [regional/global]{.underline} estimates of poverty and inequality
+
+    - each row identifies a unique combination of *region_code* and *year*.
+
+
 
 ## Variable information
 
@@ -256,7 +345,7 @@ get_aux("dictionary")
 ```
 
 
-## Ghanaian estimates
+## Ghanaian survey estimates {.smaller}
 
 ::: {.incremental}
 
@@ -272,6 +361,13 @@ get_stats(country = "GHA") |>
 
 :::
 
+## Ghanaian survey estimates with 2017 PPP {.smaller}
+
+```{r}
+#| echo: true
+get_stats(country = "GHA", ppp_version = "2017") |> 
+  select(country_code, year, poverty_line, headcount,mean,gini)
+```
 
 ## Different poverty line
 
@@ -300,16 +396,19 @@ purrr::map_dfr(.x      = povlines,
 ```{r}
 #| echo: true
 get_stats(country = c("LUX","GHA","VNM"), year=2022) |> 
-  select(country_code, year, poverty_line, headcount, mean, gini)
+  select(country_code, country_name, year, poverty_line, headcount, mean, gini)
 ```
 
-- Note that there is no estimate for Ghana (GHA) in 2022 and hence not reported in the output.
+- Note that there is no survey for Ghana (GHA) in 2022 and hence not reported in the output.
 
 :::
 
 ## Extrapolation for Ghana from 2016 to most recent year
 
 ![](img/GHA_example.png){fig-align="center"}
+
+
+
 
 ## Interpolated and extrapolated values {auto-animate="true"}
 
@@ -321,25 +420,49 @@ get_stats(country = "GHA", fill_gaps = TRUE)  |>
 ```
 
 
-## Poverty by welfare type
+## Versioning with PIP
+
+```{r}
+#| echo: true
+get_versions()
+```
+
+## Versioning with PIP {.smaller}
+
+```{r}
+#| echo: true
+get_stats("IND", release_version = "20250401", ppp_version = "2017") |> 
+  select(country_code, country_name, year, poverty_line, headcount, reporting_level, survey_acronym) |> tail(3)
+```
+
+```{r}
+#| echo: true
+get_stats("IND", release_version = "20240627", ppp_version = "2017") |> 
+  select(country_code, country_name, year, poverty_line, headcount, reporting_level, survey_acronym) |> tail(3)
+```
+
+
+
+
+
+
+## Poverty by welfare type {.smaller}
 
 ::: panel-tabset
 
-### Code
+#### Code
 
 ```{r}
 #| echo: true
 df <- get_stats(country="PHL")       
 gr <- ggplot(df,aes(y=100*headcount,x=year,color=welfare_type)) +          
       geom_line() +                     
-      labs(                          
-      title = "Extreme poverty in the Philippines, 1981-2022",                       
-      y = "Poverty rate (%)",                          
-      x = ""                   
-      )
+      labs(title = "Extreme poverty in the Philippines, 1981-2022",                       
+           y     = "Poverty rate (%)",                          
+           x     = "")
 ```
 
-### Plot
+#### Plot
 
 ```{r}
 #| fig-width: 10  
@@ -348,7 +471,7 @@ gr
 ```
 :::
 
-## Poverty by reporting level
+## Poverty by reporting level {.smaller}
 
 ::: panel-tabset
 ### Code
@@ -444,7 +567,7 @@ get_wb()
 
 ------------------------------------------------------------------------
 
-## Global poverty, 1990-2022
+## Global poverty, 1990-2022 {.smaller}
 
 ::: panel-tabset
 ### Code
@@ -556,7 +679,7 @@ gr
 
 - [Methodological handbook](https://datanalytics.worldbank.org/PIP-Methodology/): Describes all methodological details behind the estimates
 
-- [Poverty & Inequality Briefs](https://www.worldbank.org/en/topic/poverty/publication/poverty-and-equity-briefs): 2-page summary of poverty and inequality in almost every developing country
+- [Poverty & Equity Briefs](https://www.worldbank.org/en/topic/poverty/publication/poverty-and-equity-briefs): 2-page summary of poverty and inequality in almost every developing country
 
 - [Survey percentiles](https://datacatalog.worldbank.org/search/dataset/0063646): 100 percentiles of each country-year survey distribution
 
@@ -573,8 +696,8 @@ gr
 
 For further details please contact:
 
-- Diana C. Garcia Rojas <drojas@worldbank.org>
+- Diana C. Garcia Rojas <dgarciarojas@worldbank.org>
 - Zander Prinsloo: <zprinsloo@worldbank.org>
 - Rossana Tatulli: <rtatulli@worldbank.org>
-- Anubhava Singla: <asingla1@worldbabnk.org>
+- Anubhava Singla: <asingla1@worldbank.org>
 - Nishant Yonzan: <nyonzan@worldbank.org>
