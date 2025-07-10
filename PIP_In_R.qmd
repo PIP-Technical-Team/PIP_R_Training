@@ -509,6 +509,36 @@ df <- get_stats(country="CHN") |>
 print(df, n = 21)
 ```
 
+
+## Within-country comparability{.smaller}
+
+::: panel-tabset
+### Code
+
+```{r}
+#| echo: true
+
+df <- get_stats(country="CHN", reporting_level = "national") |>
+      filter(year>=1990)
+  
+gr <- ggplot(df,aes(y=100*headcount,x=year,color=comparable_spell)) +
+      geom_line() + 
+      labs(
+      title = "Extreme poverty in China, 1990-2022",
+      y = "Poverty rate (%)",
+      x = "")
+```
+
+### Plot
+
+```{r}
+#| fig-width: 10
+#| fig-height: 5
+gr
+```
+:::
+
+
 ## Data from LIS
 
 ```{r}
@@ -517,7 +547,8 @@ df <- get_stats() |>
       filter(grepl("LIS", survey_acronym)) |>
       group_by(country_name) |>
       summarize(obs = n()) |>
-      ungroup()
+      ungroup() |> 
+      arrange(desc(obs))
 print(df, n=29)
 ```
 
