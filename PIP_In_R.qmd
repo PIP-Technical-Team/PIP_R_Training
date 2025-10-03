@@ -1,251 +1,35 @@
 ---
-title: "Poverty and Inequality Platform (PIP): an introduction using R"
-date: "07/09/2025"
-author: 
-  - Rossana Tatulli
-  - Zander Prinsloo
-  - Nishant Yonzan
+title: "Poverty and Inequality Platform (PIP): an introduction"
 format:
   revealjs:
-    css: "custom.css"
-    theme: "simple"
+    css: "custom.css"   # <-- point to the file you just saved
+    theme: "simple"     # keep the base Reveal JS theme minimal
     #incremental: true   # incrementally show the bullets
     slide-number: true
-    #title-slide-style: pandoc
-    chalkboard:
+    title-slide-style: pandoc
+    chalkboard: 
       buttons: false
     # preview-links: auto
     logo: img/WB-PIP-E-horizontal-RGB-med.png
 ---
 
-# Outline of the presentation
+# Introduction to the Poverty and Inequality Platform (PIP)
 
-::: footer
-The findings, interpretations, and conclusions expressed in this presentation are entirely those of the author. They do not necessarily represent the views of the World Bank and its affiliated organizations, or those of the Executive Directors of the World Banks or the governments they represent. 
-
-The authors gratefully acknowledge financial support from the UK government through the Data and Evidence for Tackling Extreme Poverty (DEEP) Research Programme.
-:::
-
-## Outline
-
-1.   Introduction to the Poverty and Inequality Platform (PIP)
-
-2.   PIP user interface 
-
-3.   Accessing the PIP API with R
-
-4.   Exercises 
-
-5.   Additional resource
-
-
-
-# 1. Introduction 
-
-## Poverty data at the World Bank {.smaller}
-
-::: {.incremental}
-
--   The World Bank mission is to end extreme poverty and boost shared prosperity on a livable planet.
-
--   To that end, the World Bank often helps countries field household surveys to track welfare.
-
--   Some countries do not receive assistance yet the Bank is granted access to the data through collaborations with the National Statistical Office.
-
--   For high-income countries, poverty data is sourced from the Luxembourg Income Study or EU-SILC.
-
-:::
-
-   
 ## The Poverty and Inequality Platform (PIP) {.smaller}
 
-::: {.incremental}
+### Quick demo of the PIP Website ⏯️
 
-- PIP is the source of poverty and inequality data for the World Bank.
+#### (<https://pip.worldbank.org/>)
 
-- PIP is the source of data for several targets of the Sustainable Development Goals on ending poverty (SDG1) and reducing inequality (SDG10).
-
-- PIP is the joint collaboration different parts of the World Bank through the Global Poverty Working Group
-   -   Development Data Group
-   -   Development Research Group
-   -   Poverty and Equity Global Department
-
-:::
-
-
-## PIP motivation {.smaller}
-
-::: {.incremental}
-
-- **Scope**: PIP is the World Bank’s data portal for poverty, prosperity, and inequality estimates. 
-
-- **Accessibility**: PIP data is available through Application Programming Interface (API) 
-   - User Interface (UI) – for quick data access and visualizations
-   - Stata and R wrappers – for advanced users, researchers, students
-   - Microdata access (for some surveys) through Microdata Online.
-
-- **Open data, open code, reproducible research**:
-   - PIP code is publicly available, and the PIP Methodology Handbook provides details on the poverty, prosperity, and inequality estimates reported in PIP.
-   - PIP typically is updated twice a year - Spring/Fall. One can, however, access various vintages of the data.
-
-:::
-
-  
-## PIP: Transparency {.smaller}
-
-:::: {.columns}
-
-::: {.column width="40%"}
-All code necessary to create the poverty estimates are publicly available (<https://github.com/PIP-Technical-Team>)
-:::
-
-::: {.column width="60%"}
-![](img/pip_backend_code.png){fig-align="right"}
-:::
-
-::::
-
-
-## PIP: Transparency {.smaller}
-
-:::: {.columns}
-
-::: {.column width="40%"}
-A description of the entire methodology is available in a technical handbook (<https://worldbank.github.io/PIP-Methodology/>)
-:::
-
-::: {.column width="60%"}
-![](img/pip_methodology.png){fig-align="right"}
-:::
-
-::::
-
-
-## Data release notes and other publications {.smaller}
-
-:::: {.columns}
-
-::: {.column width="40%"}
-
-Publications are available detailing the updates in each release, methodological assumptions, and other technical improvements (<https://worldbank.github.io/publication/>)
-
-:::
-
-::: {.column width="20%"}
-
-:::
-
-::: {.column width="40%"}
-![](img/pip_publications.png){fig-align="right"}
-:::
-
-::::
-
-## Data on inequality {.smaller}
-
-::: incremental
-- For each survey, PIP output reports inequality and shared prosperity measures like the Gini, MLD, polarization index, the decile share of income or consumption, and the Prosperity Gap.
-
-- In addition, PIP has a dedicated dashboard that visualize inequality trends and changes. This is available through the [Further Data & Indicators](https://pip.worldbank.org/furtherindicators-data) page in PIP UI.
-
-- We also report the average and threshold income of each percentile for each survey. THis is also available through the Further Data & Indicators page in the PIP website. 
-:::
-
-
-## Welfare measure reported in PIP
+## Backbone of PIP
 
 ![](img/process2.png){fig-align="center"}
 
-
-## Welfare measure reported in PIP {.smaller}
-
-::: {.panel-tabset}
-
-## Step 1
-
-#### Acquiring Household Data 
-
-- Sources:
-  - LIC: Surveys collected by National Statistical Offices
-  - HIC: 
-    - Europe: EU-SILC
-    - Other (and earlier years): Luxembourg Income Study (LIS)
-- Data input type: welfare (consumption/income) data at the household or group level
-
-## Step 2
-
-#### Constructing Welfare Aggregates  {.tiny}
-
-- Income vs Consumption (welfare_type) -> consumption preferred.
-- Zeros dropped.
-- Micro or Grouped Data (distribution_type)
-- Additional comparability considerations:
-  - Questionnaire design changes
-  - Equivalence scales (->not used)
-  - Spatio/temporal adjustments
-  - Imputed rent (-> excluded)
-  - Tracked in PIP: comparable_spell and survey_comparability.
-
-## Step 3
-
-#### Adjusting Welfare Aggregates 
-
-- Consumer Price Indices (CPIs) & Purchasing Power Parities (PPPs)
-- Derivation of the International Poverty Line (poverty_line)
-  - \$3.00/day in 2021 PPP -> based on the median of harmonized national poverty lines from poorest countries
-- Derivation of higher poverty lines
-  - \$4.20 and \$8.30 in 2021 PPP -> based on median values of national poverty lines of lower- and upper-middle income countries, respectively.
-- Derivation of societal poverty line (spl)
-
-## Step 4
-
-#### Calculating survey estimates  
-
-- Poverty and Inequality metrics are calculated using adjusted welfare aggregates.
-- All methodology is available in the PIP Methodological Handbook on the website.
-- Source code is available on github through the package `wbpip`.
-
-## Step 5
-
-#### Calculating regional aggregates  
-
-- Extrapolations and/or Interpolations (fill_gaps)
-- Nowcasts (nowcast)
-- Regional classification
-- Population adjustments
-- Coverage rules applied
-
-
-::: 
-
-
-## Welfare measure reported in PIP
-
-![](img/process3.png){fig-align="center"}
-
-## Welfare measure reported in PIP
-
-![](img/process4.png){fig-align="center"}
-
-## Welfare measure reported in PIP
-
-![](img/process5.png){fig-align="center"}
-
-## Welfare measure reported in PIP
-
-![](img/process6.png){fig-align="center"}
-
-## Welfare measure reported in PIP
+## Calculating regional aggregates
 
 ![](img/process7.png){fig-align="center"}
 
-# 2. Accessing PIP through the user interface
-
-
-
-
-# 3. Accessing PIP in R
-
+# Accessing PIP in R
 
 ```{r}
 #| echo: false
@@ -256,47 +40,40 @@ library(ggthemes)
 library(pipr)
 ```
 
-
 ## The pipr package
 
-::: {.incremental}
+::: incremental
+-   **Installation:**
 
-- **Installation:**
+    ``` r
+    # To install the pipr package, you first need to install the devtools package
+    install.packages("devtools")
+    # The devtools package allows you to install pipr through GitHub
+    devtools::install_github("worldbank/pipr")
+    # Now load pipr
+    library(pipr)
+    # I'll use dplyr a lot in these slides, so best to load it as well
+    library(dplyr)
+    ```
 
-  ``` r
-  # To install the pipr package, you first need to install the devtools package
-  install.packages("devtools")
-  # The devtools package allows you to install pipr through GitHub
-  devtools::install_github("worldbank/pipr")
-  # Now load pipr
-  library(pipr)
-  # I'll use dplyr a lot in these slides, so best to load it as well
-  library(dplyr)
-  ```
+-   **More information about the package:**
 
-- **More information about the package:**
-
-  <https://worldbank.github.io/pipr/>
-
+    <https://worldbank.github.io/pipr/>
 :::
-
 
 ## Two main functions {.smaller}
 
-::: {.incremental}
+::: incremental
+-   **`get_stats()`:** [country]{.underline} estimates of poverty and inequality
 
-- **`get_stats()`:** [country]{.underline} estimates of poverty and inequality
+    -   each row identifies a unique combination of *country_code*, *year*, *reporting_level*, and *welfare_type*
+    -   *reporting_level*: Mostly national, but can be urban or rural
+    -   *welfare_type*: Income or consumption
 
-    - each row identifies a unique combination of *country_code*, *year*, *reporting_level*, and *welfare_type*
-    - *reporting_level*: Mostly national, but can be urban or rural
-    - *welfare_type*: Income or consumption
+-   **`get_wb()`:** [regional/global]{.underline} estimates of poverty and inequality
 
-<!-- - **`get_wb()`:** [regional/global]{.underline} estimates of poverty and inequality -->
-
-<!--     - each row identifies a unique combination of *region_code* and *year*. -->
-
+    -   each row identifies a unique combination of *region_code* and *year*.
 :::
-
 
 ## Country-level estimates
 
@@ -304,7 +81,6 @@ library(pipr)
 #| echo: true
 get_stats() 
 ```
-
 
 ## Variables
 
@@ -316,26 +92,14 @@ colnames(get_stats())
 <!-- ## Country-level poverty estimates from surveys -->
 
 <!-- ```{r} -->
+
 <!-- #| echo: true -->
+
 <!-- get_stats() |>  -->
+
 <!--   select(country_name, year, welfare_type, reporting_level, headcount, gini) -->
+
 <!-- ``` -->
-
-## Two main functions {.smaller}
-
-
-
-- **`get_stats()`:** [country]{.underline} estimates of poverty and inequality
-
-    - each row identifies a unique combination of *country_code*, *year*, *reporting_level*, and *welfare_type*
-    - *reporting_level*: Mostly national, but can be urban or rural
-    - *welfare_type*: Income or consumption
-
-- **`get_wb()`:** [regional/global]{.underline} estimates of poverty and inequality
-
-    - each row identifies a unique combination of *region_code* and *year*.
-
-
 
 ## Variable information
 
@@ -344,11 +108,9 @@ colnames(get_stats())
 get_aux("dictionary")
 ```
 
+## Ghanaian estimates
 
-## Ghanaian survey estimates {.smaller}
-
-::: {.incremental}
-
+::: incremental
 ```{r}
 #| echo: true
 get_stats(country = "GHA") |> 
@@ -358,16 +120,7 @@ get_stats(country = "GHA") |>
 -   The default poverty line is \$3.00 (per capita, per day, in 2021 PPP-adjusted dollars)
 
 -   The mean is expressed in the same currency
-
 :::
-
-## Ghanaian survey estimates with 2017 PPP {.smaller}
-
-```{r}
-#| echo: true
-get_stats(country = "GHA", ppp_version = "2017") |> 
-  select(country_code, year, poverty_line, headcount,mean,gini)
-```
 
 ## Different poverty line
 
@@ -377,38 +130,21 @@ get_stats(country = "LUX", povline = 10)  |>
   select(country_code, year, poverty_line, headcount)
 ```
 
-## Multiple poverty lines
-
-```{r}
-#| echo: true   
-povlines <- c(10, 20, 50,100) 
-purrr::map_dfr(.x      = povlines,                 
-               .f      = get_stats,                 
-               country = "LUX",                
-               year    = 2022) |>    
-  select(country_code, year, poverty_line, headcount) 
-```
-
 ## Estimates across selected countries
 
-::: {.incremental}
-
+::: incremental
 ```{r}
 #| echo: true
 get_stats(country = c("LUX","GHA","VNM"), year=2022) |> 
-  select(country_code, country_name, year, poverty_line, headcount, mean, gini)
+  select(country_code, year, poverty_line, headcount, mean, gini)
 ```
 
-- Note that there is no survey for Ghana (GHA) in 2022 and hence not reported in the output.
-
+-   Note that there is no estimate for Ghana (GHA) in 2022 and hence not reported in the output.
 :::
 
 ## Extrapolation for Ghana from 2016 to most recent year
 
 ![](img/GHA_example.png){fig-align="center"}
-
-
-
 
 ## Interpolated and extrapolated values {auto-animate="true"}
 
@@ -419,86 +155,6 @@ get_stats(country = "GHA", fill_gaps = TRUE)  |>
   select(country_code, year, poverty_line, headcount)
 ```
 
-
-## Versioning with PIP
-
-```{r}
-#| echo: true
-get_versions()
-```
-
-## Versioning with PIP {.smaller}
-
-```{r}
-#| echo: true
-get_stats("IND", release_version = "20250401", ppp_version = "2017") |> 
-  select(country_code, country_name, year, poverty_line, headcount, reporting_level, survey_acronym) |> tail(3)
-```
-
-```{r}
-#| echo: true
-get_stats("IND", release_version = "20240627", ppp_version = "2017") |> 
-  select(country_code, country_name, year, poverty_line, headcount, reporting_level, survey_acronym) |> tail(3)
-```
-
-
-
-
-
-
-## Poverty by welfare type {.smaller}
-
-::: panel-tabset
-
-#### Code
-
-```{r}
-#| echo: true
-df <- get_stats(country="PHL")       
-gr <- ggplot(df,aes(y=100*headcount,x=year,color=welfare_type)) +          
-      geom_line() +                     
-      labs(title = "Extreme poverty in the Philippines, 1981-2022",                       
-           y     = "Poverty rate (%)",                          
-           x     = "")
-```
-
-#### Plot
-
-```{r}
-#| fig-width: 10  
-#| fig-height: 5  
-gr
-```
-:::
-
-## Poverty by reporting level {.smaller}
-
-::: panel-tabset
-### Code
-
-```{r}
-#| echo: true
-
-df <- get_stats(country="CHN") |>
-      filter(year>=1990)
-  
-gr <- ggplot(df,aes(y=100*headcount,x=year,color=reporting_level)) +
-      geom_line() + 
-      labs(
-      title = "Extreme poverty in China, 1990-2022",
-      y = "Poverty rate (%)",
-      x = "")
-```
-
-### Plot
-
-```{r}
-#| fig-width: 10
-#| fig-height: 5
-gr
-```
-:::
-
 ## Within-country comparability
 
 ```{r}
@@ -507,87 +163,24 @@ df <- get_stats(country="CHN") |>
       filter(reporting_level=="national" & year>=1990) |>
       select(year,headcount,comparable_spell,welfare_type)
 print(df, n = 21)
+
 ```
 
-
-## Within-country comparability{.smaller}
-
-::: panel-tabset
-### Code
+## Plot
 
 ```{r}
-#| echo: true
-
-df <- get_stats(country="CHN", reporting_level = "national") |>
-      filter(year>=1990)
-  
-gr <- ggplot(df,aes(y=100*headcount,x=year,color=comparable_spell)) +
-      geom_line() + 
-      labs(
-      title = "Extreme poverty in China, 1990-2022",
-      y = "Poverty rate (%)",
-      x = "")
+# Line plot, coloring by comparable spell
+ggplot(df, aes(x = year, y = headcount, group = comparable_spell, color = as.factor(comparable_spell))) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2) +
+  scale_color_brewer(palette = "Set1", name = "Comparable Spell") +
+  labs(
+    title = "Poverty Headcount in China (National, 1990+)",
+    x = "Year",
+    y = "Poverty Headcount (%)"
+  ) +
+  theme_minimal(base_size = 14)
 ```
-
-### Plot
-
-```{r}
-#| fig-width: 10
-#| fig-height: 5
-gr
-```
-:::
-
-
-## Data from LIS
-
-```{r}
-#| echo: true 
-df <- get_stats() |>
-      filter(grepl("LIS", survey_acronym)) |>
-      group_by(country_name) |>
-      summarize(obs = n()) |>
-      ungroup() |> 
-      arrange(desc(obs))
-print(df, n=29)
-```
-
-# 4. Exercises
-
-## Exercise 1 
-
-Explore whether Kuznets' inverse-U hypothesis holds with data in PIP
-
-1.  Plot the relationship between an inequality metric and log mean welfare
-
-2.  Regress an inequality metric on a 2nd order polynomial of log mean welfare
-
-------------------------------------------------------------------------
-
-::: panel-tabset
-### Code
-
-```{r}
-#| echo: true 
-# Kuznets curve? 
-df <- get_stats()   
-gr <- ggplot(df, aes(x = log(mean),y=gini)) +   
-      geom_point() +   
-      geom_smooth() +   
-      labs(title = "Kuznets curve?",
-            y = "Gini coefficient",
-            x = "Log welfare")   
-summary(lm(gini~log(mean)+I(log(mean)^2),data=df)) 
-```
-
-### Plot
-
-```{r}
-#| fig-width: 10 
-#| fig-height: 6 
-gr
-```
-:::
 
 ## Global and regional estimates
 
@@ -598,7 +191,7 @@ get_wb()
 
 ------------------------------------------------------------------------
 
-## Global poverty, 1990-2022 {.smaller}
+## Global poverty, 1990-2022
 
 ::: panel-tabset
 ### Code
@@ -608,13 +201,20 @@ get_wb()
 df <- get_wb() |>
       filter(year >= 1990, region_code %in% c("WLD","EAP","SSA"))
 
-gr <- ggplot(df, aes(x = year,y = 100*headcount,color=region_code)) +
-  geom_line() +
+gr <- ggplot(df, aes(x = year, y = 100 * headcount, color = region_code)) +
+  geom_line(size = 1.1) +
   labs(
-    title = "Global poverty, 1990-2025",
+    title = "Global poverty, 1990–2025",
     y = "Poverty rate (%)",
-    x = ""
-  ) 
+    x = NULL,
+    color = "Region"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "bottom"
+  )
+
 ```
 
 ### Plot
@@ -630,105 +230,4 @@ gr
 
 ![](img/pipr_functions.png){fig-align="center"}
 
-
-## Exercise 2 
-
-COVID-19 impact on poverty and inequality
-
-1.  Calculate and plot the change in millions of extreme poor by region from 2019 to 2020
-
-2.  (Difficult) Calculate and plot the changes in Gini observed from 2019 to 2020 for countries with comparable data during these two years
-
-------------------------------------------------------------------------
-
-::: panel-tabset
-### Code
-
-```{r}
-#| echo: true
-# Change in number of poor, 2019-2020
-df <- get_wb() |> filter(year==2019 | year==2020) |>
-      group_by(region_code) |>
-      mutate(changeinpoor = pop_in_poverty-lag(pop_in_poverty)) |>
-      filter(!is.na(changeinpoor))
-
-gr <- ggplot(df, aes(y = region_name,x=changeinpoor/10^6)) +
-  geom_bar(stat="identity") +
-  labs(title = "Change in number of poor, 2019-2020",x = "Milllions",y = "Region") 
-
-```
-
-### Plot
-
-```{r}
-#| fig-width: 10
-#| fig-height: 6
-gr
-```
-:::
-
-------------------------------------------------------------------------
-
-::: panel-tabset
-### Code
-
-```{r}
-#| echo: true
-# Change in Gini, 2019-2020?=
-df <- get_stats() |> 
-      filter(year==2019 | year==2020) |>
-      filter(reporting_level=="national") |>
-      group_by(country_code,welfare_type,comparable_spell) |>
-      # Only keeps countries with comparable estimates in 2019 and 2020
-      filter(n()==2) |>
-      mutate(ginichange = gini-lag(gini)) |>
-      filter(year==2020) |>
-      ungroup() |>
-      # If countries have both income and consumption estimates, use only the latter
-      group_by(country_code) |>
-      filter(n()==1 | welfare_type=="consumption") |>
-      ungroup()
-
-gr <- ggplot(df[df$country_code!="XKX",], aes(x = reorder(country_name, +ginichange),y=ginichange*100,fill=region_name)) +
-  geom_bar(stat="identity") +
-  labs(title = "Change in Gini index, 2019-2020",y = "Gini points",x = "Country") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
-```
-
-### Plot
-
-```{r}
-#| fig-width: 10
-#| fig-height: 6
-gr
-```
-:::
-
-
-## Additional resource {.smaller}
-
-- [Methodological handbook](https://datanalytics.worldbank.org/PIP-Methodology/): Describes all methodological details behind the estimates
-
-- [Poverty & Equity Briefs](https://www.worldbank.org/en/topic/poverty/publication/poverty-and-equity-briefs): 2-page summary of poverty and inequality in almost every developing country
-
-- [Survey percentiles](https://datacatalog.worldbank.org/search/dataset/0063646): 100 percentiles of each country-year survey distribution
-
-- [Lined-up percentiles distribution](https://datacatalog.worldbank.org/search/dataset/0064304/1000-Binned-Global-Distribution): 1000 points on the global distribution
-
-- [Accessing some of the microdata online](https://pip.worldbank.org/sol/sol-landing)
-
-- [More data and indicators through the user interface](https://pip.worldbank.org/furtherindicators-data)
-
-- [API access](https://pip.worldbank.org/api)
-
-
-## Thank you for listening.{.smaller}
-
-For further details please contact:
-
-- Diana C. Garcia Rojas <dgarciarojas@worldbank.org>
-- Zander Prinsloo: <zprinsloo@worldbank.org>
-- Rossana Tatulli: <rtatulli@worldbank.org>
-- Anubhava Singla: <asingla1@worldbank.org>
-- Nishant Yonzan: <nyonzan@worldbank.org>
+## Thank you for listening! {.smaller}

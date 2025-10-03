@@ -6,14 +6,11 @@
 <script src="PIP_In_R_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="PIP_In_R_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="PIP_In_R_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="PIP_In_R_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.40">
+<link href="PIP_In_R_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="PIP_In_R_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.450">
 
-  <meta name="author" content="Rossana Tatulli">
-  <meta name="author" content="Zander Prinsloo">
-  <meta name="author" content="Nishant Yonzan">
-  <meta name="dcterms.date" content="2025-07-09">
-  <title>Poverty and Inequality Platform (PIP): an introduction using R</title>
+  <title>Poverty and Inequality Platform (PIP): an introduction</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -33,7 +30,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -44,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -72,7 +69,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.cf { color: #003b4f; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -86,7 +83,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.kw { color: #003b4f; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -97,7 +94,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="PIP_In_R_files/libs/revealjs/dist/theme/quarto-423d414d36ce366a9d05f36d06304417.css">
+  <link rel="stylesheet" href="PIP_In_R_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="custom.css">
   <link href="PIP_In_R_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="PIP_In_R_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -105,6 +102,203 @@
   <link href="PIP_In_R_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="PIP_In_R_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="PIP_In_R_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -197,252 +391,30 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Poverty and Inequality Platform (PIP): an introduction using R</h1>
-
-<div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Rossana Tatulli 
-</div>
-</div>
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Zander Prinsloo 
-</div>
-</div>
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Nishant Yonzan 
-</div>
-</div>
-</div>
-
-  <p class="date">2025-07-09</p>
+<section id="title-slide" class="center">
+  <h1 class="title">Poverty and Inequality Platform (PIP): an introduction</h1>
 </section>
 <section>
-<section id="outline-of-the-presentation" class="title-slide slide level1 center">
-<h1>Outline of the presentation</h1>
-<div class="footer">
-<p>The findings, interpretations, and conclusions expressed in this presentation are entirely those of the author. They do not necessarily represent the views of the World Bank and its affiliated organizations, or those of the Executive Directors of the World Banks or the governments they represent.</p>
-<p>The authors gratefully acknowledge financial support from the UK government through the Data and Evidence for Tackling Extreme Poverty (DEEP) Research Programme.</p>
-</div>
-</section>
-<section id="outline" class="slide level2">
-<h2>Outline</h2>
-<ol type="1">
-<li><p>Introduction to the Poverty and Inequality Platform (PIP)</p></li>
-<li><p>PIP user interface</p></li>
-<li><p>Accessing the PIP API with R</p></li>
-<li><p>Exercises</p></li>
-<li><p>Additional resource</p></li>
-</ol>
-</section></section>
-<section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>1. Introduction</h1>
+<section id="introduction-to-the-poverty-and-inequality-platform-pip" class="title-slide slide level1 center">
+<h1>Introduction to the Poverty and Inequality Platform (PIP)</h1>
 
-</section>
-<section id="poverty-data-at-the-world-bank" class="slide level2 smaller">
-<h2>Poverty data at the World Bank</h2>
-<div>
-<ul>
-<li class="fragment"><p>The World Bank mission is to end extreme poverty and boost shared prosperity on a livable planet.</p></li>
-<li class="fragment"><p>To that end, the World Bank often helps countries field household surveys to track welfare.</p></li>
-<li class="fragment"><p>Some countries do not receive assistance yet the Bank is granted access to the data through collaborations with the National Statistical Office.</p></li>
-<li class="fragment"><p>For high-income countries, poverty data is sourced from the Luxembourg Income Study or EU-SILC.</p></li>
-</ul>
-</div>
 </section>
 <section id="the-poverty-and-inequality-platform-pip" class="slide level2 smaller">
 <h2>The Poverty and Inequality Platform (PIP)</h2>
-<div>
-<ul>
-<li class="fragment"><p>PIP is the source of poverty and inequality data for the World Bank.</p></li>
-<li class="fragment"><p>PIP is the source of data for several targets of the Sustainable Development Goals on ending poverty (SDG1) and reducing inequality (SDG10).</p></li>
-<li class="fragment"><p>PIP is the joint collaboration different parts of the World Bank through the Global Poverty Working Group</p>
-<ul>
-<li class="fragment">Development Data Group</li>
-<li class="fragment">Development Research Group</li>
-<li class="fragment">Poverty and Equity Global Department</li>
-</ul></li>
-</ul>
-</div>
+<h3 id="quick-demo-of-the-pip-website">Quick demo of the PIP Website ⏯️</h3>
+<h4 id="httpspip.worldbank.org">(<a href="https://pip.worldbank.org/" class="uri">https://pip.worldbank.org/</a>)</h4>
 </section>
-<section id="pip-motivation" class="slide level2 smaller">
-<h2>PIP motivation</h2>
-<div>
-<ul>
-<li class="fragment"><p><strong>Scope</strong>: PIP is the World Bank’s data portal for poverty, prosperity, and inequality estimates.</p></li>
-<li class="fragment"><p><strong>Accessibility</strong>: PIP data is available through Application Programming Interface (API)</p>
-<ul>
-<li class="fragment">User Interface (UI) – for quick data access and visualizations</li>
-<li class="fragment">Stata and R wrappers – for advanced users, researchers, students</li>
-<li class="fragment">Microdata access (for some surveys) through Microdata Online.</li>
-</ul></li>
-<li class="fragment"><p><strong>Open data, open code, reproducible research</strong>:</p>
-<ul>
-<li class="fragment">PIP code is publicly available, and the PIP Methodology Handbook provides details on the poverty, prosperity, and inequality estimates reported in PIP.</li>
-<li class="fragment">PIP typically is updated twice a year - Spring/Fall. One can, however, access various vintages of the data.</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="pip-transparency" class="slide level2 smaller">
-<h2>PIP: Transparency</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p>All code necessary to create the poverty estimates are publicly available (<a href="https://github.com/PIP-Technical-Team" class="uri">https://github.com/PIP-Technical-Team</a>)</p>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-right">
-<figure>
-<p><img data-src="img/pip_backend_code.png" class="quarto-figure quarto-figure-right"></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="pip-transparency-1" class="slide level2 smaller">
-<h2>PIP: Transparency</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p>A description of the entire methodology is available in a technical handbook (<a href="https://worldbank.github.io/PIP-Methodology/" class="uri">https://worldbank.github.io/PIP-Methodology/</a>)</p>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-right">
-<figure>
-<p><img data-src="img/pip_methodology.png" class="quarto-figure quarto-figure-right"></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="data-release-notes-and-other-publications" class="slide level2 smaller">
-<h2>Data release notes and other publications</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p>Publications are available detailing the updates in each release, methodological assumptions, and other technical improvements (<a href="https://worldbank.github.io/publication/" class="uri">https://worldbank.github.io/publication/</a>)</p>
-</div><div class="column" style="width:20%;">
+<section id="backbone-of-pip" class="slide level2">
+<h2>Backbone of PIP</h2>
 
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-right">
-<figure>
-<p><img data-src="img/pip_publications.png" class="quarto-figure quarto-figure-right"></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="data-on-inequality" class="slide level2 smaller">
-<h2>Data on inequality</h2>
-<div>
-<ul>
-<li class="fragment"><p>For each survey, PIP output reports inequality and shared prosperity measures like the Gini, MLD, polarization index, the decile share of income or consumption, and the Prosperity Gap.</p></li>
-<li class="fragment"><p>In addition, PIP has a dedicated dashboard that visualize inequality trends and changes. This is available through the <a href="https://pip.worldbank.org/furtherindicators-data">Further Data &amp; Indicators</a> page in PIP UI.</p></li>
-<li class="fragment"><p>We also report the average and threshold income of each percentile for each survey. THis is also available through the Further Data &amp; Indicators page in the PIP website.</p></li>
-</ul>
-</div>
-</section>
-<section id="welfare-measure-reported-in-pip" class="slide level2">
-<h2>Welfare measure reported in PIP</h2>
+<img data-src="img/process2.png" class="r-stretch quarto-figure-center"></section>
+<section id="calculating-regional-aggregates" class="slide level2">
+<h2>Calculating regional aggregates</h2>
 
-<img data-src="img/process2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="welfare-measure-reported-in-pip-1" class="slide level2 smaller">
-<h2>Welfare measure reported in PIP</h2>
-<div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Step 1</a></li><li><a href="#tabset-1-2">Step 2</a></li><li><a href="#tabset-1-3">Step 3</a></li><li><a href="#tabset-1-4">Step 4</a></li><li><a href="#tabset-1-5">Step 5</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1">
-<h4 id="acquiring-household-data">Acquiring Household Data</h4>
-<ul>
-<li>Sources:
-<ul>
-<li>LIC: Surveys collected by National Statistical Offices</li>
-<li>HIC:
-<ul>
-<li>Europe: EU-SILC</li>
-<li>Other (and earlier years): Luxembourg Income Study (LIS)</li>
-</ul></li>
-</ul></li>
-<li>Data input type: welfare (consumption/income) data at the household or group level</li>
-</ul>
-</div>
-<div id="tabset-1-2">
-<h4 class="tiny" id="constructing-welfare-aggregates">Constructing Welfare Aggregates</h4>
-<ul>
-<li>Income vs Consumption (welfare_type) -&gt; consumption preferred.</li>
-<li>Zeros dropped.</li>
-<li>Micro or Grouped Data (distribution_type)</li>
-<li>Additional comparability considerations:
-<ul>
-<li>Questionnaire design changes</li>
-<li>Equivalence scales (-&gt;not used)</li>
-<li>Spatio/temporal adjustments</li>
-<li>Imputed rent (-&gt; excluded)</li>
-<li>Tracked in PIP: comparable_spell and survey_comparability.</li>
-</ul></li>
-</ul>
-</div>
-<div id="tabset-1-3">
-<h4 id="adjusting-welfare-aggregates">Adjusting Welfare Aggregates</h4>
-<ul>
-<li>Consumer Price Indices (CPIs) &amp; Purchasing Power Parities (PPPs)</li>
-<li>Derivation of the International Poverty Line (poverty_line)
-<ul>
-<li>$3.00/day in 2021 PPP -&gt; based on the median of harmonized national poverty lines from poorest countries</li>
-</ul></li>
-<li>Derivation of higher poverty lines
-<ul>
-<li>$4.20 and $8.30 in 2021 PPP -&gt; based on median values of national poverty lines of lower- and upper-middle income countries, respectively.</li>
-</ul></li>
-<li>Derivation of societal poverty line (spl)</li>
-</ul>
-</div>
-<div id="tabset-1-4">
-<h4 id="calculating-survey-estimates">Calculating survey estimates</h4>
-<ul>
-<li>Poverty and Inequality metrics are calculated using adjusted welfare aggregates.</li>
-<li>All methodology is available in the PIP Methodological Handbook on the website.</li>
-<li>Source code is available on github through the package <code>wbpip</code>.</li>
-</ul>
-</div>
-<div id="tabset-1-5">
-<h4 id="calculating-regional-aggregates">Calculating regional aggregates</h4>
-<ul>
-<li>Extrapolations and/or Interpolations (fill_gaps)</li>
-<li>Nowcasts (nowcast)</li>
-<li>Regional classification</li>
-<li>Population adjustments</li>
-<li>Coverage rules applied</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="welfare-measure-reported-in-pip-2" class="slide level2">
-<h2>Welfare measure reported in PIP</h2>
-
-<img data-src="img/process3.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="welfare-measure-reported-in-pip-3" class="slide level2">
-<h2>Welfare measure reported in PIP</h2>
-
-<img data-src="img/process4.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="welfare-measure-reported-in-pip-4" class="slide level2">
-<h2>Welfare measure reported in PIP</h2>
-
-<img data-src="img/process5.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="welfare-measure-reported-in-pip-5" class="slide level2">
-<h2>Welfare measure reported in PIP</h2>
-
-<img data-src="img/process6.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="welfare-measure-reported-in-pip-6" class="slide level2">
-<h2>Welfare measure reported in PIP</h2>
-
-<img data-src="img/process7.png" class="quarto-figure quarto-figure-center r-stretch"></section></section>
-<section id="accessing-pip-through-the-user-interface" class="title-slide slide level1 center">
-<h1>2. Accessing PIP through the user interface</h1>
-
-</section>
-
+<img data-src="img/process7.png" class="r-stretch quarto-figure-center"></section></section>
 <section>
 <section id="accessing-pip-in-r" class="title-slide slide level1 center">
-<h1>3. Accessing PIP in R</h1>
+<h1>Accessing PIP in R</h1>
 
 </section>
 <section id="the-pipr-package" class="slide level2">
@@ -450,14 +422,14 @@ Nishant Yonzan
 <div>
 <ul>
 <li class="fragment"><p><strong>Installation:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co"># To install the pipr package, you first need to install the devtools package</span></span>
-<span id="cb1-2"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
-<span id="cb1-3"><a href=""></a><span class="co"># The devtools package allows you to install pipr through GitHub</span></span>
-<span id="cb1-4"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"worldbank/pipr"</span>)</span>
-<span id="cb1-5"><a href=""></a><span class="co"># Now load pipr</span></span>
-<span id="cb1-6"><a href=""></a><span class="fu">library</span>(pipr)</span>
-<span id="cb1-7"><a href=""></a><span class="co"># I'll use dplyr a lot in these slides, so best to load it as well</span></span>
-<span id="cb1-8"><a href=""></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># To install the pipr package, you first need to install the devtools package</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># The devtools package allows you to install pipr through GitHub</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"worldbank/pipr"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># Now load pipr</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(pipr)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># I'll use dplyr a lot in these slides, so best to load it as well</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li class="fragment"><p><strong>More information about the package:</strong></p>
 <p><a href="https://worldbank.github.io/pipr/" class="uri">https://worldbank.github.io/pipr/</a></p></li>
 </ul>
@@ -473,30 +445,32 @@ Nishant Yonzan
 <li class="fragment"><em>reporting_level</em>: Mostly national, but can be urban or rural</li>
 <li class="fragment"><em>welfare_type</em>: Income or consumption</li>
 </ul></li>
+<li class="fragment"><p><strong><code>get_wb()</code>:</strong> <u>regional/global</u> estimates of poverty and inequality</p>
+<ul>
+<li class="fragment">each row identifies a unique combination of <em>region_code</em> and <em>year</em>.</li>
+</ul></li>
 </ul>
-<!-- - **`get_wb()`:** [regional/global]{.underline} estimates of poverty and inequality -->
-<!--     - each row identifies a unique combination of *region_code* and *year*. -->
 </div>
 </section>
 <section id="country-level-estimates" class="slide level2">
 <h2>Country-level estimates</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">get_stats</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">get_stats</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2,504 × 44
+<pre><code># A tibble: 2,556 × 44
    region_name       region_code country_name country_code  year reporting_level
    &lt;chr&gt;             &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;          
- 1 Sub-Saharan Afri… SSA         Angola       AGO           2000 national       
- 2 Sub-Saharan Afri… SSA         Angola       AGO           2008 national       
- 3 Sub-Saharan Afri… SSA         Angola       AGO           2018 national       
- 4 Europe &amp; Central… ECA         Albania      ALB           1996 national       
- 5 Europe &amp; Central… ECA         Albania      ALB           2002 national       
- 6 Europe &amp; Central… ECA         Albania      ALB           2005 national       
- 7 Europe &amp; Central… ECA         Albania      ALB           2008 national       
- 8 Europe &amp; Central… ECA         Albania      ALB           2012 national       
- 9 Europe &amp; Central… ECA         Albania      ALB           2014 national       
-10 Europe &amp; Central… ECA         Albania      ALB           2015 national       
-# ℹ 2,494 more rows
+ 1 Sub-Saharan Afri… SSF         Angola       AGO           2000 national       
+ 2 Sub-Saharan Afri… SSF         Angola       AGO           2008 national       
+ 3 Sub-Saharan Afri… SSF         Angola       AGO           2018 national       
+ 4 Europe &amp; Central… ECS         Albania      ALB           1996 national       
+ 5 Europe &amp; Central… ECS         Albania      ALB           2002 national       
+ 6 Europe &amp; Central… ECS         Albania      ALB           2005 national       
+ 7 Europe &amp; Central… ECS         Albania      ALB           2008 national       
+ 8 Europe &amp; Central… ECS         Albania      ALB           2012 national       
+ 9 Europe &amp; Central… ECS         Albania      ALB           2014 national       
+10 Europe &amp; Central… ECS         Albania      ALB           2015 national       
+# ℹ 2,546 more rows
 # ℹ 38 more variables: survey_acronym &lt;chr&gt;, survey_coverage &lt;chr&gt;,
 #   welfare_time &lt;dbl&gt;, welfare_type &lt;chr&gt;, survey_comparability &lt;dbl&gt;,
 #   comparable_spell &lt;chr&gt;, poverty_line &lt;dbl&gt;, headcount &lt;dbl&gt;,
@@ -509,7 +483,7 @@ Nishant Yonzan
 <section id="variables" class="slide level2">
 <h2>Variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">colnames</span>(<span class="fu">get_stats</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">colnames</span>(<span class="fu">get_stats</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "region_name"          "region_code"          "country_name"        
  [4] "country_code"         "year"                 "reporting_level"     
@@ -535,27 +509,12 @@ Nishant Yonzan
 <!--   select(country_name, year, welfare_type, reporting_level, headcount, gini) -->
 <!-- ``` -->
 </section>
-<section id="two-main-functions-1" class="slide level2 smaller">
-<h2>Two main functions</h2>
-<ul>
-<li><p><strong><code>get_stats()</code>:</strong> <u>country</u> estimates of poverty and inequality</p>
-<ul>
-<li>each row identifies a unique combination of <em>country_code</em>, <em>year</em>, <em>reporting_level</em>, and <em>welfare_type</em></li>
-<li><em>reporting_level</em>: Mostly national, but can be urban or rural</li>
-<li><em>welfare_type</em>: Income or consumption</li>
-</ul></li>
-<li><p><strong><code>get_wb()</code>:</strong> <u>regional/global</u> estimates of poverty and inequality</p>
-<ul>
-<li>each row identifies a unique combination of <em>region_code</em> and <em>year</em>.</li>
-</ul></li>
-</ul>
-</section>
 <section id="variable-information" class="slide level2">
 <h2>Variable information</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">get_aux</span>(<span class="st">"dictionary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">get_aux</span>(<span class="st">"dictionary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 41 × 2
+<pre><code># A tibble: 79 × 2
    variable        definition                                                   
    &lt;chr&gt;           &lt;chr&gt;                                                        
  1 region_name     World Bank region name                                       
@@ -568,27 +527,27 @@ Nishant Yonzan
  8 survey_coverage Geographic coverage of the country survey (i.e. national, ur…
  9 welfare_time    Welfare time                                                 
 10 welfare_type    Type of welfare vector used for estimates (income or consump…
-# ℹ 31 more rows</code></pre>
+# ℹ 69 more rows</code></pre>
 </div>
 </div>
 </section>
-<section id="ghanaian-survey-estimates" class="slide level2 smaller">
-<h2>Ghanaian survey estimates</h2>
+<section id="ghanaian-estimates" class="slide level2">
+<h2>Ghanaian estimates</h2>
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">get_stats</span>(<span class="at">country =</span> <span class="st">"GHA"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href=""></a>  <span class="fu">select</span>(country_code, year, poverty_line, headcount,mean,gini)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">get_stats</span>(<span class="at">country =</span> <span class="st">"GHA"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">select</span>(country_code, year, poverty_line, headcount,mean,gini)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 6
-  country_code  year poverty_line headcount     mean      gini
-  &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1 GHA           1987            3 0.7821900 2.326959 0.3534958
-2 GHA           1988            3 0.77437   2.389670 0.3599354
-3 GHA           1991            3 0.8036237 2.222009 0.3843171
-4 GHA           1998            3 0.6534858 2.958526 0.4007121
-5 GHA           2005            3 0.6088694 3.387710 0.4275624
-6 GHA           2012            3 0.4176550 4.822603 0.4237164
-7 GHA           2016            3 0.3902579 5.068841 0.4350860</code></pre>
+  country_code  year poverty_line headcount  mean  gini
+  &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 GHA           1987            3     0.782  2.33 0.353
+2 GHA           1988            3     0.774  2.39 0.360
+3 GHA           1991            3     0.804  2.22 0.384
+4 GHA           1998            3     0.653  2.96 0.401
+5 GHA           2005            3     0.609  3.39 0.428
+6 GHA           2012            3     0.418  4.82 0.424
+7 GHA           2016            3     0.390  5.07 0.435</code></pre>
 </div>
 </div>
 <ul>
@@ -597,65 +556,26 @@ Nishant Yonzan
 </ul>
 </div>
 </section>
-<section id="ghanaian-survey-estimates-with-2017-ppp" class="slide level2 smaller">
-<h2>Ghanaian survey estimates with 2017 PPP</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">get_stats</span>(<span class="at">country =</span> <span class="st">"GHA"</span>, <span class="at">ppp_version =</span> <span class="st">"2017"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a href=""></a>  <span class="fu">select</span>(country_code, year, poverty_line, headcount,mean,gini)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 6
-  country_code  year poverty_line headcount     mean      gini
-  &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1 GHA           1987         2.15 0.5838600 2.336508 0.3534958
-2 GHA           1988         2.15 0.57657   2.399476 0.3599354
-3 GHA           1991         2.15 0.6416775 2.231081 0.3843456
-4 GHA           1998         2.15 0.4865398 2.970653 0.4007188
-5 GHA           2005         2.15 0.4246774 3.401514 0.4276035
-6 GHA           2012         2.15 0.2568997 4.842373 0.4237220
-7 GHA           2016         2.15 0.2520855 5.089504 0.4351244</code></pre>
-</div>
-</div>
-</section>
 <section id="different-poverty-line" class="slide level2">
 <h2>Different poverty line</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">get_stats</span>(<span class="at">country =</span> <span class="st">"LUX"</span>, <span class="at">povline =</span> <span class="dv">10</span>)  <span class="sc">|&gt;</span>    </span>
-<span id="cb12-2"><a href=""></a>  <span class="fu">select</span>(country_code, year, poverty_line, headcount)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">get_stats</span>(<span class="at">country =</span> <span class="st">"LUX"</span>, <span class="at">povline =</span> <span class="dv">10</span>)  <span class="sc">|&gt;</span>    </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">select</span>(country_code, year, poverty_line, headcount)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 38 × 4
-   country_code  year poverty_line   headcount
-   &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
- 1 LUX           1985           10 0.004744776
- 2 LUX           1986           10 0.002237166
- 3 LUX           1987           10 0.002258436
- 4 LUX           1988           10 0          
- 5 LUX           1989           10 0          
- 6 LUX           1990           10 0          
- 7 LUX           1991           10 0          
- 8 LUX           1992           10 0          
- 9 LUX           1993           10 0          
-10 LUX           1994           10 0          
-# ℹ 28 more rows</code></pre>
-</div>
-</div>
-</section>
-<section id="multiple-poverty-lines" class="slide level2">
-<h2>Multiple poverty lines</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>povlines <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">50</span>,<span class="dv">100</span>) </span>
-<span id="cb14-2"><a href=""></a>purrr<span class="sc">::</span><span class="fu">map_dfr</span>(<span class="at">.x      =</span> povlines,                 </span>
-<span id="cb14-3"><a href=""></a>               <span class="at">.f      =</span> get_stats,                 </span>
-<span id="cb14-4"><a href=""></a>               <span class="at">country =</span> <span class="st">"LUX"</span>,                </span>
-<span id="cb14-5"><a href=""></a>               <span class="at">year    =</span> <span class="dv">2022</span>) <span class="sc">|&gt;</span>    </span>
-<span id="cb14-6"><a href=""></a>  <span class="fu">select</span>(country_code, year, poverty_line, headcount) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 4
-  country_code  year poverty_line   headcount
-  &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
-1 LUX           2022           10 0.002801136
-2 LUX           2022           20 0.01300092 
-3 LUX           2022           50 0.2030513  
-4 LUX           2022          100 0.5921018  </code></pre>
+<pre><code># A tibble: 39 × 4
+   country_code  year poverty_line headcount
+   &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;
+ 1 LUX           1985           10   0.00474
+ 2 LUX           1986           10   0.00224
+ 3 LUX           1987           10   0.00226
+ 4 LUX           1988           10   0      
+ 5 LUX           1989           10   0      
+ 6 LUX           1990           10   0      
+ 7 LUX           1991           10   0      
+ 8 LUX           1992           10   0      
+ 9 LUX           1993           10   0      
+10 LUX           1994           10   0      
+# ℹ 29 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -663,387 +583,138 @@ Nishant Yonzan
 <h2>Estimates across selected countries</h2>
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">get_stats</span>(<span class="at">country =</span> <span class="fu">c</span>(<span class="st">"LUX"</span>,<span class="st">"GHA"</span>,<span class="st">"VNM"</span>), <span class="at">year=</span><span class="dv">2022</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a href=""></a>  <span class="fu">select</span>(country_code, country_name, year, poverty_line, headcount, mean, gini)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">get_stats</span>(<span class="at">country =</span> <span class="fu">c</span>(<span class="st">"LUX"</span>,<span class="st">"GHA"</span>,<span class="st">"VNM"</span>), <span class="at">year=</span><span class="dv">2022</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">select</span>(country_code, year, poverty_line, headcount, mean, gini)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 7
-  country_code country_name  year poverty_line   headcount      mean      gini
-  &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 LUX          Luxembourg    2022            3 0.001043733 103.2674  0.3409399
-2 VNM          Viet Nam      2022            3 0.01603360   16.58664 0.3609300</code></pre>
+<pre><code># A tibble: 2 × 6
+  country_code  year poverty_line headcount  mean  gini
+  &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 LUX           2022            3   0.00104 103.  0.341
+2 VNM           2022            3   0.0160   16.6 0.361</code></pre>
 </div>
 </div>
 <ul>
-<li class="fragment">Note that there is no survey for Ghana (GHA) in 2022 and hence not reported in the output.</li>
+<li class="fragment">Note that there is no estimate for Ghana (GHA) in 2022 and hence not reported in the output.</li>
 </ul>
 </div>
 </section>
 <section id="extrapolation-for-ghana-from-2016-to-most-recent-year" class="slide level2">
 <h2>Extrapolation for Ghana from 2016 to most recent year</h2>
 
-<img data-src="img/GHA_example.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="img/GHA_example.png" class="r-stretch quarto-figure-center"></section>
 <section id="interpolated-and-extrapolated-values" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Interpolated and extrapolated values</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb18-1" class="hljs-ln-code"><a href=""></a><span class="fu">get_stats</span>(<span class="at">country =</span> <span class="st">"GHA"</span>, <span class="at">fill_gaps =</span> <span class="cn">TRUE</span>)  <span class="sc">|&gt;</span> </span>
-<span id="cb18-2" class="hljs-ln-code"><a href=""></a>  <span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">2016</span>) <span class="sc">|&gt;</span></span>
-<span id="cb18-3" class="hljs-ln-code"><a href=""></a>  <span class="fu">select</span>(country_code, year, poverty_line, headcount)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb14-1" class="hljs-ln-code"><a href="#cb14-1"></a><span class="fu">get_stats</span>(<span class="at">country =</span> <span class="st">"GHA"</span>, <span class="at">fill_gaps =</span> <span class="cn">TRUE</span>)  <span class="sc">|&gt;</span> </span>
+<span id="cb14-2" class="hljs-ln-code"><a href="#cb14-2"></a>  <span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">2016</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-3" class="hljs-ln-code"><a href="#cb14-3"></a>  <span class="fu">select</span>(country_code, year, poverty_line, headcount)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8 × 4
+<pre><code># A tibble: 9 × 4
   country_code  year poverty_line headcount
   &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;
-1 GHA           2016            3 0.4045640
-2 GHA           2017            3 0.3851886
-3 GHA           2018            3 0.3752956
-4 GHA           2019            3 0.3593040
-5 GHA           2020            3 0.3655441
-6 GHA           2021            3 0.3553633
-7 GHA           2022            3 0.3482590
-8 GHA           2023            3 0.3452387</code></pre>
-</div>
-</div>
-</section>
-<section id="versioning-with-pip" class="slide level2">
-<h2>Versioning with PIP</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">get_versions</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 4
-   version                  release_version ppp_version identity
-   &lt;chr&gt;                    &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;   
- 1 20250401_2021_01_02_PROD 20250401        2021        PROD    
- 2 20250401_2017_01_02_PROD 20250401        2017        PROD    
- 3 20240627_2017_01_02_PROD 20240627        2017        PROD    
- 4 20240627_2011_02_02_PROD 20240627        2011        PROD    
- 5 20240326_2017_01_02_PROD 20240326        2017        PROD    
- 6 20240326_2011_02_02_PROD 20240326        2011        PROD    
- 7 20230919_2017_01_02_PROD 20230919        2017        PROD    
- 8 20230919_2011_02_02_PROD 20230919        2011        PROD    
- 9 20230328_2017_01_02_PROD 20230328        2017        PROD    
-10 20230328_2011_02_02_PROD 20230328        2011        PROD    
-11 20220909_2017_01_02_PROD 20220909        2017        PROD    
-12 20220909_2011_02_02_PROD 20220909        2011        PROD    </code></pre>
-</div>
-</div>
-</section>
-<section id="versioning-with-pip-1" class="slide level2 smaller">
-<h2>Versioning with PIP</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">get_stats</span>(<span class="st">"IND"</span>, <span class="at">release_version =</span> <span class="st">"20250401"</span>, <span class="at">ppp_version =</span> <span class="st">"2017"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb22-2"><a href=""></a>  <span class="fu">select</span>(country_code, country_name, year, poverty_line, headcount, reporting_level, survey_acronym) <span class="sc">|&gt;</span> <span class="fu">tail</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 7
-  country_code country_name  year poverty_line  headcount reporting_level
-  &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;          
-1 IND          India         2009         2.15 0.2249636  national       
-2 IND          India         2011         2.15 0.1621560  national       
-3 IND          India         2022         2.15 0.02349184 national       
-# ℹ 1 more variable: survey_acronym &lt;chr&gt;</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">get_stats</span>(<span class="st">"IND"</span>, <span class="at">release_version =</span> <span class="st">"20240627"</span>, <span class="at">ppp_version =</span> <span class="st">"2017"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb24-2"><a href=""></a>  <span class="fu">select</span>(country_code, country_name, year, poverty_line, headcount, reporting_level, survey_acronym) <span class="sc">|&gt;</span> <span class="fu">tail</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 7
-  country_code country_name  year poverty_line headcount reporting_level
-  &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;          
-1 IND          India         2021         2.15 0.1291731 national       
-2 IND          India         2021         2.15 0.1408614 rural          
-3 IND          India         2021         2.15 0.1069970 urban          
-# ℹ 1 more variable: survey_acronym &lt;chr&gt;</code></pre>
-</div>
-</div>
-</section>
-<section id="poverty-by-welfare-type" class="slide level2 smaller">
-<h2>Poverty by welfare type</h2>
-<div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Code</a></li><li><a href="#tabset-2-2">Plot</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">get_stats</span>(<span class="at">country=</span><span class="st">"PHL"</span>)       </span>
-<span id="cb26-2"><a href=""></a>gr <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df,<span class="fu">aes</span>(<span class="at">y=</span><span class="dv">100</span><span class="sc">*</span>headcount,<span class="at">x=</span>year,<span class="at">color=</span>welfare_type)) <span class="sc">+</span>          </span>
-<span id="cb26-3"><a href=""></a>      <span class="fu">geom_line</span>() <span class="sc">+</span>                     </span>
-<span id="cb26-4"><a href=""></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Extreme poverty in the Philippines, 1981-2022"</span>,                       </span>
-<span id="cb26-5"><a href=""></a>           <span class="at">y     =</span> <span class="st">"Poverty rate (%)"</span>,                          </span>
-<span id="cb26-6"><a href=""></a>           <span class="at">x     =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-2-2">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="PIP_In_R_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="poverty-by-reporting-level" class="slide level2 smaller">
-<h2>Poverty by reporting level</h2>
-<div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Code</a></li><li><a href="#tabset-3-2">Plot</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">get_stats</span>(<span class="at">country=</span><span class="st">"CHN"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb27-2"><a href=""></a>      <span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">1990</span>)</span>
-<span id="cb27-3"><a href=""></a>  </span>
-<span id="cb27-4"><a href=""></a>gr <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df,<span class="fu">aes</span>(<span class="at">y=</span><span class="dv">100</span><span class="sc">*</span>headcount,<span class="at">x=</span>year,<span class="at">color=</span>reporting_level)) <span class="sc">+</span></span>
-<span id="cb27-5"><a href=""></a>      <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb27-6"><a href=""></a>      <span class="fu">labs</span>(</span>
-<span id="cb27-7"><a href=""></a>      <span class="at">title =</span> <span class="st">"Extreme poverty in China, 1990-2022"</span>,</span>
-<span id="cb27-8"><a href=""></a>      <span class="at">y =</span> <span class="st">"Poverty rate (%)"</span>,</span>
-<span id="cb27-9"><a href=""></a>      <span class="at">x =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-3-2">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="PIP_In_R_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
+1 GHA           2016            3     0.405
+2 GHA           2017            3     0.385
+3 GHA           2018            3     0.375
+4 GHA           2019            3     0.359
+5 GHA           2020            3     0.366
+6 GHA           2021            3     0.355
+7 GHA           2022            3     0.348
+8 GHA           2023            3     0.345
+9 GHA           2024            3     0.331</code></pre>
 </div>
 </div>
 </section>
 <section id="within-country-comparability" class="slide level2">
 <h2>Within-country comparability</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">get_stats</span>(<span class="at">country=</span><span class="st">"CHN"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb28-2"><a href=""></a>      <span class="fu">filter</span>(reporting_level<span class="sc">==</span><span class="st">"national"</span> <span class="sc">&amp;</span> year<span class="sc">&gt;=</span><span class="dv">1990</span>) <span class="sc">|&gt;</span></span>
-<span id="cb28-3"><a href=""></a>      <span class="fu">select</span>(year,headcount,comparable_spell,welfare_type)</span>
-<span id="cb28-4"><a href=""></a><span class="fu">print</span>(df, <span class="at">n =</span> <span class="dv">21</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df <span class="ot">&lt;-</span> <span class="fu">get_stats</span>(<span class="at">country=</span><span class="st">"CHN"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>      <span class="fu">filter</span>(reporting_level<span class="sc">==</span><span class="st">"national"</span> <span class="sc">&amp;</span> year<span class="sc">&gt;=</span><span class="dv">1990</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>      <span class="fu">select</span>(year,headcount,comparable_spell,welfare_type)</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="fu">print</span>(df, <span class="at">n =</span> <span class="dv">21</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 19 × 4
-    year   headcount comparable_spell welfare_type
-   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;       
- 1  1990 0.8303196   1990 - 2012      consumption 
- 2  1993 0.7675762   1990 - 2012      consumption 
- 3  1996 0.6200222   1990 - 2012      consumption 
- 4  1999 0.5843151   1990 - 2012      consumption 
- 5  2002 0.4814554   1990 - 2012      consumption 
- 6  2005 0.3309843   1990 - 2012      consumption 
- 7  2008 0.2624233   1990 - 2012      consumption 
- 8  2010 0.2058664   1990 - 2012      consumption 
- 9  2011 0.1569681   1990 - 2012      consumption 
-10  2012 0.1324195   1990 - 2012      consumption 
-11  2013 0.06225640  2013 - 2021      consumption 
-12  2014 0.04744519  2013 - 2021      consumption 
-13  2015 0.0297972   2013 - 2021      consumption 
-14  2016 0.02198244  2013 - 2021      consumption 
-15  2017 0.01665204  2013 - 2021      consumption 
-16  2018 0.007953106 2013 - 2021      consumption 
-17  2019 0           2013 - 2021      consumption 
-18  2020 0           2013 - 2021      consumption 
-19  2021 0           2013 - 2021      consumption </code></pre>
+<pre><code># A tibble: 20 × 4
+    year headcount comparable_spell welfare_type
+   &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;       
+ 1  1990   0.830   1990 - 2012      consumption 
+ 2  1993   0.768   1990 - 2012      consumption 
+ 3  1996   0.620   1990 - 2012      consumption 
+ 4  1999   0.584   1990 - 2012      consumption 
+ 5  2002   0.481   1990 - 2012      consumption 
+ 6  2005   0.331   1990 - 2012      consumption 
+ 7  2008   0.262   1990 - 2012      consumption 
+ 8  2010   0.206   1990 - 2012      consumption 
+ 9  2011   0.157   1990 - 2012      consumption 
+10  2012   0.132   1990 - 2012      consumption 
+11  2013   0.0623  2013 - 2022      consumption 
+12  2014   0.0474  2013 - 2022      consumption 
+13  2015   0.0298  2013 - 2022      consumption 
+14  2016   0.0220  2013 - 2022      consumption 
+15  2017   0.0167  2013 - 2022      consumption 
+16  2018   0.00795 2013 - 2022      consumption 
+17  2019   0       2013 - 2022      consumption 
+18  2020   0       2013 - 2022      consumption 
+19  2021   0       2013 - 2022      consumption 
+20  2022   0       2013 - 2022      consumption </code></pre>
 </div>
 </div>
 </section>
-<section id="within-country-comparability-1" class="slide level2 smaller">
-<h2>Within-country comparability</h2>
-<div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Code</a></li><li><a href="#tabset-4-2">Plot</a></li></ul>
-<div class="tab-content">
-<div id="tabset-4-1">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">get_stats</span>(<span class="at">country=</span><span class="st">"CHN"</span>, <span class="at">reporting_level =</span> <span class="st">"national"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb30-2"><a href=""></a>      <span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">1990</span>)</span>
-<span id="cb30-3"><a href=""></a>  </span>
-<span id="cb30-4"><a href=""></a>gr <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df,<span class="fu">aes</span>(<span class="at">y=</span><span class="dv">100</span><span class="sc">*</span>headcount,<span class="at">x=</span>year,<span class="at">color=</span>comparable_spell)) <span class="sc">+</span></span>
-<span id="cb30-5"><a href=""></a>      <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb30-6"><a href=""></a>      <span class="fu">labs</span>(</span>
-<span id="cb30-7"><a href=""></a>      <span class="at">title =</span> <span class="st">"Extreme poverty in China, 1990-2022"</span>,</span>
-<span id="cb30-8"><a href=""></a>      <span class="at">y =</span> <span class="st">"Poverty rate (%)"</span>,</span>
-<span id="cb30-9"><a href=""></a>      <span class="at">x =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-4-2">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="PIP_In_R_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="data-from-lis" class="slide level2">
-<h2>Data from LIS</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">get_stats</span>() <span class="sc">|&gt;</span></span>
-<span id="cb31-2"><a href=""></a>      <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"LIS"</span>, survey_acronym)) <span class="sc">|&gt;</span></span>
-<span id="cb31-3"><a href=""></a>      <span class="fu">group_by</span>(country_name) <span class="sc">|&gt;</span></span>
-<span id="cb31-4"><a href=""></a>      <span class="fu">summarize</span>(<span class="at">obs =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb31-5"><a href=""></a>      <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb31-6"><a href=""></a>      <span class="fu">arrange</span>(<span class="fu">desc</span>(obs))</span>
-<span id="cb31-7"><a href=""></a><span class="fu">print</span>(df, <span class="at">n=</span><span class="dv">29</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 29 × 2
-   country_name      obs
-   &lt;chr&gt;           &lt;int&gt;
- 1 United States      61
- 2 United Kingdom     54
- 3 Canada             44
- 4 Germany            30
- 5 Israel             25
- 6 Luxembourg         18
- 7 Italy              17
- 8 Taiwan, China      16
- 9 Japan              13
-10 Australia          12
-11 France             12
-12 Korea, Rep.        11
-13 Spain              11
-14 Sweden              8
-15 Austria             7
-16 Belgium             6
-17 Ireland             6
-18 Netherlands         5
-19 Norway              5
-20 Switzerland         5
-21 Denmark             4
-22 Finland             4
-23 Poland              4
-24 Czechia             3
-25 Hungary             3
-26 Greece              2
-27 Romania             2
-28 Slovak Republic     2
-29 Slovenia            2</code></pre>
-</div>
-</div>
-</section></section>
-<section>
-<section id="exercises" class="title-slide slide level1 center">
-<h1>4. Exercises</h1>
+<section id="plot" class="slide level2">
+<h2>Plot</h2>
 
-</section>
-<section id="exercise-1" class="slide level2">
-<h2>Exercise 1</h2>
-<p>Explore whether Kuznets’ inverse-U hypothesis holds with data in PIP</p>
-<ol type="1">
-<li><p>Plot the relationship between an inequality metric and log mean welfare</p></li>
-<li><p>Regress an inequality metric on a 2nd order polynomial of log mean welfare</p></li>
-</ol>
-</section>
-<section class="slide level2">
-
-<div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Code</a></li><li><a href="#tabset-5-2">Plot</a></li></ul>
-<div class="tab-content">
-<div id="tabset-5-1">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="co"># Kuznets curve? </span></span>
-<span id="cb33-2"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">get_stats</span>()   </span>
-<span id="cb33-3"><a href=""></a>gr <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(mean),<span class="at">y=</span>gini)) <span class="sc">+</span>   </span>
-<span id="cb33-4"><a href=""></a>      <span class="fu">geom_point</span>() <span class="sc">+</span>   </span>
-<span id="cb33-5"><a href=""></a>      <span class="fu">geom_smooth</span>() <span class="sc">+</span>   </span>
-<span id="cb33-6"><a href=""></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Kuznets curve?"</span>,</span>
-<span id="cb33-7"><a href=""></a>            <span class="at">y =</span> <span class="st">"Gini coefficient"</span>,</span>
-<span id="cb33-8"><a href=""></a>            <span class="at">x =</span> <span class="st">"Log welfare"</span>)   </span>
-<span id="cb33-9"><a href=""></a><span class="fu">summary</span>(<span class="fu">lm</span>(gini<span class="sc">~</span><span class="fu">log</span>(mean)<span class="sc">+</span><span class="fu">I</span>(<span class="fu">log</span>(mean)<span class="sc">^</span><span class="dv">2</span>),<span class="at">data=</span>df)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = gini ~ log(mean) + I(log(mean)^2), data = df)
-
-Residuals:
-       Min         1Q     Median         3Q        Max 
--0.2013324 -0.0528842 -0.0087689  0.0454070  0.3066085 
-
-Coefficients:
-                 Estimate Std. Error t value              Pr(&gt;|t|)    
-(Intercept)     0.3239573  0.0115712  27.997 &lt; 0.00000000000000022 ***
-log(mean)       0.0791346  0.0087568   9.037 &lt; 0.00000000000000022 ***
-I(log(mean)^2) -0.0195452  0.0015606 -12.524 &lt; 0.00000000000000022 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.079882 on 2501 degrees of freedom
-Multiple R-squared:  0.15149,   Adjusted R-squared:  0.15081 
-F-statistic: 223.26 on 2 and 2501 DF,  p-value: &lt; 0.000000000000000222</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-5-2">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="PIP_In_R_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
+<img data-src="PIP_In_R_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
 <section id="global-and-regional-estimates" class="slide level2">
 <h2>Global and regional estimates</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">get_wb</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">get_wb</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 450 × 14
-   region_name              region_code  year poverty_line headcount poverty_gap
-   &lt;chr&gt;                    &lt;chr&gt;       &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
- 1 Eastern and Southern Af… AFE          1981            3 0.5818767   0.2687279
- 2 Eastern and Southern Af… AFE          1982            3 0.5855789   0.2726082
- 3 Eastern and Southern Af… AFE          1983            3 0.5917143   0.2779007
- 4 Eastern and Southern Af… AFE          1984            3 0.6010141   0.2840959
- 5 Eastern and Southern Af… AFE          1985            3 0.6086635   0.2895107
- 6 Eastern and Southern Af… AFE          1986            3 0.6035845   0.2856189
- 7 Eastern and Southern Af… AFE          1987            3 0.5973070   0.2814237
- 8 Eastern and Southern Af… AFE          1988            3 0.5964351   0.2799636
- 9 Eastern and Southern Af… AFE          1989            3 0.5969201   0.2809244
-10 Eastern and Southern Af… AFE          1990            3 0.6048452   0.2870300
-# ℹ 440 more rows
-# ℹ 8 more variables: poverty_severity &lt;dbl&gt;, watts &lt;dbl&gt;, mean &lt;dbl&gt;,
-#   spr &lt;dbl&gt;, pg &lt;dbl&gt;, estimate_type &lt;chr&gt;, pop &lt;dbl&gt;, pop_in_poverty &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 765 × 14
+   region_code region_name        year poverty_line    pop headcount poverty_gap
+   &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+ 1 EAP         East Asia &amp; Paci…  1981            3 1.38e9     0.881       0.493
+ 2 EAP         East Asia &amp; Paci…  1982            3 1.40e9     0.871       0.469
+ 3 EAP         East Asia &amp; Paci…  1983            3 1.43e9     0.858       0.441
+ 4 EAP         East Asia &amp; Paci…  1984            3 1.45e9     0.835       0.397
+ 5 EAP         East Asia &amp; Paci…  1985            3 1.47e9     0.812       0.372
+ 6 EAP         East Asia &amp; Paci…  1986            3 1.50e9     0.792       0.355
+ 7 EAP         East Asia &amp; Paci…  1987            3 1.52e9     0.763       0.333
+ 8 EAP         East Asia &amp; Paci…  1988            3 1.55e9     0.720       0.299
+ 9 EAP         East Asia &amp; Paci…  1989            3 1.58e9     0.771       0.351
+10 EAP         East Asia &amp; Paci…  1990            3 1.60e9     0.759       0.340
+# ℹ 755 more rows
+# ℹ 7 more variables: poverty_severity &lt;dbl&gt;, watts &lt;dbl&gt;, mean &lt;dbl&gt;,
+#   spr &lt;dbl&gt;, pg &lt;dbl&gt;, pop_in_poverty &lt;dbl&gt;, estimate_type &lt;chr&gt;</code></pre>
 </div>
 </div>
 </section>
-<section id="global-poverty-1990-2022" class="slide level2 smaller">
+<section id="global-poverty-1990-2022" class="slide level2">
 <h2>Global poverty, 1990-2022</h2>
 <div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Code</a></li><li><a href="#tabset-6-2">Plot</a></li></ul>
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Code</a></li><li><a href="#tabset-1-2">Plot</a></li></ul>
 <div class="tab-content">
-<div id="tabset-6-1">
+<div id="tabset-1-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">get_wb</span>() <span class="sc">|&gt;</span></span>
-<span id="cb37-2"><a href=""></a>      <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>, region_code <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"WLD"</span>,<span class="st">"EAP"</span>,<span class="st">"SSA"</span>))</span>
-<span id="cb37-3"><a href=""></a></span>
-<span id="cb37-4"><a href=""></a>gr <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> year,<span class="at">y =</span> <span class="dv">100</span><span class="sc">*</span>headcount,<span class="at">color=</span>region_code)) <span class="sc">+</span></span>
-<span id="cb37-5"><a href=""></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb37-6"><a href=""></a>  <span class="fu">labs</span>(</span>
-<span id="cb37-7"><a href=""></a>    <span class="at">title =</span> <span class="st">"Global poverty, 1990-2025"</span>,</span>
-<span id="cb37-8"><a href=""></a>    <span class="at">y =</span> <span class="st">"Poverty rate (%)"</span>,</span>
-<span id="cb37-9"><a href=""></a>    <span class="at">x =</span> <span class="st">""</span></span>
-<span id="cb37-10"><a href=""></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df <span class="ot">&lt;-</span> <span class="fu">get_wb</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>      <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>, region_code <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"WLD"</span>,<span class="st">"EAP"</span>,<span class="st">"SSA"</span>))</span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a>gr <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> <span class="dv">100</span> <span class="sc">*</span> headcount, <span class="at">color =</span> region_code)) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-7"><a href="#cb20-7"></a>    <span class="at">title =</span> <span class="st">"Global poverty, 1990–2025"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8"></a>    <span class="at">y =</span> <span class="st">"Poverty rate (%)"</span>,</span>
+<span id="cb20-9"><a href="#cb20-9"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb20-10"><a href="#cb20-10"></a>    <span class="at">color =</span> <span class="st">"Region"</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a>  <span class="fu">theme</span>(</span>
+<span id="cb20-14"><a href="#cb20-14"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb20-15"><a href="#cb20-15"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div id="tabset-6-2">
+<div id="tabset-1-2">
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="PIP_In_R_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
-</figure>
-</div>
+<p><img data-src="PIP_In_R_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1053,120 +724,16 @@ F-statistic: 223.26 on 2 and 2501 DF,  p-value: &lt; 0.000000000000000222</code>
 <section id="many-more-functions" class="slide level2">
 <h2>Many more functions</h2>
 
-<img data-src="img/pipr_functions.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="exercise-2" class="slide level2">
-<h2>Exercise 2</h2>
-<p>COVID-19 impact on poverty and inequality</p>
-<ol type="1">
-<li><p>Calculate and plot the change in millions of extreme poor by region from 2019 to 2020</p></li>
-<li><p>(Difficult) Calculate and plot the changes in Gini observed from 2019 to 2020 for countries with comparable data during these two years</p></li>
-</ol>
-</section>
-<section class="slide level2">
+<img data-src="img/pipr_functions.png" class="r-stretch quarto-figure-center"></section>
+<section id="thank-you-for-listening" class="slide level2 smaller">
+<h2>Thank you for listening!</h2>
 
-<div class="panel-tabset">
-<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Code</a></li><li><a href="#tabset-7-2">Plot</a></li></ul>
-<div class="tab-content">
-<div id="tabset-7-1">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="co"># Change in number of poor, 2019-2020</span></span>
-<span id="cb38-2"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">get_wb</span>() <span class="sc">|&gt;</span> <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2019</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2020</span>) <span class="sc">|&gt;</span></span>
-<span id="cb38-3"><a href=""></a>      <span class="fu">group_by</span>(region_code) <span class="sc">|&gt;</span></span>
-<span id="cb38-4"><a href=""></a>      <span class="fu">mutate</span>(<span class="at">changeinpoor =</span> pop_in_poverty<span class="sc">-</span><span class="fu">lag</span>(pop_in_poverty)) <span class="sc">|&gt;</span></span>
-<span id="cb38-5"><a href=""></a>      <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(changeinpoor))</span>
-<span id="cb38-6"><a href=""></a></span>
-<span id="cb38-7"><a href=""></a>gr <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">y =</span> region_name,<span class="at">x=</span>changeinpoor<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>)) <span class="sc">+</span></span>
-<span id="cb38-8"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb38-9"><a href=""></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Change in number of poor, 2019-2020"</span>,<span class="at">x =</span> <span class="st">"Milllions"</span>,<span class="at">y =</span> <span class="st">"Region"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-7-2">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="PIP_In_R_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
+<img src="img/WB-PIP-E-horizontal-RGB-med.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
-<div class="panel-tabset">
-<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Code</a></li><li><a href="#tabset-8-2">Plot</a></li></ul>
-<div class="tab-content">
-<div id="tabset-8-1">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="co"># Change in Gini, 2019-2020?=</span></span>
-<span id="cb39-2"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">get_stats</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb39-3"><a href=""></a>      <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2019</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2020</span>) <span class="sc">|&gt;</span></span>
-<span id="cb39-4"><a href=""></a>      <span class="fu">filter</span>(reporting_level<span class="sc">==</span><span class="st">"national"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb39-5"><a href=""></a>      <span class="fu">group_by</span>(country_code,welfare_type,comparable_spell) <span class="sc">|&gt;</span></span>
-<span id="cb39-6"><a href=""></a>      <span class="co"># Only keeps countries with comparable estimates in 2019 and 2020</span></span>
-<span id="cb39-7"><a href=""></a>      <span class="fu">filter</span>(<span class="fu">n</span>()<span class="sc">==</span><span class="dv">2</span>) <span class="sc">|&gt;</span></span>
-<span id="cb39-8"><a href=""></a>      <span class="fu">mutate</span>(<span class="at">ginichange =</span> gini<span class="sc">-</span><span class="fu">lag</span>(gini)) <span class="sc">|&gt;</span></span>
-<span id="cb39-9"><a href=""></a>      <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2020</span>) <span class="sc">|&gt;</span></span>
-<span id="cb39-10"><a href=""></a>      <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
-<span id="cb39-11"><a href=""></a>      <span class="co"># If countries have both income and consumption estimates, use only the latter</span></span>
-<span id="cb39-12"><a href=""></a>      <span class="fu">group_by</span>(country_code) <span class="sc">|&gt;</span></span>
-<span id="cb39-13"><a href=""></a>      <span class="fu">filter</span>(<span class="fu">n</span>()<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> welfare_type<span class="sc">==</span><span class="st">"consumption"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb39-14"><a href=""></a>      <span class="fu">ungroup</span>()</span>
-<span id="cb39-15"><a href=""></a></span>
-<span id="cb39-16"><a href=""></a>gr <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df[df<span class="sc">$</span>country_code<span class="sc">!=</span><span class="st">"XKX"</span>,], <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(country_name, <span class="sc">+</span>ginichange),<span class="at">y=</span>ginichange<span class="sc">*</span><span class="dv">100</span>,<span class="at">fill=</span>region_name)) <span class="sc">+</span></span>
-<span id="cb39-17"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb39-18"><a href=""></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Change in Gini index, 2019-2020"</span>,<span class="at">y =</span> <span class="st">"Gini points"</span>,<span class="at">x =</span> <span class="st">"Country"</span>) <span class="sc">+</span></span>
-<span id="cb39-19"><a href=""></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="tabset-8-2">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="PIP_In_R_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="additional-resource" class="slide level2 smaller">
-<h2>Additional resource</h2>
-<ul>
-<li><p><a href="https://datanalytics.worldbank.org/PIP-Methodology/">Methodological handbook</a>: Describes all methodological details behind the estimates</p></li>
-<li><p><a href="https://www.worldbank.org/en/topic/poverty/publication/poverty-and-equity-briefs">Poverty &amp; Equity Briefs</a>: 2-page summary of poverty and inequality in almost every developing country</p></li>
-<li><p><a href="https://datacatalog.worldbank.org/search/dataset/0063646">Survey percentiles</a>: 100 percentiles of each country-year survey distribution</p></li>
-<li><p><a href="https://datacatalog.worldbank.org/search/dataset/0064304/1000-Binned-Global-Distribution">Lined-up percentiles distribution</a>: 1000 points on the global distribution</p></li>
-<li><p><a href="https://pip.worldbank.org/sol/sol-landing">Accessing some of the microdata online</a></p></li>
-<li><p><a href="https://pip.worldbank.org/furtherindicators-data">More data and indicators through the user interface</a></p></li>
-<li><p><a href="https://pip.worldbank.org/api">API access</a></p></li>
-</ul>
-</section>
-<section id="thank-you-for-listening." class="slide level2 smaller">
-<h2>Thank you for listening.</h2>
-<p>For further details please contact:</p>
-<ul>
-<li>Diana C. Garcia Rojas <a href="mailto:dgarciarojas@worldbank.org" class="email">dgarciarojas@worldbank.org</a></li>
-<li>Zander Prinsloo: <a href="mailto:zprinsloo@worldbank.org" class="email">zprinsloo@worldbank.org</a></li>
-<li>Rossana Tatulli: <a href="mailto:rtatulli@worldbank.org" class="email">rtatulli@worldbank.org</a></li>
-<li>Anubhava Singla: <a href="mailto:asingla1@worldbank.org" class="email">asingla1@worldbank.org</a></li>
-<li>Nishant Yonzan: <a href="mailto:nyonzan@worldbank.org" class="email">nyonzan@worldbank.org</a></li>
-</ul>
-
 </section></section>
     </div>
-  <div class="quarto-auto-generated-content" style="display: none;">
-<p><img src="img/WB-PIP-E-horizontal-RGB-med.png" class="slide-logo"></p>
-<div class="footer footer-default">
-
-</div>
-</div></div>
+  </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="PIP_In_R_files/libs/revealjs/dist/reveal.js"></script>
@@ -1192,12 +759,12 @@ F-statistic: 223.26 on 2 and 2501 DF,  p-value: &lt; 0.000000000000000222</code>
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":false},
 'smaller': false,
  
@@ -1352,7 +919,7 @@ F-statistic: 223.26 on 2 and 2501 DF,  p-value: &lt; 0.000000000000000222</code>
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1379,80 +946,42 @@ F-statistic: 223.26 on 2 and 2501 DF,  p-value: &lt; 0.000000000000000222</code>
       });
     </script>
     
-
     <script>
-
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
       // slide changes (different for each slide format).
-
       (function () {
-
         // dispatch for htmlwidgets
-
         function fireSlideEnter() {
-
           const event = window.document.createEvent("Event");
-
           event.initEvent("slideenter", true, true);
-
           window.document.dispatchEvent(event);
-
         }
-
-    
 
         function fireSlideChanged(previousSlide, currentSlide) {
-
           fireSlideEnter();
 
-    
-
           // dispatch for shiny
-
           if (window.jQuery) {
-
             if (previousSlide) {
-
               window.jQuery(previousSlide).trigger("hidden");
-
             }
-
             if (currentSlide) {
-
               window.jQuery(currentSlide).trigger("shown");
-
             }
-
           }
-
         }
-
-    
 
         // hookup for slidy
-
         if (window.w3c_slidy) {
-
           window.w3c_slidy.add_observer(function (slide_num) {
-
             // slide_num starts at position 1
-
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
           });
-
         }
 
-    
-
       })();
-
     </script>
-
-    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1486,7 +1015,18 @@ F-statistic: 223.26 on 2 and 2501 DF,  p-value: &lt; 0.000000000000000222</code>
         }
         return false;
       }
-      const onCopySuccess = function(e) {
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1518,48 +1058,11 @@ F-statistic: 223.26 on 2 and 2501 DF,  p-value: &lt; 0.000000000000000222</code>
         }, 1000);
         // clear code selection
         e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
       });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-        }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
-            }
-          }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1569,17 +1072,8 @@ F-statistic: 223.26 on 2 and 2501 DF,  p-value: &lt; 0.000000000000000222</code>
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1593,11 +1087,7 @@ F-statistic: 223.26 on 2 and 2501 DF,  p-value: &lt; 0.000000000000000222</code>
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
+          return note.innerHTML;
         });
       }
       const findCites = (el) => {
