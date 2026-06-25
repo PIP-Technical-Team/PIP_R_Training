@@ -35,50 +35,49 @@ format:
 ## Poverty data at the World Bank {.smaller}
 
 ::: incremental
--   The World Bank mission is to end extreme poverty and boost shared poverty on a livable planet.
+- The World Bank mission is to end extreme poverty and boost shared prosperity on a livable planet.
 
--   To that end, the World Bank often helps countries field household surveys to track welfare.
+- To that end, the World Bank often helps countries field household surveys to track welfare.
 
--   Some countries do not receive assistance yet the Bank is granted access to the data through collaborations with the National Statistical Office.
+- Some countries do not receive assistance yet the Bank is granted access to the data through collaborations with the National Statistical Office.
 
--   For high-income countries, poverty data is sourced from the Luxembourg Income Study or EU-SILC.
+- For high-income countries, poverty data is sourced from the Luxembourg Income Study or EU-SILC.
 :::
 
 ## The Poverty and Inequality Platform (PIP) {.smaller}
 
 ::: incremental
--   PIP is the source of poverty and inequality data for the World Bank.
+- PIP is the source of poverty and inequality data for the World Bank.
 
--   PIP is the source of data for several targets of the Sustainable Development Goals on ending poverty (SDG1) and reducing inequality (SDG10).
+- PIP is the source of data for several targets of the Sustainable Development Goals on ending poverty (SDG1) and reducing inequality (SDG10).
 
--   PIP is the joint collaboration between different parts of the World Bank through the Global Poverty Working Group
+- PIP is the joint collaboration between different parts of the World Bank through the Global Poverty Working Group
 
-    -   Development Data Group
-    -   Development Research Group
-    -   Poverty and Equity Global Department
+  - Development Data Group
+  - Development Research Group
+  - Poverty and Equity Global Department
 :::
 
 ## PIP motivation {.smaller}
 
 ::: incremental
--   **Scope**: PIP is the World Bank's data portal for poverty, prosperity, and inequality estimates.
+- **Scope**: PIP is the World Bank's data portal for poverty, prosperity, and inequality estimates.
 
--   **Accessibility**: PIP data is available through Application Programming Interface (API)
+- **Accessibility**: PIP data is available through Application Programming Interface (API)
 
-    -   User Interface (UI) -- for quick data access and visualizations
-    -   Stata and R wrappers -- for advanced users, researchers, students
-    -   Microdata access (for some surveys) through Microdata Online.
+  - User Interface (UI) -- for quick data access and visualizations
+  - Stata and R wrappers -- for advanced users, researchers, students
+  - Microdata access (for some surveys) through Microdata Online.
 
--   **Open data, open code, reproducible research**:
+- **Open data, open code, reproducible research**:
 
-    -   PIP code is publicly available, and the PIP Methodology Handbook provides details on the poverty, prosperity, and inequality estimates reported in PIP.
-    -   PIP typically is updated twice a year - Spring/Fall. One can, however, access various vintages of the data.
+  - PIP code is publicly available, and the PIP Methodology Handbook provides details on the poverty, prosperity, and inequality estimates reported in PIP.
+  - PIP typically is updated twice a year - Spring/Fall. One can, however, access various vintages of the data.
 :::
 
 ## PIP: Transparency {.smaller}
 
-:::: {.columns}
-
+::::: columns
 ::: {.column width="40%"}
 All code necessary to create the poverty estimates are publicly available (<https://github.com/PIP-Technical-Team>)
 :::
@@ -86,13 +85,11 @@ All code necessary to create the poverty estimates are publicly available (<http
 ::: {.column width="60%"}
 ![](img/pip_backend_code.png){fig-align="right"}
 :::
-
-::::
+:::::
 
 ## PIP: Transparency {.smaller}
 
-:::: {.columns}
-
+::::: columns
 ::: {.column width="40%"}
 A description of the entire methodology is available in a technical handbook (<https://worldbank.github.io/PIP-Methodology/>)
 :::
@@ -100,96 +97,120 @@ A description of the entire methodology is available in a technical handbook (<h
 ::: {.column width="60%"}
 ![](img/pip_methodology.png){fig-align="right"}
 :::
-
-::::
-
+:::::
 
 ## Data release notes and other publications {.smaller}
 
-:::: {.columns}
-
+:::::: columns
 ::: {.column width="40%"}
-
 Publications are available detailing the updates in each release, methodological assumptions, and other technical improvements (<https://worldbank.github.io/publication/>)
-
 :::
 
 ::: {.column width="20%"}
-
 :::
 
 ::: {.column width="40%"}
 ![](img/pip_publications.png){fig-align="right"}
 :::
+::::::
 
-::::
+## Data on inequality {.smaller}
+
+::: incremental
+- For each survey, PIP output reports inequality and shared prosperity measures like the Gini, MLD, polarization index, the decile share of income or consumption, and the Prosperity Gap.
+
+- In addition, PIP has a dedicated dashboard that visualize inequality trends and changes. This is available through the [Further Data & Indicators](https://pip.worldbank.org/furtherindicators-data) page in PIP UI.
+
+- We also report the average and threshold income of each percentile for each survey. THis is also available through the Further Data & Indicators page in the PIP website.
+:::
 
 ## Welfare measure reported in PIP
 
 ![](img/process2.png){fig-align="center"}
 
+<!-- ## Welfare measure reported in PIP {.smaller} -->
 
-## Welfare measure reported in PIP {.smaller}
+<!-- ::: {.panel-tabset} -->
 
-::: {.panel-tabset}
+<!-- ## Step 1 -->
 
-## Step 1
+<!-- ### Acquiring Household Data  -->
 
-### Acquiring Household Data 
+<!-- - Sources: -->
 
-- Sources:
-  - LIC: Surveys collected by National Statistical Offices
-  - HIC: 
-    - Europe: EU-SILC
-    - Other (and earlier years): Luxembourg Income Study (LIS)
-- Data input type: welfare (consumption/income) data at the household or group level
+<!--   - LIC: Surveys collected by National Statistical Offices -->
 
-## Step 2
+<!--   - HIC:  -->
 
-### Constructing Welfare Aggregates 
+<!--     - Europe: EU-SILC -->
 
-- Income vs Consumption (welfare_type) -> consumption preferred.
-- Zeros dropped.
-- Micro or Grouped Data (distribution_type)
-- Additional comparability considerations:
-  - Questionnaire design changes
-  - Equivalence scales (->not used)
-  - Spatio/temporal adjustments
-  - Imputed rent (-> excluded)
-  - Tracked in PIP: comparable_spell and survey_comparability.
+<!--     - Other (and earlier years): Luxembourg Income Study (LIS) -->
 
-## Step 3
+<!-- - Data input type: welfare (consumption/income) data at the household or group level -->
 
-### Adjusting Welfare Aggregates 
+<!-- ## Step 2 -->
 
-- Consumer Price Indices (CPIs) & Purchasing Power Parities (PPPs)
-- Derivation of the International Poverty Line (poverty_line)
-  - \$3.00/day in 2021 PPP -> based on the median of harmonized national poverty lines from poorest countries
-- Derivation of higher poverty lines
-  - \$4.20 and \$8.30 in 2021 PPP -> based on median values of national poverty lines of lower- and upper-middle income countries, respectively.
-- Derivation of societal poverty line (spl)
+<!-- ### Constructing Welfare Aggregates  -->
 
-## Step 4
+<!-- - Income vs Consumption (welfare_type) -> consumption preferred. -->
 
-### Calculating survey estimates  
+<!-- - Zeros dropped. -->
 
-- Poverty and Inequality metrics are calculated using adjusted welfare aggregates.
-- All methodology is available in the PIP Methodological Handbook on the website.
-- Source code is available on github through the package wbpip.
+<!-- - Micro or Grouped Data (distribution_type) -->
 
-## Step 5
+<!-- - Additional comparability considerations: -->
 
-### Calculating regional aggregates  
+<!--   - Questionnaire design changes -->
 
-- Extrapolations and/or Interpolations (fill_gaps)
-- Nowcasts (nowcast)
-- Regional classification
-- Population adjustments
-- Coverage rules applied
+<!--   - Equivalence scales (->not used) -->
 
+<!--   - Spatio/temporal adjustments -->
 
-::: 
+<!--   - Imputed rent (-> excluded) -->
 
+<!--   - Tracked in PIP: comparable_spell and survey_comparability. -->
+
+<!-- ## Step 3 -->
+
+<!-- ### Adjusting Welfare Aggregates  -->
+
+<!-- - Consumer Price Indices (CPIs) & Purchasing Power Parities (PPPs) -->
+
+<!-- - Derivation of the International Poverty Line (poverty_line) -->
+
+<!--   - \$3.00/day in 2021 PPP -> based on the median of harmonized national poverty lines from poorest countries -->
+
+<!-- - Derivation of higher poverty lines -->
+
+<!--   - \$4.20 and \$8.30 in 2021 PPP -> based on median values of national poverty lines of lower- and upper-middle income countries, respectively. -->
+
+<!-- - Derivation of societal poverty line (spl) -->
+
+<!-- ## Step 4 -->
+
+<!-- ### Calculating survey estimates   -->
+
+<!-- - Poverty and Inequality metrics are calculated using adjusted welfare aggregates. -->
+
+<!-- - All methodology is available in the PIP Methodological Handbook on the website. -->
+
+<!-- - Source code is available on github through the package wbpip. -->
+
+<!-- ## Step 5 -->
+
+<!-- ### Calculating regional aggregates   -->
+
+<!-- - Extrapolations and/or Interpolations (fill_gaps) -->
+
+<!-- - Nowcasts (nowcast) -->
+
+<!-- - Regional classification -->
+
+<!-- - Population adjustments -->
+
+<!-- - Coverage rules applied -->
+
+<!-- :::  -->
 
 ## Welfare measure reported in PIP
 
@@ -218,47 +239,33 @@ Publications are available detailing the updates in each release, methodological
 ## Installing the Stata pip.ado {.smaller}
 
 ::: incremental
+- We recommend installing the package through GitHub by first running the following, which allows you to install Stata packages from GitHub:
 
-We recommend installing the package through GitHub by first running the following, which allows you to install Stata packages from GitHub:
+  \-`net install github, from("https://haghish.github.io/github/")`
 
--   `net install github, from("https://haghish.github.io/github/")`
+  - You can now install the Stata package by running
 
--   You can now install the Stata package by running
+  \-`github install worldbank/pip`
 
--   `github install worldbank/pip`
+- **More information about the package:**
 
+  - <https://github.com/worldbank/pip/>
 :::
-
-## Installing the Stata pip.ado {.smaller}
-
-
-We recommend installing the package through GitHub by first running the following, which allows you to install Stata packages from GitHub:
-
--   `net install github, from("https://haghish.github.io/github/")`
-
--   You can now install the Stata package by running
-
--   `github install worldbank/pip`
-
-
-**More information about the package:**
-
-<https://github.com/worldbank/pip/>
 
 ## Two main functions {.smaller}
 
 ::: incremental
--   **`pip cl`:** [country]{.underline} estimates of poverty and inequality
+- **`pip cl`:** [country]{.underline} estimates of poverty and inequality
 
-    -   each row identifies a unique combination of *country_code*, *year*, *reporting_level*, and *welfare_type*
+  - each row identifies a unique combination of *country_code*, *year*, *reporting_level*, and *welfare_type*
 
-    -   *reporting_level*: Mostly national, but can be urban or rural
+  - *reporting_level*: Mostly national, but can be urban or rural
 
-    -   *welfare_type*: Income or consumption
+  - *welfare_type*: Income or consumption
 
--   **`pip wb`:** [regional/global]{.underline} estimates of poverty and inequality
+- **`pip wb`:** [regional/global]{.underline} estimates of poverty and inequality
 
-    -   each row identifies a unique combination of *region_code* and *year*.
+  - each row identifies a unique combination of *region_code* and *year*.
 :::
 
 ## Country-level estimates {.smaller}
@@ -301,9 +308,9 @@ pip, country(GHA) n2disp(7) clear
 
 ## Ghanaian survey estimates {.smaller}
 
--   The default poverty line is \$3.00 (per capita, per day, in 2021 PPP-adjusted dollars)
+- The default poverty line is \$3.00 (per capita, per day, in 2021 PPP-adjusted dollars)
 
--   The mean is expressed in the same currency
+- The mean is expressed in the same currency
 
 ## Ghanaian survey estimates with 2017 PPP {.smaller}
 
@@ -312,13 +319,15 @@ pip, country(GHA) n2disp(7) clear
 pip, country(GHA) n2disp(7) ppp_year(2017) clear
 ```
 
-
 ## Different poverty line {.smaller}
 
-```{stata, collectcode=TRUE}
-#| echo: false
-set linesize 200
-```
+<!-- ```{stata, collectcode=TRUE} -->
+
+<!-- #| echo: false -->
+
+<!-- set linesize 200 -->
+
+<!-- ``` -->
 
 ```{stata}
 #| echo: true 
@@ -327,10 +336,13 @@ pip, country(LUX) povline(10) clear
 
 ## Multiple poverty lines {.smaller}
 
-```{stata, collectcode=TRUE}
-#| echo: false
-set linesize 200
-```
+<!-- ```{stata, collectcode=TRUE} -->
+
+<!-- #| echo: false -->
+
+<!-- set linesize 200 -->
+
+<!-- ``` -->
 
 ```{stata}
 #| echo: true   
@@ -339,18 +351,20 @@ pip, country(LUX) year(2022) n2disp(4) povline(10 20 50 100) clear
 
 ## Estimates across selected countries {.smaller}
 
-```{stata, collectcode=TRUE}
-#| echo: false
-set linesize 200
-```
+<!-- ```{stata, collectcode=TRUE} -->
+
+<!-- #| echo: false -->
+
+<!-- set linesize 200 -->
+
+<!-- ``` -->
 
 ```{stata}
 #| echo: true
 pip, country(LUX GHA VNM) n2disp(3) year(2022) clear
 ```
 
--   Note that there is no survey for Ghana (GHA) in 2022 and hence not reported in the output.
-
+- Note that there is no survey for Ghana (GHA) in 2022 and hence not reported in the output.
 
 ## Extrapolation for Ghana from 2016 to most recent year
 
@@ -358,16 +372,18 @@ pip, country(LUX GHA VNM) n2disp(3) year(2022) clear
 
 ## Interpolated and extrapolated values {.smaller}
 
-```{stata, collectcode=TRUE}
-#| echo: false
-set linesize 200
-```
+<!-- ```{stata, collectcode=TRUE} -->
+
+<!-- #| echo: false -->
+
+<!-- set linesize 200 -->
+
+<!-- ``` -->
 
 ```{stata}
 #| echo: true
 pip, country(GHA) year(2016/2025) n2disp(5) fillgaps nowcasts clear
 ```
-
 
 ## Poverty by the type of welfare aggregate {.smaller}
 
@@ -399,6 +415,7 @@ pip, country(CHN) year(1990/2022) clear
 graph twoway line headcount year || scatter headcount year, by(reporting_level comparable_spell, legend(off)) xtitle("") ytitle("Extreme poverty in China, 1990-2022")
 graph export "rep_level_plot.svg", replace
 ```
+
 ![](rep_level_plot.svg)
 
 ## Within-country comparability {.smaller}
@@ -409,19 +426,36 @@ keep if reporting_level=="national"
 list country_name reporting_level year headcount comparable_spell welfare_type
 ```
 
-## Data from LIS {.smaller}
+## Data on Shared Prosperity and inequality {.smaller}
 
-```{stata, results="hide", collectcode=TRUE}
-#| echo: true
-pip, clear
-keep if strpos(survey_acronym,"LIS")
-```
+- The World Bank recently adopted the *Prosperity Gap* to capture shared prosperity.
+
+- The *Prosperity Gap* is a average societal shortfall from a prosperity standard, currently set at \$28/day in 2021 PPP. The threshold is close to the income levels of individuals living in middle income countries that is transitioning into high income status.
+
+- The data on Prosperty Gap and inequality measures are available in the PIP Stata output.
 
 ```{stata}
-#| echo: true 
+#| echo: true
+qui pip, clear country(GHA)
+list country_code year gini pg in 1/3
+```
+
+## Data from LIS {.smaller}
+
+```{stata, collectcode=TRUE}
+#| echo: true
+qui pip, clear
+keep if strpos(survey_acronym,"LIS")
 tab country_name
 ```
 
+<!-- ```{stata} -->
+
+<!-- #| echo: true  -->
+
+<!-- tab country_name -->
+
+<!-- ``` -->
 
 ## Global and regional estimates {.smaller}
 
@@ -430,7 +464,7 @@ tab country_name
 pip wb, clear
 ```
 
-```{stata}
+```{stata, collectcode=TRUE}
 #| echo: true
 levelsof region_code
 ```
@@ -454,7 +488,6 @@ graph export "pov_90_22.svg", replace
 ### Plot
 
 ![](pov_90_22.svg)
-
 :::
 
 ## Many more functions {.smaller}
@@ -463,7 +496,6 @@ graph export "pov_90_22.svg", replace
 #| echo: true
 pip tables
 ```
-
 
 # 4. Exercises
 
@@ -480,7 +512,6 @@ Explore whether Kuznets' inverse-U hypothesis holds with data in PIP
 ## Results {.smaller}
 
 ::: panel-tabset
-
 ### Code
 
 ```{stata, results="hide", collectcode=TRUE}
@@ -512,7 +543,6 @@ reg gini logmean logmean2
 ### Plot
 
 ![](ex_1_plot.svg)
-
 :::
 
 ## Exercise 2
@@ -550,12 +580,13 @@ graph export "ex_2a_plot.svg", replace
 :::
 
 ------------------------------------------------------------------------
+
 ## Results (part 2) {.smaller}
 
 ::: panel-tabset
 ### Code
 
-```{stata, results="hide", collectcode=TRUE}
+```{stata, results="hide"}
 #| echo: true
 pip, year(2019/2020) coverage(national)
 
@@ -588,23 +619,23 @@ graph export "ex_2b_plot.svg", replace
 
 ## 5. Additional resource {.smaller}
 
--   [Methodological handbook](https://datanalytics.worldbank.org/PIP-Methodology/): Describes all methodological details behind the estimates
+- [Methodological handbook](https://datanalytics.worldbank.org/PIP-Methodology/): Describes all methodological details behind the estimates
 
--   [Poverty & Inequality Briefs](https://www.worldbank.org/en/topic/poverty/publication/poverty-and-equity-briefs): 2-page summary of poverty and inequality in almost every developing country
+- [Poverty & Inequality Briefs](https://www.worldbank.org/en/topic/poverty/publication/poverty-and-equity-briefs): 2-page summary of poverty and inequality in almost every developing country
 
--   [Survey percentiles](https://datacatalog.worldbank.org/search/dataset/0063646): 100 percentiles of each country-year survey distribution
+- [Survey percentiles](https://datacatalog.worldbank.org/search/dataset/0063646): 100 percentiles of each country-year survey distribution
 
--   [Lined-up percentiles distribution](https://datacatalog.worldbank.org/search/dataset/0064304/1000-Binned-Global-Distribution): 1000 points on the global distribution
+- [Lined-up percentiles distribution](https://datacatalog.worldbank.org/search/dataset/0064304/1000-Binned-Global-Distribution): 1000 points on the global distribution
 
--   [Accessing some of the microdata online](https://pip.worldbank.org/sol/sol-landing)
+- [Accessing some of the microdata online](https://pip.worldbank.org/sol/sol-landing)
 
--   [More data and indicators through the user interface](https://pip.worldbank.org/furtherindicators-data)
+- [More data and indicators through the user interface](https://pip.worldbank.org/furtherindicators-data)
 
--   [API access](https://pip.worldbank.org/api)
+- [API access](https://pip.worldbank.org/api)
 
 ## Acknowledgment {.smaller}
 
-The findings, interpretations, and conclusions expressed in this presentation are entirely those of the author. They do not necessarily represent the views of the World Bank and its affiliated organizations, or those of the Executive Directors of the World Banks or the governments they represent. 
+The findings, interpretations, and conclusions expressed in this presentation are entirely those of the author. They do not necessarily represent the views of the World Bank and its affiliated organizations, or those of the Executive Directors of the World Banks or the governments they represent.
 
 The authors gratefully acknowledge financial support from the UK government through the Data and Evidence for Tackling Extreme Poverty (DEEP) Research Programme.
 
@@ -612,8 +643,8 @@ The authors gratefully acknowledge financial support from the UK government thro
 
 For further details please contact:
 
--   Diana C. Garcia Rojas: [dgarciarojas\@worldbank.org](mailto:dgarciarojas@worldbank.org){.email}
--   Zander Prinsloo: [zprinsloo\@worldbank.org](mailto:zprinsloo@worldbank.org){.email}
--   Rossana Tatulli: [rtatulli\@worldbank.org](mailto:rtatulli@worldbank.org){.email}
--   Anubhava Singla: [asingla1\@worldbabnk.org](mailto:asingla1@worldbank.org){.email}
--   Nishant Yonzan: [nyonzan\@worldbank.org](mailto:nyonzan@worldbank.org){.email}
+- Diana C. Garcia Rojas: [dgarciarojas\@worldbank.org](mailto:dgarciarojas@worldbank.org){.email}
+- Zander Prinsloo: [zprinsloo\@worldbank.org](mailto:zprinsloo@worldbank.org){.email}
+- Rossana Tatulli: [rtatulli\@worldbank.org](mailto:rtatulli@worldbank.org){.email}
+- Anubhava Singla: [asingla1\@worldbabnk.org](mailto:asingla1@worldbank.org){.email}
+- Nishant Yonzan: [nyonzan\@worldbank.org](mailto:nyonzan@worldbank.org){.email}
