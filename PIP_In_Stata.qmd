@@ -18,6 +18,16 @@ format:
     logo: img/WB-PIP-E-horizontal-RGB-med.png
 ---
 
+```{r, include=FALSE}
+library(Statamarkdown)
+```
+
+```{stata, collectcode=TRUE}
+#| echo: false
+set linesize 200
+pip cl, clear
+```
+
 ## Outline
 
 1.  Introduction to the Poverty and Inequality Platform (PIP)
@@ -269,16 +279,6 @@ Publications are available detailing the updates in each release, methodological
 :::
 
 ## Country-level estimates {.smaller}
-
-```{r, include=FALSE}
-library(Statamarkdown)
-```
-
-```{stata, collectcode=TRUE}
-#| echo: true
-set linesize 200
-pip cl, clear
-```
 
 ## Variables {.smaller}
 
