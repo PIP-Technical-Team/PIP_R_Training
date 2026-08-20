@@ -4,3 +4,11 @@
 .Ruserdata
 
 /.quarto/
+/pip-0.10.14.9002/
+0/
+
+# Quarto/revealjs rendered output
+PIP_In_R_files/
+PIP_In_Stata_files/
+*.pdf
+*.html
