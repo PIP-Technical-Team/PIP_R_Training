@@ -246,6 +246,7 @@ Publications are available detailing the updates in each release, methodological
 
 # 3. Accessing PIP in Stata
 
+
 ## Installing the Stata pip.ado {.smaller}
 
 ::: incremental
