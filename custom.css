@@ -67,3 +67,53 @@
 .reveal .slides section.smaller > h2:first-child {
   font-size: 2.5rem !important;
 }
+
+/* ==================================================
+   4 · BODY CONTENT NEVER LARGER THAN THE SLIDE TITLE (2.5rem)
+   -------------------------------------------------- */
+/* regular slides: content smaller than the 2.5rem heading */
+.reveal .slides section {
+  font-size: 2rem;
+}
+
+/* .smaller slides: scale content down further */
+.reveal .slides section.smaller {
+  font-size: 1.5rem;
+}
+
+/* ==================================================
+   5 · PANEL-TABSET CONTENT ALSO CAPPED BELOW THE TITLE
+   -------------------------------------------------- */
+/* tab labels and body text inside tabs */
+.reveal .panel-tabset,
+.reveal .panel-tabset [role="tab"],
+.reveal .panel-tabset [role="tabpanel"],
+.reveal .panel-tabset .tab-content,
+.reveal .panel-tabset .tab-content p,
+.reveal .panel-tabset .tab-content li {
+  font-size: 2rem;
+}
+
+.reveal section.smaller .panel-tabset,
+.reveal section.smaller .panel-tabset [role="tab"],
+.reveal section.smaller .panel-tabset [role="tabpanel"],
+.reveal section.smaller .panel-tabset .tab-content,
+.reveal section.smaller .panel-tabset .tab-content p,
+.reveal section.smaller .panel-tabset .tab-content li {
+  font-size: 1.5rem;
+}
+
+/* code blocks / output inside tabs */
+.reveal .panel-tabset pre,
+.reveal .panel-tabset pre code,
+.reveal .panel-tabset code {
+  font-size: 1.4rem;
+}
+
+.reveal section.smaller .panel-tabset pre,
+.reveal section.smaller .panel-tabset pre code,
+.reveal section.smaller .panel-tabset code {
+  font-size: 1.1rem;
+}
+
+

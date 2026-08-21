@@ -1,5 +1,5 @@
 ---
-title: "Poverty and Inequality Platform (PIP): an introduction using R and Stata"
+title: "Poverty and Inequality Platform (PIP): <br> An introduction using R and Stata"
 date: "August 2026"
 author: 
   - Diana C. Garcia Rojas
@@ -645,8 +645,6 @@ get_stats("IND", version = "20260324_2021_01_02_PROD") |>
 
 ```{stata, eval=FALSE}
 *| echo: true
-* version() takes the full data version string (format %Y%m%d_YYYY_RV_AV_SSS),
-* mirroring R's version argument. Alternatively use release() + ppp_year().
 pip, country(IND) version(20260324_2021_01_02_PROD) clear
 list country_code country_name year poverty_line headcount reporting_level survey_acronym in -3/L
 ```
@@ -1062,7 +1060,7 @@ Explore whether Kuznets' inverse-U hypothesis holds with data in PIP
 
 ```{r}
 #| echo: true 
-#| fig-show: hide
+#| eval: false
 # Kuznets curve? 
 df <- get_stats()   
 gr <- ggplot(df, aes(x = log(mean), y = gini)) +   
@@ -1075,7 +1073,23 @@ m <- lm(gini ~ log(mean) + I(log(mean)^2), data = df)
 summary(m)
 ```
 
-### R output
+### R regression
+
+```{r}
+#| echo: false
+#| fig-show: hide
+df <- get_stats()   
+gr <- ggplot(df, aes(x = log(mean), y = gini)) +   
+      geom_point() +   
+      geom_smooth() +   
+      labs(title = "Kuznets curve?",
+           y     = "Gini coefficient",
+           x     = "Log welfare")   
+m <- lm(gini ~ log(mean) + I(log(mean)^2), data = df)
+summary(m)
+```
+
+### R graph
 
 ```{r}
 #| echo: false
@@ -1086,12 +1100,14 @@ gr
 
 ### Stata code
 
-```{stata, results="hide", collectcode=TRUE}
+```{stata, eval=FALSE}
 *| echo: true
 pip, clear
 
 gen logmean = log(mean)
 gen logmean2 = log(mean)^2
+
+reg gini logmean logmean2
 
 graph twoway scatter gini logmean || ///
 lpolyci gini logmean, ///
@@ -1103,12 +1119,31 @@ legend(off)
 graph export "img/ex_1_plot.svg", replace
 ```
 
-```{stata}
-*| echo: true
+### Stata regression
+
+```{stata, collectcode=TRUE}
+*| echo: false
+qui pip, clear
+
+qui gen logmean = log(mean)
+qui gen logmean2 = log(mean)^2
+
 reg gini logmean logmean2
 ```
 
-### Stata output
+### Stata graph
+
+```{stata, results="hide"}
+*| echo: false
+graph twoway scatter gini logmean || ///
+lpolyci gini logmean, ///
+title("Kuznets curve?") ///
+xtitle("Log welfare") ///
+ytitle("Gini coefficient") ///
+legend(off)
+
+graph export "img/ex_1_plot.svg", replace
+```
 
 ![](img/ex_1_plot.svg)
 :::
