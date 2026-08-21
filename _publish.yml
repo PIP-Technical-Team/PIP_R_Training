@@ -1,0 +1,4 @@
+- source: PIP_In_R_and_Stata.qmd
+  quarto-pub:
+    - id: 1f20562c-bec3-4ca8-afd2-535e2c80c6a9
+      url: https://dana89co.quarto.pub/pip-in-r-and-stata

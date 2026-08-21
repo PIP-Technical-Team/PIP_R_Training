@@ -1,17 +1,17 @@
 ---
 title: "Poverty and Inequality Platform (PIP): <br> An introduction using R and Stata"
 date: "August 2026"
+date-format: "MMMM YYYY"
 author: 
   - Diana C. Garcia Rojas
 format:
   revealjs:
-    embed-resources: true
+    # embed-resources: true  # disabled for Quarto Pub (self-contained file exceeds upload size limit)
     css: "custom.css"
     theme: "simple"
     #incremental: true   # incrementally show the bullets
     slide-number: true
     # title-slide-style: pandoc
-    # chalkboard is disabled because it is incompatible with embed-resources (self-contained)
     # preview-links: auto
     logo: img/WB-PIP-E-horizontal-RGB-med.png
 ---
@@ -1304,7 +1304,7 @@ The findings, interpretations, and conclusions expressed in this presentation ar
 
 The authors gratefully acknowledge financial support from the UK government through the Data and Evidence for Tackling Extreme Poverty (DEEP) Research Programme.
 
-## Thank you for listening. {.smaller}
+## Thank you for listening! {.smaller}
 
 For further details please contact:
 
