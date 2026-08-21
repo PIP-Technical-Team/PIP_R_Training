@@ -20,7 +20,7 @@
 /* 2) shrink the main title a little */
 .title-slide h1.title {
   /* was clamp(3rem,10vw,6rem); */
-  font-size: clamp(2rem, 6vw, 4rem);
+  font-size: clamp(1.6rem, 4.5vw, 2.8rem);
   line-height: 1.2;
   margin-bottom: 1rem;
 }
@@ -41,6 +41,9 @@
   color:            var(--wb-white);
   padding: 0.45em 0.75em;
 
+  /* smaller heading font */
+  font-size: 2.5rem;
+
   /* full-bleed bar */
   margin: 0 -1.2em 0.6em -1.2em;
 
@@ -53,4 +56,14 @@
 
   /* avoid ugly wraps of a single word */
   word-break: keep-all;
+}
+
+/* ==================================================
+   3 · FORCE SMALLER HEADING FONT (incl. .smaller slides)
+   -------------------------------------------------- */
+.reveal .slides section > h1:first-child,
+.reveal .slides section > h2:first-child,
+.reveal .slides section.smaller > h1:first-child,
+.reveal .slides section.smaller > h2:first-child {
+  font-size: 2.5rem !important;
 }

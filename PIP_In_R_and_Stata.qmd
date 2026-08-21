@@ -5,13 +5,13 @@ author:
   - Diana C. Garcia Rojas
 format:
   revealjs:
+    embed-resources: true
     css: "custom.css"
     theme: "simple"
     #incremental: true   # incrementally show the bullets
     slide-number: true
     # title-slide-style: pandoc
-    chalkboard:
-      buttons: false
+    # chalkboard is disabled because it is incompatible with embed-resources (self-contained)
     # preview-links: auto
     logo: img/WB-PIP-E-horizontal-RGB-med.png
 ---
@@ -26,18 +26,10 @@ library(ggthemes)
 ```
 
 ```{stata, collectcode=TRUE}
-*| echo: false
+*| include: false
 set linesize 200
 pip cl, clear
 ```
-
-# Outline of the presentation
-
-::: footer
-The findings, interpretations, and conclusions expressed in this presentation are entirely those of the author. They do not necessarily represent the views of the World Bank and its affiliated organizations, or those of the Executive Directors of the World Banks or the governments they represent.
-
-The authors gratefully acknowledge financial support from the UK government through the Data and Evidence for Tackling Extreme Poverty (DEEP) Research Programme.
-:::
 
 ## Outline
 
@@ -268,17 +260,33 @@ More information: <https://github.com/worldbank/pip/>
 ## Country-level estimates {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
+#| eval: false
 get_stats() 
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+get_stats() 
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+pip cl, clear
+list country_code year welfare_type reporting_level headcount gini in 1/5
+```
+
+### Stata output
 
 ```{stata}
-*| echo: true
+*| echo: false
 pip cl, clear
 list country_code year welfare_type reporting_level headcount gini in 1/5
 ```
@@ -287,37 +295,68 @@ list country_code year welfare_type reporting_level headcount gini in 1/5
 ## Variables {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
-colnames(get_stats())
+#| eval: false
+glimpse(get_stats())
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+glimpse(get_stats())
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+describe
+```
+
+### Stata output
 
 ```{stata}
-*| echo: true
+*| echo: false
 describe
 ```
 :::
 
 ## Auxiliary data {.smaller}
 
-Though the main underlying data of PIP are the household surveys, it makes use of many other sources such as GDP, CPI, population, among many others. You can get the list of all auxiliary tables and pick the one you want.
-
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
+#| eval: false
+print(get_aux("dictionary"), n = 100)
+```
+
+### R output
+
+```{r}
+#| echo: false
 get_aux("dictionary")
 ```
 
-### Stata
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+* List all auxiliary tables
+pip tables, clear
+* Or provide the name of the table of interest directly, e.g. CPI
+pip tables, table(cpi) clear
+```
+
+### Stata output
 
 ```{stata}
-*| echo: true
+*| echo: false
 * List all auxiliary tables
 pip tables, clear
 * Or provide the name of the table of interest directly, e.g. CPI
@@ -328,18 +367,34 @@ pip tables, table(cpi) clear
 ## Ghanaian survey estimates {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
+#| eval: false
 get_stats(country = "GHA") |> 
   select(country_code, year, poverty_line, headcount, mean, gini)
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+get_stats(country = "GHA") |> 
+  select(country_code, year, poverty_line, headcount, mean, gini)
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+pip, country(GHA) n2disp(7) clear
+```
+
+### Stata output
 
 ```{stata}
-*| echo: true
+*| echo: false
 pip, country(GHA) n2disp(7) clear
 ```
 :::
@@ -353,18 +408,34 @@ pip, country(GHA) n2disp(7) clear
 ## Ghanaian survey estimates with 2017 PPP {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
+#| eval: false
 get_stats(country = "GHA", ppp_version = "2017") |> 
   select(country_code, year, poverty_line, headcount, mean, gini)
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+get_stats(country = "GHA", ppp_version = "2017") |> 
+  select(country_code, year, poverty_line, headcount, mean, gini)
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+pip, country(GHA) n2disp(7) ppp_year(2017) clear
+```
+
+### Stata output
 
 ```{stata}
-*| echo: true
+*| echo: false
 pip, country(GHA) n2disp(7) ppp_year(2017) clear
 ```
 :::
@@ -372,18 +443,34 @@ pip, country(GHA) n2disp(7) ppp_year(2017) clear
 ## Different poverty line {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true 
+#| eval: false
 get_stats(country = "LUX", povline = 10)  |>    
   select(country_code, year, poverty_line, headcount)
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+get_stats(country = "LUX", povline = 10)  |>    
+  select(country_code, year, poverty_line, headcount)
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+pip, country(LUX) povline(10) clear
+```
+
+### Stata output
 
 ```{stata}
-*| echo: true
+*| echo: false
 pip, country(LUX) povline(10) clear
 ```
 :::
@@ -391,10 +478,11 @@ pip, country(LUX) povline(10) clear
 ## Multiple poverty lines {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true   
+#| eval: false
 povlines <- c(10, 20, 50, 100) 
 purrr::map_dfr(.x      = povlines,                 
                .f      = get_stats,                 
@@ -403,10 +491,29 @@ purrr::map_dfr(.x      = povlines,
   select(country_code, year, poverty_line, headcount) 
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+povlines <- c(10, 20, 50, 100) 
+purrr::map_dfr(.x      = povlines,                 
+               .f      = get_stats,                 
+               country = "LUX",                
+               year    = 2022) |>    
+  select(country_code, year, poverty_line, headcount) 
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+pip, country(LUX) year(2022) n2disp(4) povline(10 20 50 100) clear
+```
+
+### Stata output
 
 ```{stata}
-*| echo: true
+*| echo: false
 pip, country(LUX) year(2022) n2disp(4) povline(10 20 50 100) clear
 ```
 :::
@@ -414,23 +521,43 @@ pip, country(LUX) year(2022) n2disp(4) povline(10 20 50 100) clear
 ## Estimates across selected countries {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
+#| eval: false
 get_stats(country = c("LUX","GHA","VNM"), year = 2022) |> 
   select(country_code, country_name, year, poverty_line, headcount, mean, gini)
 ```
 
-### Stata
+### R output
 
-```{stata}
+```{r}
+#| echo: false
+get_stats(country = c("LUX","GHA","VNM"), year = 2022) |> 
+  select(country_code, country_name, year, poverty_line, headcount, mean, gini)
+```
+
+- Note that there is no survey for Ghana (GHA) in 2022 and hence not reported in the output.
+
+### Stata code
+
+```{stata, eval=FALSE}
 *| echo: true
 pip, country(LUX GHA VNM) n2disp(3) year(2022) clear
 ```
-:::
+
+### Stata output
+
+```{stata}
+*| echo: false
+pip, country(LUX GHA VNM) n2disp(3) year(2022) clear
+```
 
 - Note that there is no survey for Ghana (GHA) in 2022 and hence not reported in the output.
+:::
+
+
 
 ## Extrapolation for Ghana from 2016 to most recent year
 
@@ -439,19 +566,36 @@ pip, country(LUX GHA VNM) n2disp(3) year(2022) clear
 ## Interpolated and extrapolated values {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
+#| eval: false
 get_stats(country = "GHA", fill_gaps = TRUE)  |> 
   filter(year >= 2016) |>
   select(country_code, year, poverty_line, headcount)
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+get_stats(country = "GHA", fill_gaps = TRUE)  |> 
+  filter(year >= 2016) |>
+  select(country_code, year, poverty_line, headcount)
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+pip, country(GHA) year(2016/2025) n2disp(5) fillgaps nowcasts clear
+```
+
+### Stata output
 
 ```{stata}
-*| echo: true
+*| echo: false
 pip, country(GHA) year(2016/2025) n2disp(5) fillgaps nowcasts clear
 ```
 :::
@@ -460,29 +604,72 @@ pip, country(GHA) year(2016/2025) n2disp(5) fillgaps nowcasts clear
 
 Access various vintages of the data with the versioning options (shown here in R).
 
+::: panel-tabset
+### R code
+
 ```{r}
 #| echo: true
+#| eval: false
 get_versions()
 ```
 
+### R output
+
+```{r}
+#| echo: false
+get_versions()
+```
+:::
+
 ## Versioning with PIP {.smaller}
+
+::: panel-tabset
+### R code
 
 ```{r}
 #| echo: true
-get_stats("IND", release_version = "20240627", ppp_version = "2021") |> 
+#| eval: false
+get_stats("IND", version = "20260324_2021_01_02_PROD") |> 
   select(country_code, country_name, year, poverty_line, headcount, reporting_level, survey_acronym) |> tail(3)
 ```
+
+### R output
+
+```{r}
+#| echo: false
+get_stats("IND", version = "20260324_2021_01_02_PROD") |> 
+  select(country_code, country_name, year, poverty_line, headcount, reporting_level, survey_acronym) |> tail(3)
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+* version() takes the full data version string (format %Y%m%d_YYYY_RV_AV_SSS),
+* mirroring R's version argument. Alternatively use release() + ppp_year().
+pip, country(IND) version(20260324_2021_01_02_PROD) clear
+list country_code country_name year poverty_line headcount reporting_level survey_acronym in -3/L
+```
+
+### Stata output
+
+```{stata}
+*| echo: false
+pip, country(IND) version(20260324_2021_01_02_PROD) clear
+list country_code country_name year poverty_line headcount reporting_level survey_acronym in -3/L
+```
+
+:::
 
 
 ## Poverty by welfare type {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
-#| fig-width: 10
-#| fig-height: 4.5
+#| fig-show: hide
 df <- get_stats(country = "PHL")       
 gr <- ggplot(df, aes(y = 100*headcount, x = year, color = welfare_type)) +          
       geom_line() +                     
@@ -492,27 +679,37 @@ gr <- ggplot(df, aes(y = 100*headcount, x = year, color = welfare_type)) +
 gr
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4.5
+gr
+```
+
+### Stata code
 
 ```{stata, results="hide"}
 *| echo: true
 pip, country(PHL) clear
 graph twoway line headcount year, by(welfare_type) xtitle("") ytitle("Extreme poverty in the Philippines, 1981-2022")
-graph export "welfare_plot.svg", replace
+graph export "img/welfare_plot.svg", replace
 ```
 
-![](welfare_plot.svg)
+### Stata output
+
+![](img/welfare_plot.svg)
 :::
 
 ## Poverty by reporting level {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
-#| fig-width: 10
-#| fig-height: 4.5
+#| fig-show: hide
 df <- get_stats(country = "CHN") |>
       filter(year >= 1990)
   
@@ -524,35 +721,65 @@ gr <- ggplot(df, aes(y = 100*headcount, x = year, color = reporting_level)) +
 gr
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4.5
+gr
+```
+
+### Stata code
 
 ```{stata, results="hide", collectcode=TRUE}
 *| echo: true
 pip, country(CHN) year(1990/2022) clear
 graph twoway line headcount year || scatter headcount year, by(reporting_level comparable_spell, legend(off)) xtitle("") ytitle("Extreme poverty in China, 1990-2022")
-graph export "rep_level_plot.svg", replace
+graph export "img/rep_level_plot.svg", replace
 ```
 
-![](rep_level_plot.svg)
+### Stata output
+
+![](img/rep_level_plot.svg)
 :::
 
 ## Within-country comparability {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
+#| eval: false
 df <- get_stats(country = "CHN") |> 
       filter(reporting_level == "national" & year >= 1990) |>
       select(year, headcount, comparable_spell, welfare_type)
 print(df, n = 21)
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+df <- get_stats(country = "CHN") |> 
+      filter(reporting_level == "national" & year >= 1990) |>
+      select(year, headcount, comparable_spell, welfare_type)
+print(df, n = 21)
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+keep if reporting_level=="national"
+list country_name reporting_level year headcount comparable_spell welfare_type
+```
+
+### Stata output
 
 ```{stata}
-*| echo: true
+*| echo: false
 keep if reporting_level=="national"
 list country_name reporting_level year headcount comparable_spell welfare_type
 ```
@@ -561,12 +788,11 @@ list country_name reporting_level year headcount comparable_spell welfare_type
 ## Comparability over time {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
-#| fig-width: 10
-#| fig-height: 4.5
+#| fig-show: hide
 df <- get_stats(country = "CHN", reporting_level = "national") |>
       filter(year >= 1990)
   
@@ -578,16 +804,27 @@ gr <- ggplot(df, aes(y = 100*headcount, x = year, color = comparable_spell)) +
 gr
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4.5
+gr
+```
+
+### Stata code
 
 ```{stata, results="hide"}
 *| echo: true
 pip, country(PHL) clear
 graph twoway scatter headcount year || line headcount year, by(welfare_type comparable_spell, legend(off)) xtitle("") ytitle("Extreme poverty in the Philippines, 1981-2022")
-graph export "welfare_plot_2.svg", replace
+graph export "img/welfare_plot_2.svg", replace
 ```
 
-![](welfare_plot_2.svg)
+### Stata output
+
+![](img/welfare_plot_2.svg)
 :::
 
 ## Data on Shared Prosperity and inequality {.smaller}
@@ -598,20 +835,40 @@ graph export "welfare_plot_2.svg", replace
 
 - The data on Prosperity Gap and inequality measures are available in both the R and Stata output.
 
+## Data on Shared Prosperity and inequality {.smaller}
+
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
+#| eval: false
 get_stats(country = "GHA") |>
   select(country_code, year, gini, pg) |>
   head(3)
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+get_stats(country = "GHA") |>
+  select(country_code, year, gini, pg) |>
+  head(3)
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+qui pip, clear country(GHA)
+list country_code year gini pg in 1/3
+```
+
+### Stata output
 
 ```{stata}
-*| echo: true
+*| echo: false
 qui pip, clear country(GHA)
 list country_code year gini pg in 1/3
 ```
@@ -620,10 +877,11 @@ list country_code year gini pg in 1/3
 ## Data from LIS {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true 
+#| eval: false
 get_stats() |>
   filter(grepl("LIS", survey_acronym)) |>
   group_by(country_name) |>
@@ -633,10 +891,32 @@ get_stats() |>
   print(n = 29)
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+get_stats() |>
+  filter(grepl("LIS", survey_acronym)) |>
+  group_by(country_name) |>
+  summarize(obs = n()) |>
+  ungroup() |> 
+  arrange(desc(obs)) |>
+  print(n = 29)
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+qui pip, clear
+keep if strpos(survey_acronym,"LIS")
+tab country_name
+```
+
+### Stata output
 
 ```{stata, collectcode=TRUE}
-*| echo: true
+*| echo: false
 qui pip, clear
 keep if strpos(survey_acronym,"LIS")
 tab country_name
@@ -646,22 +926,42 @@ tab country_name
 ## Global and regional estimates {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
+#| eval: false
 get_wb()
 ```
 
-### Stata
+### R output
 
-```{stata, collectcode=TRUE}
+```{r}
+#| echo: false
+get_wb()
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
 *| echo: true
 pip wb, clear
 ```
 
-```{stata, collectcode=TRUE}
+```{stata, eval=FALSE}
 *| echo: true
+levelsof region_code
+```
+
+### Stata output
+
+```{stata, collectcode=TRUE}
+*| echo: false
+pip wb, clear
+```
+
+```{stata, collectcode=TRUE}
+*| echo: false
 levelsof region_code
 ```
 :::
@@ -669,12 +969,11 @@ levelsof region_code
 ## Global poverty, 1990-2022 {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
-#| fig-width: 10
-#| fig-height: 4.5
+#| fig-show: hide
 df <- get_wb() |>
       filter(year >= 1990, region_code %in% c("WLD","EAP","SSA"))
 
@@ -686,7 +985,16 @@ gr <- ggplot(df, aes(x = year, y = 100*headcount, color = region_code)) +
 gr
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4.5
+gr
+```
+
+### Stata code
 
 ```{stata, results="hide"}
 *| echo: true
@@ -694,30 +1002,50 @@ keep if year>=1990 & inlist(region_code,"WLD","EAP","SSA")
 graph twoway line headcount year, by(region_name) ytitle("Poverty rate (%)") ///
 ylab(,angle(horizontal))
 
-graph export "pov_90_22.svg", replace
+graph export "img/pov_90_22.svg", replace
 ```
 
-![](pov_90_22.svg)
+### Stata output
+
+![](img/pov_90_22.svg)
 :::
 
 ## Many more functions {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
-![](img/pipr_functions.png){fig-align="center"}
+``` {r}
+#| echo: true
+#| eval: false
+ls("package:pipr")
+```
 
-### Stata
+### R output
+
+``` {r}
+#| echo: false
+ls("package:pipr")
+```
+
+### Stata code
+
+```{stata, eval=FALSE}
+*| echo: true
+pip tables
+```
+
+### Stata output
 
 ```{stata}
-*| echo: true
+*| echo: false
 pip tables
 ```
 :::
 
 # 4. Exercises
 
-## Exercise 1
+## Exercise 1 {.smaller}
 
 Explore whether Kuznets' inverse-U hypothesis holds with data in PIP
 
@@ -730,12 +1058,11 @@ Explore whether Kuznets' inverse-U hypothesis holds with data in PIP
 ## Results {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true 
-#| fig-width: 10
-#| fig-height: 4.5
+#| fig-show: hide
 # Kuznets curve? 
 df <- get_stats()   
 gr <- ggplot(df, aes(x = log(mean), y = gini)) +   
@@ -744,11 +1071,20 @@ gr <- ggplot(df, aes(x = log(mean), y = gini)) +
       labs(title = "Kuznets curve?",
            y     = "Gini coefficient",
            x     = "Log welfare")   
-gr
-summary(lm(gini ~ log(mean) + I(log(mean)^2), data = df)) 
+m <- lm(gini ~ log(mean) + I(log(mean)^2), data = df)
+summary(m)
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4.5
+gr
+```
+
+### Stata code
 
 ```{stata, results="hide", collectcode=TRUE}
 *| echo: true
@@ -764,18 +1100,20 @@ xtitle("Log welfare") ///
 ytitle("Gini coefficient") ///
 legend(off)
 
-graph export "ex_1_plot.svg", replace
+graph export "img/ex_1_plot.svg", replace
 ```
-
-![](ex_1_plot.svg)
 
 ```{stata}
 *| echo: true
 reg gini logmean logmean2
 ```
+
+### Stata output
+
+![](img/ex_1_plot.svg)
 :::
 
-## Exercise 2
+## Exercise 2 {.smaller}
 
 COVID-19 impact on poverty and inequality
 
@@ -788,12 +1126,11 @@ COVID-19 impact on poverty and inequality
 ## Results (part 1) {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
-#| fig-width: 10
-#| fig-height: 4.5
+#| fig-show: hide
 # Change in number of poor, 2019-2020
 df <- get_wb() |> filter(year == 2019 | year == 2020) |>
       group_by(region_code) |>
@@ -806,7 +1143,16 @@ gr <- ggplot(df, aes(y = region_name, x = changeinpoor/10^6)) +
 gr
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4.5
+gr
+```
+
+### Stata code
 
 ```{stata, results="hide"}
 *| echo: true
@@ -819,10 +1165,12 @@ keep if year==2020
 
 graph hbar changeinpoor, over(region_code, sort(changeinpoor)) ytitle("Millions") title("Change in number of poor, 2019-2020") yline(0)
 
-graph export "ex_2a_plot.svg", replace
+graph export "img/ex_2a_plot.svg", replace
 ```
 
-![](ex_2a_plot.svg)
+### Stata output
+
+![](img/ex_2a_plot.svg)
 :::
 
 ------------------------------------------------------------------------
@@ -830,12 +1178,11 @@ graph export "ex_2a_plot.svg", replace
 ## Results (part 2) {.smaller}
 
 ::: panel-tabset
-### R
+### R code
 
 ```{r}
 #| echo: true
-#| fig-width: 10
-#| fig-height: 4.5
+#| fig-show: hide
 # Change in Gini, 2019-2020?
 df <- get_stats() |> 
       filter(year == 2019 | year == 2020) |>
@@ -858,7 +1205,16 @@ gr <- ggplot(df[df$country_code != "XKX",], aes(x = reorder(country_name, +ginic
 gr
 ```
 
-### Stata
+### R output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4.5
+gr
+```
+
+### Stata code
 
 ```{stata, results="hide"}
 *| echo: true
@@ -883,10 +1239,12 @@ drop if country_code=="XKX"
 graph bar ginichange,  over(country_name, sort(ginichange)  gap(0) lab(angle(90) labsize(small)))   ///
 title("Change in Gini index, 2019-2020") ytitle("Gini points") 
 
-graph export "ex_2b_plot.svg", replace
+graph export "img/ex_2b_plot.svg", replace
 ```
 
-![](ex_2b_plot.svg)
+### Stata output
+
+![](img/ex_2b_plot.svg)
 :::
 
 ## 5. Additional resources {.smaller}
@@ -916,3 +1274,6 @@ The authors gratefully acknowledge financial support from the UK government thro
 For further details please contact:
 
 - Diana C. Garcia Rojas: [dgarciarojas\@worldbank.org](mailto:dgarciarojas@worldbank.org){.email}
+- Zander Prinsloo: [zprinsloo\@worldbank.org](mailto:zprinsloo@worldbank.org){.email}
+- Rossana Tatulli: [rtatulli\@worldbank.org](mailto:rtatulli@worldbank.org){.email}
+- Nishant Yonzan: [nyonzan\@worldbank.org](mailto:nyonzan@worldbank.org){.email}
