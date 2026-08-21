@@ -10,5 +10,10 @@
 # Quarto/revealjs rendered output
 PIP_In_R_files/
 PIP_In_Stata_files/
+PIP_In_R_and_Stata_files/
 *.pdf
 *.html
+**/*.quarto_ipynb
+
+# Quarto/knitr cache
+PIP_In_R_and_Stata_cache/
