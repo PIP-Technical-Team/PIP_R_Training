@@ -104,7 +104,7 @@ All code necessary to create the poverty estimates are publicly available (<http
 
 ::::: columns
 ::: {.column width="40%"}
-A description of the entire methodology is available in a technical handbook (<https://worldbank.github.io/PIP-Methodology/>)
+A description of the entire methodology is available in a technical handbook (<https://datanalytics.worldbank.org/PIP-Methodology/>)
 :::
 
 ::: {.column width="60%"}
@@ -116,7 +116,7 @@ A description of the entire methodology is available in a technical handbook (<h
 
 :::::: columns
 ::: {.column width="40%"}
-Publications are available detailing the updates in each release, methodological assumptions, and other technical improvements (<https://worldbank.github.io/publication/>)
+Publications are available detailing the updates in each release, methodological assumptions, and other technical improvements (<https://pip.worldbank.org/publication/>)
 :::
 
 ::: {.column width="20%"}
@@ -156,13 +156,13 @@ Publications are available detailing the updates in each release, methodological
 #### Constructing Welfare Aggregates {.tiny}
 
 - Income vs Consumption (welfare_type) -\> consumption preferred.
-- Zeros dropped.
+- Bottom coding
 - Micro or Grouped Data (distribution_type)
 - Additional comparability considerations:
   - Questionnaire design changes
   - Equivalence scales (-\>not used)
   - Spatio/temporal adjustments
-  - Imputed rent (-\> excluded)
+  <!-- - Imputed rent (-\> excluded) -->
   - Tracked in PIP: comparable_spell and survey_comparability.
 
 ## Step 3 {.smaller}
@@ -174,7 +174,7 @@ Publications are available detailing the updates in each release, methodological
   - \$3.00/day in 2021 PPP -\> based on the median of harmonized national poverty lines from poorest countries
 - Derivation of higher poverty lines
   - \$4.20 and \$8.30 in 2021 PPP -\> based on median values of national poverty lines of lower- and upper-middle income countries, respectively.
-- Derivation of societal poverty line (spl)
+- Derivation of societal poverty line (spl) -\> varies across countries in accord with the average estimated cost of meeting basic needs.
 
 ## Step 4 {.smaller}
 
@@ -791,12 +791,13 @@ list country_name reporting_level year headcount comparable_spell welfare_type
 ```{r}
 #| echo: true
 #| fig-show: hide
-df <- get_stats(country = "CHN", reporting_level = "national") |>
-      filter(year >= 1990)
+df <- get_stats(country = "PHL")
   
 gr <- ggplot(df, aes(y = 100*headcount, x = year, color = comparable_spell)) +
+      geom_point() +
       geom_line() + 
-      labs(title = "Extreme poverty in China, 1990-2022",
+      facet_wrap(~welfare_type) +
+      labs(title = "Extreme poverty in the Philippines, 1981-2022",
            y     = "Poverty rate (%)",
            x     = "")
 gr
