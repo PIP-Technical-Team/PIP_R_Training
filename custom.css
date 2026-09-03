@@ -1,0 +1,119 @@
+/* ==================================================
+   COLOUR VARIABLES (just makes the file easier to read)
+   -------------------------------------------------- */
+:root {
+  --wb-navy:   #0f2f55;   /* deep blue  */
+  --wb-accent: #23a6f6;   /* bright cyan accent    */
+  --wb-white:  #ffffff;
+}
+
+/* ==================================================
+   1 · H1 TITLE SLIDES WHICH START WITH '#' (the <section class="title-slide">)
+   -------------------------------------------------- */
+/* 1) center all the text on a title‐slide */
+.title-slide h1.title,
+.title-slide h2,
+.title-slide h3 {
+  text-align: center;
+}
+
+/* 2) shrink the main title a little */
+.title-slide h1.title {
+  /* was clamp(3rem,10vw,6rem); */
+  font-size: clamp(1.6rem, 4.5vw, 2.8rem);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+/* 3) hide the built-in <hr> that Pandoc puts mid-slide */
+.title-slide > hr {
+  display: none;
+}
+
+
+
+/* ==================================================
+   2 · EVERY REGULAR SLIDE HEADING (top bar)
+   -------------------------------------------------- */
+.reveal section h1:first-child,
+.reveal section h2:first-child {
+  background-color: var(--wb-navy);
+  color:            var(--wb-white);
+  padding: 0.45em 0.75em;
+
+  /* smaller heading font */
+  font-size: 2.5rem;
+
+  /* full-bleed bar */
+  margin: 0 -1.2em 0.6em -1.2em;
+
+  /* accent underline */
+  border-bottom: 6px solid var(--wb-accent);
+
+  /* guarantee square corners, even if another theme is loaded */
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
+  /* avoid ugly wraps of a single word */
+  word-break: keep-all;
+}
+
+/* ==================================================
+   3 · FORCE SMALLER HEADING FONT (incl. .smaller slides)
+   -------------------------------------------------- */
+.reveal .slides section > h1:first-child,
+.reveal .slides section > h2:first-child,
+.reveal .slides section.smaller > h1:first-child,
+.reveal .slides section.smaller > h2:first-child {
+  font-size: 2.5rem !important;
+}
+
+/* ==================================================
+   4 · BODY CONTENT NEVER LARGER THAN THE SLIDE TITLE (2.5rem)
+   -------------------------------------------------- */
+/* regular slides: content smaller than the 2.5rem heading */
+.reveal .slides section {
+  font-size: 2rem;
+}
+
+/* .smaller slides: scale content down further */
+.reveal .slides section.smaller {
+  font-size: 1.5rem;
+}
+
+/* ==================================================
+   5 · PANEL-TABSET CONTENT ALSO CAPPED BELOW THE TITLE
+   -------------------------------------------------- */
+/* tab labels and body text inside tabs */
+.reveal .panel-tabset,
+.reveal .panel-tabset [role="tab"],
+.reveal .panel-tabset [role="tabpanel"],
+.reveal .panel-tabset .tab-content,
+.reveal .panel-tabset .tab-content p,
+.reveal .panel-tabset .tab-content li {
+  font-size: 2rem;
+}
+
+.reveal section.smaller .panel-tabset,
+.reveal section.smaller .panel-tabset [role="tab"],
+.reveal section.smaller .panel-tabset [role="tabpanel"],
+.reveal section.smaller .panel-tabset .tab-content,
+.reveal section.smaller .panel-tabset .tab-content p,
+.reveal section.smaller .panel-tabset .tab-content li {
+  font-size: 1.5rem;
+}
+
+/* code blocks / output inside tabs */
+.reveal .panel-tabset pre,
+.reveal .panel-tabset pre code,
+.reveal .panel-tabset code {
+  font-size: 1.4rem;
+}
+
+.reveal section.smaller .panel-tabset pre,
+.reveal section.smaller .panel-tabset pre code,
+.reveal section.smaller .panel-tabset code {
+  font-size: 1.1rem;
+}
+
+
